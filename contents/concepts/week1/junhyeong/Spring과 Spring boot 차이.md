@@ -193,7 +193,7 @@ public class CustomValidationAdvice {
 
 # Spring boot란?
 
-![Untitled](Spring%E1%84%80%E1%85%AA%20Spring%20boot%20%E1%84%8E%E1%85%A1%E1%84%8B%E1%85%B5%206286d45570e148d7a2b48c9bff421749/Untitled.png)
+![Untitled](./img/Untitled.png)
 
 # Spring vs Spring boot
 
