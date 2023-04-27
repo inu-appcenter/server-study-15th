@@ -63,12 +63,10 @@ public class TodoController {
     @GetMapping("")
     public ResponseEntity<GetTodoListResponse> getVoteList(@RequestParam int page, @RequestParam int size) {
         Slice<TodoListData> todoListData = todoService.getTodoList(page, size);
-        log.info(todoListData.toString());
         GetTodoListResponse todoListResponse = GetTodoListResponse.builder()
                 .todoSlice(todoListData)
                 .message("최신순 todo 리스트 조회를 성공 했습니다")
                 .build();
-        log.info("여기는??");
         return new ResponseEntity(todoListResponse, HttpStatus.OK);
     }
 
