@@ -1,8 +1,8 @@
 ---
-name: Epic
+name: New Feature
 about: Template for creating a new epic
 title: ""
-labels: epic
+labels: New Feature
 assignees: ""
 ---
 
