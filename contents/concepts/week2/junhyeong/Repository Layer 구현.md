@@ -66,7 +66,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 <aside>
 💡 김영한님 답변
-**DAO** : 데이터에 접근하도록 DB접근 관련 로직을 모아둔 객체
+	
+**DAO** : 데이터에 접근하도록 DB접근 관련 로직을 모아둔 객체  
 **Repository** : 엔티티 객체를 보관하고 관리하는 저장소
 
 </aside>
@@ -126,13 +127,17 @@ Spring data jpa : jpa를 쓰기 쉽게 추상화 시킨 모듈
 
 ![Untitled](../junhyeong/img/Untitled.png)
 
-![Untitled1](../junhyeong/img/Untitled 1.png)
+
+![Untitled1](../junhyeong/img/Untitled%201.png)
+
 
  실제 클래스가 아닌 프록시 객체 ⇒ spring data jpa가 인터페이스를 보고 구현클래스를 꽂아버렸다는 뜻
 
 - Entity 클래스 생성
 
-![Untitled2](../junhyeong/img/Untitled 2.png)
+
+![Untitled2](../junhyeong/img/Untitled%202.png)
+
 
 - Repository 인터페이스 생성
 
@@ -142,7 +147,9 @@ Spring data jpa : jpa를 쓰기 쉽게 추상화 시킨 모듈
 
 - 메소드 작성
 
-![Untitled4](../junhyeong/img/Untitled 4.png)
+
+![Untitled4](../junhyeong/img/Untitled%204.png)
+
 
 [https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods)
 
