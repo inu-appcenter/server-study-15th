@@ -2,50 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="81f51037-4901-472c-bd73-05bd8d4b8b65" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/.idea/contents.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/settings.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/java/appCenter/guCoding/todoList/TodoListApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/java/appCenter/guCoding/todoList/config/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/java/appCenter/guCoding/todoList/config/SwaggerConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/java/appCenter/guCoding/todoList/controller/TaskController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/java/appCenter/guCoding/todoList/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/java/appCenter/guCoding/todoList/domain/BaseTimeEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/java/appCenter/guCoding/todoList/domain/task/Task.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/java/appCenter/guCoding/todoList/domain/task/TaskRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/java/appCenter/guCoding/todoList/domain/user/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/java/appCenter/guCoding/todoList/domain/user/UserEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/java/appCenter/guCoding/todoList/domain/user/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/java/appCenter/guCoding/todoList/dto/ResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/java/appCenter/guCoding/todoList/dto/task/TaskReqDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/java/appCenter/guCoding/todoList/dto/task/TaskRespDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/java/appCenter/guCoding/todoList/dto/user/UserReqDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/java/appCenter/guCoding/todoList/dto/user/UserRespDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/java/appCenter/guCoding/todoList/handler/CustomExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/java/appCenter/guCoding/todoList/handler/aop/CustomValidationAdvice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/java/appCenter/guCoding/todoList/handler/ex/CustomApiException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/java/appCenter/guCoding/todoList/handler/ex/CustomNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/java/appCenter/guCoding/todoList/handler/ex/CustomValidationException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/java/appCenter/guCoding/todoList/service/TaskService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/java/appCenter/guCoding/todoList/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/java/appCenter/guCoding/todoList/util/CustomResponseUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/resources/application-dev.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/test/java/appCenter/guCoding/todoList/TaskListApplicationTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/junhyung/src/test/java/appCenter/guCoding/todoList/domain/task/TaskRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +19,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/contents" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../todoList" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -85,5 +42,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
