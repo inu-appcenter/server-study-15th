@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="73532097-098c-4157-9947-7e1d6907ada0" name="Changes" comment="[Docs] 파일 경로 수정">
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist/src/main/java/com/example/todolist/controller/MemberController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist/src/main/java/com/example/todolist/controller/TodoController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist/src/main/java/com/example/todolist/service/MemberService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/todolist/src/main/java/com/example/todolist/service/TodoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,12 +21,35 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+    <projectState path="$PROJECT_DIR$/todolist">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/todolist/src/main/java">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="todolist" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -32,7 +59,7 @@
         <entry key="$PROJECT_DIR$" value="elyudwo" />
       </map>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
     <option name="RESET_MODE" value="SOFT" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -55,19 +82,44 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/dudqk/OneDrive/바탕 화면/3학년 1학기/앱센터/todolist/todolist/build.gradle",
+    "last_opened_file_path": "C:/Users/dudqk/OneDrive/바탕 화면/서버 코드/jpaboard/build.gradle",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "spring.configuration.checksum": "50440cf3f1bef6597888703f14503ff4",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
-    <configuration name="TodolistApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+  <component name="RunManager" selected="Spring Boot.TodolistApplication (1)">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="main" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TodolistApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="todolist.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.todolist.TodolistApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TodolistApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <module name="todolist" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.todolist.TodolistApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -84,6 +136,8 @@
       <updated>1682772474753</updated>
       <workItem from="1682772476198" duration="2983000" />
       <workItem from="1682826115665" duration="662000" />
+      <workItem from="1682827833098" duration="2193000" />
+      <workItem from="1683177276198" duration="2163000" />
     </task>
     <task id="LOCAL-00001" summary="feat : &quot;domain repository 구현&quot;">
       <created>1682775193726</created>
@@ -106,7 +160,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682826312071</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="[Docs] 파일 경로 수정">
+      <created>1682827965290</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1682827965290</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
