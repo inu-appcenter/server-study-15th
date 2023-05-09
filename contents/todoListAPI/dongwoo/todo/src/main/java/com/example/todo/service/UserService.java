@@ -23,9 +23,14 @@ public class UserService {
 
         log.info(signUpInfo.getEmail());
 
-        userRepository.findByEmail(signUpInfo.getEmail()).orElseThrow(AlreadyExistUserException::new);
+        if (userRepository.existsByEmail(signUpInfo.getEmail())) {
+            throw new AlreadyExistUserException();
+        }
+
+//        userRepository.findByEmail(signUpInfo.getEmail()).orElseThrow(AlreadyExistUserException::new);
 
         User user = User.builder()
+                .name(signUpInfo.getName())
                 .email(signUpInfo.getEmail())
                 .password(passwordEncoder.encode(signUpInfo.getPassword()))
                 .build();
