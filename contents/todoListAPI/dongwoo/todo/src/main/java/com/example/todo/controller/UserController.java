@@ -25,7 +25,8 @@ public class UserController {
 
     private final UserService userService;
 
-    @Operation(summary = "회원가입", description = "바디에 {name, email, password} 을 json 형식으로 보내주시면 됩니다.")
+    @Operation(summary = "회원가입", description = "바디에 {name, email, password} 을 json 형식으로 보내주시면 됩니다. " +
+            "email 은 꼭 email 형식으로 보내주셔야 합니다")
     @PostMapping("/signup")
     public ResponseEntity<CommonResponse> registerUser(@Valid @RequestBody GeneralSignUpRequest request) {
 

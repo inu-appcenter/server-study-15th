@@ -26,7 +26,7 @@ public class TodoController {
 
     private final TodoService todoService;
 
-    @Operation(summary = "todo 생성", description = "바디에 {contents} 을 json 형식으로 보내주시면 됩니다.")
+    @Operation(summary = "todo 생성", description = "바디에 {contents, deadLine} 을 json 형식으로 보내주시면 됩니다.")
     @PostMapping("")
     public ResponseEntity<CommonResponse> createTodo(@Valid @RequestBody CreateTodoRequest request) {
 
@@ -69,7 +69,7 @@ public class TodoController {
         return new ResponseEntity(todoListResponse, HttpStatus.OK);
     }
 
-    @Operation(summary = "todo 수행 완료", description = "파라미터에 todoId 보내주시면 됩니다. ")
+    @Operation(summary = "todo 수행 완료", description = "파라미터에 수행 완료된 todoId 보내주시면 됩니다. ")
     @GetMapping("/{todoId}")
     public ResponseEntity<CommonResponse> doTodo(@PathVariable("todoId") Long todoId) {
 
