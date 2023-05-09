@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -19,16 +20,26 @@ public class Todo extends BaseTimeEntity {
     @Column(name = "TODO_ID")
     private Long id;
 
+    @Column
     private String contents;
+
+    @Column
+    private Date deadLine;
+
+    @Column
+    private Boolean finished;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     private User user;
 
     @Builder
-    public Todo(String contents) {
+    public Todo(String contents, Date deadLine) {
         this.contents = contents;
+        this.deadLine = deadLine;
+        this.finished = false;
     }
+
     public void mappingUser(User user) {
         this.user = user;
         user.getTodoList().add(this);
@@ -36,5 +47,9 @@ public class Todo extends BaseTimeEntity {
 
     public void update(UpdateTodoRequest request) {
         this.contents = request.getContents();
+    }
+
+    public void doTodo() {
+        this.finished = true;
     }
 }

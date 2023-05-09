@@ -18,6 +18,9 @@ public class User extends BaseTimeEntity {
     private Long id;
 
     @Column
+    private String name;
+
+    @Column
     private String email;
 
     @Column
@@ -27,8 +30,8 @@ public class User extends BaseTimeEntity {
     private List<Todo> todoList = new ArrayList<>();
 
     @Builder
-    public User(Long id, String email, String password) {
-        this.id = id;
+    public User(Long id, String name, String email, String password) {
+        this.name = name;
         this. email = email;
         this.password = password;
     }

@@ -28,9 +28,9 @@ public class TodoController {
 
     @Operation(summary = "todo 생성", description = "바디에 {contents} 을 json 형식으로 보내주시면 됩니다.")
     @PostMapping("")
-    public ResponseEntity<CommonResponse> createTodos(@Valid @RequestBody CreateTodoRequest request) {
+    public ResponseEntity<CommonResponse> createTodo(@Valid @RequestBody CreateTodoRequest request) {
 
-        todoService.createTodo(request.getContents());
+        todoService.createTodo(request);
 
         CommonResponse response = new CommonResponse("투두 저장 성공 했습니다");
 
@@ -41,7 +41,6 @@ public class TodoController {
     @DeleteMapping("/{todoId}")
     public ResponseEntity<CommonResponse> deleteTodo(@PathVariable("todoId") Long todoId) {
 
-        log.info(String.valueOf(todoId));
         todoService.deleteTodo(todoId);
         CommonResponse response = new CommonResponse("투두 삭제 성공 했습니다");
 
@@ -68,6 +67,17 @@ public class TodoController {
                 .message("최신순 todo 리스트 조회를 성공 했습니다")
                 .build();
         return new ResponseEntity(todoListResponse, HttpStatus.OK);
+    }
+
+    @Operation(summary = "todo 수행 완료", description = "파라미터에 todoId 보내주시면 됩니다. ")
+    @GetMapping("/{todoId}")
+    public ResponseEntity<CommonResponse> doTodo(@PathVariable("todoId") Long todoId) {
+
+        todoService.doTodo(todoId);
+
+        CommonResponse response = new CommonResponse("투두 수행 완료 성공 했습니다");
+
+        return new ResponseEntity(response, HttpStatus.OK);
     }
 
 }

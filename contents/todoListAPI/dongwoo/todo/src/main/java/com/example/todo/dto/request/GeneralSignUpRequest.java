@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class GeneralSignUpRequest {
+
     @NotBlank
     private String name;
 

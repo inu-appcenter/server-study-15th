@@ -16,6 +16,8 @@ public class TodoListData {
 
     private final LocalDateTime modifiedDate;
 
+    private final Boolean finished;
+
 //    private final UserData writer;
 
     public TodoListData(final Todo todo) {
@@ -23,6 +25,7 @@ public class TodoListData {
         this.contents = todo.getContents();
         this.createdDate = todo.getCreatedDate();
         this.modifiedDate = todo.getModifiedDate();
+        this.finished = todo.getFinished();
 //        UserData userData = new UserData(todo.getUser());
 //        this.writer = userData;
     }
