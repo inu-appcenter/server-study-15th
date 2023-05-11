@@ -25,8 +25,8 @@ public class SwaggerConfig {
     public OpenAPI springShopOpenAPI() {
 
         return new OpenAPI()
-                .info(new Info().title("IDLE Project API")
-                        .description("프로젝트 API 명세서입니다.")
+                .info(new Info().title("app center todo-list API")
+                        .description("15기 서버 스터디 API 입니다.")
                         .version("v0.0.1"));
 
     }
