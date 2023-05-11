@@ -56,7 +56,6 @@ public class TodoService {
         Slice<Todo> todoSlice = todoRepository.findSliceBy(pageRequest);
 
         Slice<TodoListData> todoListData = todoSlice.map(todo -> {
-            todo.getContents(); //프록시 처리된 user 엔티티 가져오기 위함
             return new TodoListData(todo);
         });
 
