@@ -35,7 +35,7 @@
 
 ## 2) ERD 작성
 
-![Untitled]([2주차] ERD & API Docs/Untitled.png)
+![Untitled](./%5B2주차%5D%20ERD%20&%20API%20Docs/Untitled.png)
 
 ## 3) API 명세서
 
