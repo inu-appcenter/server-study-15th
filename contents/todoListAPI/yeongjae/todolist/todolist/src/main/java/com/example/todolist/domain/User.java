@@ -2,6 +2,7 @@ package com.example.todolist.domain;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -20,7 +22,6 @@ public class User {
 
     @Column(nullable = false, length = 20)
     private String password;
-
 
     @Column(nullable = false)
     private String email;
@@ -34,6 +35,4 @@ public class User {
         this.password = password;
         this.email = email;
     }
-
-
 }
