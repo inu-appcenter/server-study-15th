@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Todo extends BaseTimeEntity {
 
     @Id

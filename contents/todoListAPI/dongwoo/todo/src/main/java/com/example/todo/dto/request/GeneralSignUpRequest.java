@@ -7,9 +7,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Getter
-@Setter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-@AllArgsConstructor
 public class GeneralSignUpRequest {
 
     @Schema(description = "유저 이름", example = "홀길동")

@@ -7,9 +7,6 @@ import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @Getter
-@Setter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-@AllArgsConstructor
 public class CreateTodoRequest {
 
     @Schema(description = "todo 의 내용", example = "운동")

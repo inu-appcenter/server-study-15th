@@ -6,9 +6,6 @@ import lombok.*;
 import javax.validation.constraints.NotBlank;
 
 @Getter
-@Setter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-@AllArgsConstructor
 public class UpdateTodoRequest {
 
     @Schema(description = "수정할 todo 내용", example = "수정할 todo 입니다")
