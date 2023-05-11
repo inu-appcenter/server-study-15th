@@ -27,8 +27,6 @@ public class UserService {
             throw new AlreadyExistUserException();
         }
 
-//        userRepository.findByEmail(signUpInfo.getEmail()).orElseThrow(AlreadyExistUserException::new);
-
         User user = User.builder()
                 .name(signUpInfo.getName())
                 .email(signUpInfo.getEmail())
