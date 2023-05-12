@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("/member")
+@RestController()
+@RequestMapping("/member")
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberService memberService;
