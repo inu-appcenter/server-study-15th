@@ -34,7 +34,7 @@ public class TodoController {
 
         CommonResponse response = new CommonResponse("투두 저장 성공 했습니다");
 
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(response, HttpStatus.CREATED);
     }
 
     @Operation(summary = "todo 삭제", description = "파라미터에 todoId 보내주시면 됩니다.")
