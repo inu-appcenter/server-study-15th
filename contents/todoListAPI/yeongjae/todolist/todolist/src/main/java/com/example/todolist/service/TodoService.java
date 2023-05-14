@@ -1,6 +1,7 @@
 package com.example.todolist.service;
 
 import com.example.todolist.domain.Task;
+import com.example.todolist.exception.TodoNotFoundException;
 import com.example.todolist.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,19 +15,23 @@ import static com.example.todolist.dto.taskdto.TaskResponseDto.*;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class TodoService {
 
     private final TodoRepository todoRepository;
 
-
+    @Transactional
     public TaskSaveRespDto writeTodo(TaskSaveReqDto TaskSaveReqDto) {
         Task task = todoRepository.save(TaskSaveReqDto.changeEntity(TaskSaveReqDto));
         return new TaskSaveRespDto(task);
     }
 
+    @Transactional
     public TaskDeleteRespDto deleteTodo(Long id) {
         Optional<Task> optionalTask = todoRepository.findById(id);
+
+        if(optionalTask.isEmpty()) {
+            throw new TodoNotFoundException();
+        }
         Task task = optionalTask.get();
 
         todoRepository.deleteById(id);
@@ -34,7 +39,8 @@ public class TodoService {
         return new TaskDeleteRespDto(task);
     }
 
-    public TaskEditRespDto editTodo(Long id, TaskEditRequestDto taskEditRequestDto) throws Exception {
+    @Transactional
+    public TaskEditRespDto editTodo(Long id, TaskEditRequestDto taskEditRequestDto) {
         Optional<Task> optionalTask = todoRepository.findById(id);
 
         if (optionalTask.isPresent()) {
@@ -46,10 +52,11 @@ public class TodoService {
 
             return new TaskEditRespDto(task);
         } else {
-            throw new Exception("id 로 조회되는 정보가 없습니다");
+            throw new TodoNotFoundException();
         }
     }
 
+    @Transactional
     public List<Task> findAll() {
         return todoRepository.findAll();
     }
