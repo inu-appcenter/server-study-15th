@@ -1,4 +1,4 @@
-package com.example.todolist.exception;
+package com.example.todolist.exception.todo;
 
 import lombok.Getter;
 

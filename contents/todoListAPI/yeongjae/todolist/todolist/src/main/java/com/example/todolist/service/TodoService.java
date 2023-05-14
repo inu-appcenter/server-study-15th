@@ -1,7 +1,7 @@
 package com.example.todolist.service;
 
 import com.example.todolist.domain.Task;
-import com.example.todolist.exception.TodoNotFoundException;
+import com.example.todolist.exception.todo.TodoNotFoundException;
 import com.example.todolist.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
