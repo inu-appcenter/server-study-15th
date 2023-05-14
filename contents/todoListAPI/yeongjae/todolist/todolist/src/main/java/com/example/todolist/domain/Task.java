@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Task {
@@ -38,5 +37,17 @@ public class Task {
         this.isCompleted = isCompleted;
         this.user = user;
         this.deadline = deadline;
+    }
+
+    public void setContents(String contents) {
+        this.contents = contents;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDeadline(LocalDateTime parseDatetime) {
+        this.deadline = parseDatetime;
     }
 }
