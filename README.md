@@ -30,6 +30,18 @@
 </p>
 
 ---
+
+## 📘 스터디 진행 내용
+- [개념 정리](contents/concepts/index.md)
+- TodoList API
+	- [구준형](contents/todoListAPI/junhyung/README.md)
+	- [김동우](contents/todoListAPI/dongwoo/README.md)
+	- [김원정](contents/todoListAPI/wonjeong/README.md)
+	- [이영재](contents/todoListAPI/yeongjae/README.md)
+	- [지은미](contents/todoListAPI/eunmi/README.md)
+
+---
+
 ## 📝 규칙
 
 - `커밋 컨벤션`
@@ -91,18 +103,6 @@
         ## 📚 기타
         
         ```
-
----
-
-## 📘 스터디 진행 내용
-- [개념 정리](contents/concepts/index.md)
-- TodoList API
-	- [구준형](contents/todoListAPI/junhyung/README.md)
-	- [김동우](contents/todoListAPI/dongwoo/README.md)
-	- [김원정](contents/todoListAPI/wonjeong/README.md)
-	- [이영재](contents/todoListAPI/yeongjae/README.md)
-	- [지은미](contents/todoListAPI/eunmi/README.md)
-
 ---
 
 ## 📚 스터디 주제
@@ -219,5 +219,19 @@
 	- 구현되지 못했거나 오류가 있던 부분 개선
 	- todo-list에 대한 CRUD API 구현
 	- 원하는 방식으로 배포 진행 (EC2, 앱센터 서버 등)
+
+---
+
+### Spring Security + JWT Login 구현
+- ##### 5주차 2023-05-12 (금) - 2023-05-18 (목)
+
+- 발표 내용
+	- 세션과 쿠키의 차이
+	- JWT란?
+	- Spring Security란?
+	- Spring Security & JWT 구현 과정
+
+- 진행 내용
+	- Spring Security + JWT로 로그인 구현하기!
 
 ---
