@@ -1,42 +1,47 @@
 package com.example.todolist.controller;
 
 
-import com.example.todolist.domain.Member;
 import com.example.todolist.dto.MemberDto;
+import com.example.todolist.dto.MemberPageRespDto;
 import com.example.todolist.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
-@RestController()
+@RestController
 @RequestMapping("/member")
 @RequiredArgsConstructor
 public class MemberController {
+
     private final MemberService memberService;
 
     @PostMapping()
-    public String join(@RequestBody MemberDto memberDto) {
+    public ResponseEntity<String> join(@Valid MemberDto memberDto) {
         Long save = memberService.save(memberDto);
-        return save + "번 멤버 생성 완료";
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("회원정보가 생성 되었습니다.");
     }
 
     @PutMapping("/{id}")
-    public String updateMember(@PathVariable Long id, @RequestBody MemberDto memberDto) {
+    public ResponseEntity<String> updateMember(@PathVariable Long id, @Valid MemberDto memberDto) {
         Long update = memberService.update(id, memberDto);
-        return update + "번 멤버 수정 완료";
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("회원정보가 수정되었습니다.");
     }
 
     @DeleteMapping("/{id}")
-    public String deleteMember(@PathVariable Long id) {
+    public ResponseEntity<String> deleteMember(@PathVariable Long id) {
         memberService.deleteMember(id);
-        return id + "번 멤버 삭제";
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("회원정보가 삭제 되었습니다.");
     }
 
     @GetMapping()
-    public List<Member> readAllMember() {
+    public List<MemberPageRespDto> readAllMember() {
         return memberService.findAll();
     }
 

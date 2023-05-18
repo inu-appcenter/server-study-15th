@@ -3,14 +3,17 @@ package com.example.todolist.dto;
 import com.example.todolist.domain.Member;
 import lombok.*;
 
+import javax.validation.constraints.Email;
+
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class MemberDto {
 
     private String name;
 
     private String nickName;
 
+    @Email
     private String email;
 
     @Builder

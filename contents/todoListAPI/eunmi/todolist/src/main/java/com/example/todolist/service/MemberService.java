@@ -2,8 +2,7 @@ package com.example.todolist.service;
 
 import com.example.todolist.domain.Member;
 import com.example.todolist.dto.MemberDto;
-import com.example.todolist.exception.DuplicationException;
-import com.example.todolist.exception.NotFoundMemberException;
+import com.example.todolist.dto.MemberPageRespDto;
 import com.example.todolist.exception.NotFoundMemberException;
 import com.example.todolist.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +31,7 @@ public class MemberService {
     public Long update(Long id, MemberDto memberDto) {
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new NotFoundMemberException(NOT_FOUND_MEMBER_MESSAGE));
-        member.updateMember(memberDto);
+        member.toMember(memberDto);
         return member.getId();
     }
 
@@ -45,8 +45,10 @@ public class MemberService {
                 .build();
     }
 
-    public List<Member> findAll() {
-        return memberRepository.findAll();
+    public List<MemberPageRespDto> findAll() {
+        List<Member> members = memberRepository.findAll();
+        return members.stream().map(member -> member.setMemberPageRespDto(member))
+                .collect(Collectors.toList());
     }
 
     public void deleteMember(Long id) {
