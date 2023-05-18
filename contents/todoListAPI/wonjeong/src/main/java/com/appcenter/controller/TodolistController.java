@@ -31,6 +31,6 @@ public class TodolistController {
     public ResponseEntity<TodolistResponseDTO> createContent(@RequestBody TodolistDTO todolistDTO) {
         TodolistResponseDTO todolistResponseDTO = todolistService.savedContent(todolistDTO);
 
-        return  ResponseEntity.status(HttpStatus.OK).body(todolistResponseDTO);
+        return  ResponseEntity.status(HttpStatus.CREATED).body(todolistResponseDTO);
     }
 }

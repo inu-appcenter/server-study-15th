@@ -32,7 +32,7 @@ public class MemberController {
     public ResponseEntity<MemberResponseDTO> createMember(@RequestBody MemberDTO memberDTO) {
         MemberResponseDTO memberResponseDTO = memberService.savedMember(memberDTO);
 
-        return ResponseEntity.status(HttpStatus.OK).body(memberResponseDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(memberResponseDTO);
     }
 
     @PutMapping()
