@@ -2,6 +2,8 @@ package com.example.todolist.service;
 
 import com.example.todolist.domain.Member;
 import com.example.todolist.domain.Todo;
+import com.example.todolist.dto.TodoCheckReqDto;
+import com.example.todolist.dto.TodoPageRespDto;
 import com.example.todolist.dto.TodoReqDto;
 import com.example.todolist.dto.TodoRespDto;
 import com.example.todolist.exception.NotFoundMemberException;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -51,13 +54,21 @@ public class TodoService {
                 .build();
     }
 
-    public List<Todo> findAll(Long memberId) {
+    public List<TodoPageRespDto> findAll(Long memberId) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new NotFoundMemberException(NOT_FOUND_MEMBER_MESSAGE));
-        return todoRepository.findAllByMember(member);
+        List<Todo> todos = todoRepository.findAllByMember(member);
+        return todos.stream().map(todo -> todo.toTodoPageRespDto(todo))
+                .collect(Collectors.toList());
     }
 
     public void deleteTodo(Long id) {
         todoRepository.deleteById(id);
+    }
+
+    public Long updateChecked(Long id, TodoCheckReqDto todoCheckReqDto) {
+        Todo todo = todoRepository.findById(id).orElseThrow(() -> new NotFoundTodoException(NOT_FOUND_TODO_MESSAGE));
+        Todo updateTodo = todo.setChecked(todoCheckReqDto);
+        return updateTodo.getId();
     }
 }
