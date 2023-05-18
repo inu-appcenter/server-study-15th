@@ -6,8 +6,9 @@ import com.appcenter.data.entity.Member;
 import com.appcenter.data.repository.MemberRepository;
 import com.appcenter.service.MemberService;
 import javassist.NotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -17,26 +18,30 @@ public class MemberServiceImpl implements MemberService {
     // 오류 메세지 상수 선언
     private final String NOT_FOUND_MEMBER = "유효하지 않은 멤버 번호 입니다.";
 
-    @Autowired
     public MemberServiceImpl(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
 
 
     @Override
-    public MemberResponseDTO getMember(Long id){
+    public MemberResponseDTO getMember(Long id) throws Exception{
         // 나중에 getMember 인터페이스에 예외처리 추가
-        Member member = memberRepository.findById(id).get();
+        Optional<Member> member = memberRepository.findById(id);
 
-        // 리턴할 새로운 DTO 객체 생성
-        // Entity 객체에서 get해서 DTO 객체에 set
-        MemberResponseDTO memberResponseDTO = new MemberResponseDTO();
-        memberResponseDTO.setId(member.getId());
-        memberResponseDTO.setName(member.getName());
-        memberResponseDTO.setPassword(member.getPassword());
-        memberResponseDTO.setEmail(member.getEmail());
+        if(member.isPresent()) {
+            Member content = member.get();
+            // 리턴할 새로운 DTO 객체 생성
+            // Entity 객체에서 get해서 DTO 객체에 set
+            MemberResponseDTO memberResponseDTO = new MemberResponseDTO();
+            memberResponseDTO.setId(content.getId());
+            memberResponseDTO.setName(content.getName());
+            memberResponseDTO.setPassword(content.getPassword());
+            memberResponseDTO.setEmail(content.getEmail());
 
-        return memberResponseDTO;
+            return memberResponseDTO;
+        } else {
+            throw new Exception(NOT_FOUND_MEMBER);
+        }
     }
 
     @Override

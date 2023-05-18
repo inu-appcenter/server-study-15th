@@ -5,11 +5,11 @@ import com.appcenter.data.dto.response.MemberResponseDTO;
 
 public interface MemberService {
 
-    MemberResponseDTO getMember(Long number);
+    MemberResponseDTO getMember(Long id) throws Exception;
 
     MemberResponseDTO savedMember(MemberDTO memberDTO);
 
-    MemberResponseDTO changeMemberinfo(Long number, String name) throws Exception;
+    MemberResponseDTO changeMemberinfo(Long id, String name) throws Exception;
 
-    void deleteMember(Long number) throws Exception;
+    void deleteMember(Long id) throws Exception;
 }

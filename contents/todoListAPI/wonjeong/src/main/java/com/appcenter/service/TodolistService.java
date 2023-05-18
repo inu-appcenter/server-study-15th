@@ -5,11 +5,11 @@ import com.appcenter.data.dto.response.TodolistResponseDTO;
 
 public interface TodolistService {
 
-    TodolistResponseDTO getContent(Long number);
+    TodolistResponseDTO getContent(Long id) throws Exception;
 
     TodolistResponseDTO savedContent(TodolistDTO todolistDTO);
 
-    TodolistResponseDTO updateContent(Long number, String name) throws Exception;
+    TodolistResponseDTO updateContent(Long id, String name) throws Exception;
 
-    void deleteContent(Long number) throws Exception;
+    void deleteContent(Long id) throws Exception;
 }
