@@ -38,7 +38,7 @@ public class MemberController {
     @PutMapping()
     public ResponseEntity<MemberResponseDTO> changeMemberInfo(@RequestBody ChangeMemberDTO changeMemberDTO) throws Exception {
         MemberResponseDTO memberResponseDTO = memberService.changeMemberinfo(
-                changeMemberDTO.getNumber(),
+                changeMemberDTO.getId(),
                 changeMemberDTO.getName()
         );
 

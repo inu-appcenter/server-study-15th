@@ -24,14 +24,14 @@ public class MemberServiceImpl implements MemberService {
 
 
     @Override
-    public MemberResponseDTO getMember(Long number){
+    public MemberResponseDTO getMember(Long id){
         // 나중에 getMember 인터페이스에 예외처리 추가
-        Member member = memberRepository.findById(number).get();
+        Member member = memberRepository.findById(id).get();
 
         // 리턴할 새로운 DTO 객체 생성
         // Entity 객체에서 get해서 DTO 객체에 set
         MemberResponseDTO memberResponseDTO = new MemberResponseDTO();
-        memberResponseDTO.setNumber(member.getNumber());
+        memberResponseDTO.setId(member.getId());
         memberResponseDTO.setName(member.getName());
         memberResponseDTO.setPassword(member.getPassword());
         memberResponseDTO.setEmail(member.getEmail());
@@ -49,7 +49,7 @@ public class MemberServiceImpl implements MemberService {
         Member savedMember = memberRepository.save(member);
 
         MemberResponseDTO memberResponseDTO = new MemberResponseDTO();
-        memberResponseDTO.setNumber(savedMember.getNumber());
+        memberResponseDTO.setId(savedMember.getId());
         memberResponseDTO.setName(savedMember.getName());
         memberResponseDTO.setPassword(savedMember.getPassword());
         memberResponseDTO.setEmail(savedMember.getEmail());
@@ -58,9 +58,9 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public MemberResponseDTO changeMemberinfo(Long number, String name) throws Exception {
+    public MemberResponseDTO changeMemberinfo(Long id, String name) throws Exception {
         // 멤버 수정 기능은 재 정의 해야 함
-        Member foundMember = memberRepository.findById(number)
+        Member foundMember = memberRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(NOT_FOUND_MEMBER));
 
         foundMember.setName(name);
@@ -70,7 +70,7 @@ public class MemberServiceImpl implements MemberService {
         // DTO 객체에 담아 리턴
         // DTO 객체 선언
         MemberResponseDTO memberResponseDTO = new MemberResponseDTO();
-        memberResponseDTO.setNumber(changedMember.getNumber());
+        memberResponseDTO.setId(changedMember.getId());
         memberResponseDTO.setName(changedMember.getName());
         memberResponseDTO.setPassword(changedMember.getPassword());
         memberResponseDTO.setEmail(changedMember.getEmail());
@@ -79,10 +79,10 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void deleteMember(Long number) throws Exception {
+    public void deleteMember(Long id) throws Exception {
         // DAO에서 delete 메소드 호출
         try {
-            memberRepository.deleteById(number);
+            memberRepository.deleteById(id);
         } catch (Exception e) {
             throw new NotFoundException(NOT_FOUND_MEMBER);
         }

@@ -23,12 +23,12 @@ public class TodolistServiceImpl implements TodolistService {
     }
 
     @Override
-    public TodolistResponseDTO getContent(Long number) {
-        Todolist todolist = todolistRepository.findById(number).get();
+    public TodolistResponseDTO getContent(Long id) {
+        Todolist todolist = todolistRepository.findById(id).get();
 
         TodolistResponseDTO todolistResponseDTO = new TodolistResponseDTO();
 
-        todolistResponseDTO.setNumber(todolist.getNumber());
+        todolistResponseDTO.setId(todolist.getId());
         todolistResponseDTO.setTitle(todolist.getTitle());
         todolistResponseDTO.setContents(todolist.getContents());
 
@@ -45,7 +45,7 @@ public class TodolistServiceImpl implements TodolistService {
         Todolist savedMember = todolistRepository.save(todolist);
 
         TodolistResponseDTO todolistResponseDTO = new TodolistResponseDTO();
-        todolistResponseDTO.setNumber(savedMember.getNumber());
+        todolistResponseDTO.setId(savedMember.getId());
         todolistResponseDTO.setTitle(savedMember.getTitle());
         todolistResponseDTO.setContents(savedMember.getContents());
 
@@ -53,14 +53,14 @@ public class TodolistServiceImpl implements TodolistService {
     }
 
     @Override
-    public TodolistResponseDTO updateContent(Long number, String name) throws Exception {
+    public TodolistResponseDTO updateContent(Long id, String name) throws Exception {
         return null;
     }
 
     @Override
-    public void deleteContent(Long number) throws Exception {
+    public void deleteContent(Long id) throws Exception {
         try {
-            todolistRepository.deleteById(number);
+            todolistRepository.deleteById(id);
         } catch (Exception e) {
             throw new NotFoundException(NOT_FOUND_CONTENT);
         }
