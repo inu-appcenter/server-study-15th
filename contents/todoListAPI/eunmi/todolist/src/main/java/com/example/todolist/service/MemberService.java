@@ -31,8 +31,8 @@ public class MemberService {
     public Long update(Long id, MemberReqDto memberReqDto) {
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new NotFoundMemberException(NOT_FOUND_MEMBER_MESSAGE));
-        member.toMember(memberReqDto);
-        return member.getId();
+        Member updateMember = member.toMember(memberReqDto);
+        return updateMember.getId();
     }
 
     public MemberReqDto findOne(Long id) {
