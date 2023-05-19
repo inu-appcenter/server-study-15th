@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -35,7 +34,6 @@ class TodoServiceTest {
 
         TodoReqDto todoReqDto = TodoReqDto.builder()
                 .content("할일 1")
-                .creatAt(LocalDateTime.now())
                 .checked(false)
                 .build();
 
@@ -53,7 +51,6 @@ class TodoServiceTest {
         // given
         TodoReqDto todoReqDto = TodoReqDto.builder()
                 .content("할일 2")
-                .creatAt(LocalDateTime.now())
                 .checked(false)
                 .build();
 
@@ -62,7 +59,6 @@ class TodoServiceTest {
         // when
         TodoReqDto todoReqDto2 = TodoReqDto.builder()
                 .content("할일 3")
-                .creatAt(LocalDateTime.now())
                 .checked(true)
                 .build();
 

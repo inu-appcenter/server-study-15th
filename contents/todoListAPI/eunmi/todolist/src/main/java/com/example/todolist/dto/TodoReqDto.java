@@ -5,21 +5,16 @@ import com.example.todolist.domain.Todo;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
-
 @Getter
 public class TodoReqDto {
 
     private String content;
 
-    private LocalDateTime creatAt;
-
     private boolean checked;
 
     @Builder
-    public TodoReqDto(String content, LocalDateTime creatAt, boolean checked) {
+    public TodoReqDto(String content, boolean checked) {
         this.content = content;
-        this.creatAt = creatAt;
         this.checked = checked;
     }
 
@@ -27,7 +22,6 @@ public class TodoReqDto {
         return Todo.builder()
                 .member(member)
                 .content(todoReqDto.getContent())
-                .creatAt(todoReqDto.getCreatAt())
                 .checked(false)
                 .build();
     }
