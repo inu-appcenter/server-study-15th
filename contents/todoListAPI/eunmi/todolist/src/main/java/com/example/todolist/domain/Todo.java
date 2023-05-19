@@ -41,7 +41,6 @@ public class Todo {
         return Todo.builder()
                 .member(this.member)
                 .content(todoReqDto.getContent())
-                .creatAt(todoReqDto.getCreatAt())
                 .checked(todoReqDto.isChecked())
                 .build();
     }
