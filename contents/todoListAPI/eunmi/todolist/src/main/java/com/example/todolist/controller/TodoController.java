@@ -19,21 +19,21 @@ public class TodoController {
     private final TodoService todoService;
 
     @PostMapping()
-    public ResponseEntity<String> create(Long memberId, TodoReqDto todoReqDto) {
+    public ResponseEntity<String> create(Long memberId, @RequestBody TodoReqDto todoReqDto) {
         Long save = todoService.save(memberId, todoReqDto);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(save + "번 할 일 등록 완료");
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<String> updateChecked(@PathVariable Long id, TodoCheckReqDto todoCheckReqDto) {
+    public ResponseEntity<String> updateChecked(@PathVariable Long id, @RequestBody TodoCheckReqDto todoCheckReqDto) {
         Long updateChecked = todoService.updateChecked(id, todoCheckReqDto);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(updateChecked + "번 Checked 수정 완료");
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateTodo(@PathVariable Long id, TodoReqDto todoReqDto) {
+    public ResponseEntity<String> updateTodo(@PathVariable Long id, @RequestBody TodoReqDto todoReqDto) {
         Long update = todoService.update(id, todoReqDto);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(update + "번 할 일 수정 완료");

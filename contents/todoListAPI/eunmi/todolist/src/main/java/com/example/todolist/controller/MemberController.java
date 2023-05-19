@@ -20,14 +20,14 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping()
-    public ResponseEntity<String> join(@Valid MemberReqDto memberReqDto) {
+    public ResponseEntity<String> join(@Valid @RequestBody MemberReqDto memberReqDto) {
         Long save = memberService.save(memberReqDto);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("회원정보가 생성 되었습니다.");
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateMember(@PathVariable Long id, @Valid MemberReqDto memberReqDto) {
+    public ResponseEntity<String> updateMember(@PathVariable Long id, @Valid @RequestBody MemberReqDto memberReqDto) {
         Long update = memberService.update(id, memberReqDto);
         return ResponseEntity.status(HttpStatus.OK)
                 .body("회원정보가 수정되었습니다.");
