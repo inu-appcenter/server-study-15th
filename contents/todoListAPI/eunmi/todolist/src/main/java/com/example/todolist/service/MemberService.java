@@ -38,11 +38,7 @@ public class MemberService {
     public MemberReqDto findOne(Long id) {
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new NotFoundMemberException(NOT_FOUND_MEMBER_MESSAGE));
-        return MemberDto.builder()
-                .name(member.getName())
-                .nickName(member.getNickName())
-                .email(member.getEmail())
-                .build();
+        return member.toMemberReqDto(member);
     }
 
     public List<MemberPageRespDto> findAll() {
