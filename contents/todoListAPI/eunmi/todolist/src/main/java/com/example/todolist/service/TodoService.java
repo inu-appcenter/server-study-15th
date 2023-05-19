@@ -5,7 +5,6 @@ import com.example.todolist.domain.Todo;
 import com.example.todolist.dto.TodoCheckReqDto;
 import com.example.todolist.dto.TodoPageRespDto;
 import com.example.todolist.dto.TodoReqDto;
-import com.example.todolist.dto.TodoRespDto;
 import com.example.todolist.exception.NotFoundMemberException;
 import com.example.todolist.exception.NotFoundTodoException;
 import com.example.todolist.repository.MemberRepository;
@@ -43,15 +42,10 @@ public class TodoService {
         return creatTodo.getId();
     }
 
-    public TodoRespDto findOne(Long id) {
+    public TodoPageRespDto findOne(Long id) {
         Todo todo = todoRepository.findById(id)
                 .orElseThrow(() -> new NotFoundTodoException(NOT_FOUND_TODO_MESSAGE));
-        return TodoRespDto.builder()
-                .id(todo.getId())
-                .content(todo.getContent())
-                .creatAt(todo.getCreatAt())
-                .checked(todo.isChecked())
-                .build();
+        return todo.toTodoPageRespDto(todo);
     }
 
     public List<TodoPageRespDto> findAll(Long memberId) {
