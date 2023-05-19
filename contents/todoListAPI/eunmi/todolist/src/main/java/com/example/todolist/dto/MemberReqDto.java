@@ -7,7 +7,7 @@ import javax.validation.constraints.Email;
 
 @Getter
 @NoArgsConstructor
-public class MemberDto {
+public class MemberReqDto {
 
     private String name;
 
@@ -17,17 +17,17 @@ public class MemberDto {
     private String email;
 
     @Builder
-    public MemberDto(String name, String nickName, String email) {
+    public MemberReqDto(String name, String nickName, String email) {
         this.name = name;
         this.nickName = nickName;
         this.email = email;
     }
 
-    public Member toMember(MemberDto memberDto) {
+    public Member toMember(MemberReqDto memberReqDto) {
         return Member.builder()
-                .name(memberDto.getName())
-                .nickName(memberDto.getNickName())
-                .email(memberDto.getEmail())
+                .name(memberReqDto.getName())
+                .nickName(memberReqDto.getNickName())
+                .email(memberReqDto.getEmail())
                 .build();
     }
 

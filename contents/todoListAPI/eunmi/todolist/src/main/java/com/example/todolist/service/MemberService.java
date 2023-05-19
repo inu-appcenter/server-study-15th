@@ -1,7 +1,7 @@
 package com.example.todolist.service;
 
 import com.example.todolist.domain.Member;
-import com.example.todolist.dto.MemberDto;
+import com.example.todolist.dto.MemberReqDto;
 import com.example.todolist.dto.MemberPageRespDto;
 import com.example.todolist.exception.NotFoundMemberException;
 import com.example.todolist.repository.MemberRepository;
@@ -21,21 +21,21 @@ public class MemberService {
     private final String NOT_FOUND_MEMBER_MESSAGE = "회원정보가 존재하지 않습니다.";
 
     @Transactional
-    public Long save(MemberDto memberDto) {
-        Member member = memberDto.toMember(memberDto);
+    public Long save(MemberReqDto memberReqDto) {
+        Member member = memberReqDto.toMember(memberReqDto);
         Member savedMember = memberRepository.save(member);
         return savedMember.getId();
     }
 
     @Transactional
-    public Long update(Long id, MemberDto memberDto) {
+    public Long update(Long id, MemberReqDto memberReqDto) {
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new NotFoundMemberException(NOT_FOUND_MEMBER_MESSAGE));
-        member.toMember(memberDto);
+        member.toMember(memberReqDto);
         return member.getId();
     }
 
-    public MemberDto findOne(Long id) {
+    public MemberReqDto findOne(Long id) {
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new NotFoundMemberException(NOT_FOUND_MEMBER_MESSAGE));
         return MemberDto.builder()
@@ -47,7 +47,7 @@ public class MemberService {
 
     public List<MemberPageRespDto> findAll() {
         List<Member> members = memberRepository.findAll();
-        return members.stream().map(member -> member.setMemberPageRespDto(member))
+        return members.stream().map(member -> member.toMemberPageRespDto(member))
                 .collect(Collectors.toList());
     }
 

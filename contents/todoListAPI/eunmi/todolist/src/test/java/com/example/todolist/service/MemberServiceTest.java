@@ -1,7 +1,7 @@
 package com.example.todolist.service;
 
 import com.example.todolist.domain.Member;
-import com.example.todolist.dto.MemberDto;
+import com.example.todolist.dto.MemberReqDto;
 import com.example.todolist.dto.MemberPageRespDto;
 import com.example.todolist.repository.MemberRepository;
 import org.assertj.core.api.Assertions;
@@ -25,73 +25,73 @@ class MemberServiceTest {
     @DisplayName("회원 저장 테스트")
      void 회원_저장() {
         //given
-        MemberDto memberDto = MemberDto.builder()
+        MemberReqDto memberReqDto = MemberReqDto.builder()
                 .name("spring")
                 .nickName("springBoot")
                 .email("spring@naver.com")
                 .build();
 
         //when
-        Long save = memberService.save(memberDto);
+        Long save = memberService.save(memberReqDto);
 
         //then
         Member member = memberRepository.findById(save).orElse(null);
-        Assertions.assertThat(memberDto.getName()).isEqualTo(member.getName());
+        Assertions.assertThat(memberReqDto.getName()).isEqualTo(member.getName());
     }
 
     @Test
     @DisplayName("회원 닉네임 중복 저장 에러 테스트")
     void 회원_닉네임_중복_저장() {
         //given
-        MemberDto memberDto = MemberDto.builder()
+        MemberReqDto memberReqDto = MemberReqDto.builder()
                 .name("member1")
                 .nickName("springBoot")
                 .email("spring@naver.com")
                 .build();
 
         //when
-        Long save = memberService.save(memberDto);
+        Long save = memberService.save(memberReqDto);
 
         //then
         Member member = memberRepository.findById(save).orElse(null);
-        Assertions.assertThat(memberDto.getName()).isEqualTo(member.getName());
+        Assertions.assertThat(memberReqDto.getName()).isEqualTo(member.getName());
     }
 
     @Test
     @DisplayName("회원정보 수정 테스트")
     void 회원정보_수정() {
         //given
-        MemberDto memberDto = MemberDto.builder()
+        MemberReqDto memberReqDto = MemberReqDto.builder()
                 .name("member2")
                 .nickName("member2")
                 .email("member2@naver.com")
                 .build();
 
         //when
-        Long update = memberService.update(1L, memberDto);
+        Long update = memberService.update(1L, memberReqDto);
 
         //then
         Member member = memberRepository.findById(update).orElse(null);
-        Assertions.assertThat(memberDto.getName()).isEqualTo(member.getName());
+        Assertions.assertThat(memberReqDto.getName()).isEqualTo(member.getName());
     }
 
     @Test
     @DisplayName("회원정보 id로 조회하기")
     public void 회원정보_id로_조회() throws Exception {
         // given
-        MemberDto memberDto = MemberDto.builder()
+        MemberReqDto memberReqDto = MemberReqDto.builder()
                 .name("member3")
                 .nickName("member3")
                 .email("spring@naver.com")
                 .build();
 
-        Long save = memberService.save(memberDto);
+        Long save = memberService.save(memberReqDto);
 
         // when
-        MemberDto result = memberService.findOne(save);
+        MemberReqDto result = memberService.findOne(save);
 
         // then
-        Assertions.assertThat(result.getName()).isEqualTo(memberDto.getNickName());
+        Assertions.assertThat(result.getName()).isEqualTo(memberReqDto.getNickName());
 
     }
 
@@ -113,13 +113,13 @@ class MemberServiceTest {
     @Test
     public void 회원정보_삭제() throws Exception {
         // given
-        MemberDto memberDto = MemberDto.builder()
+        MemberReqDto memberReqDto = MemberReqDto.builder()
                 .name("member4")
                 .nickName("member4")
                 .email("member4@naver.com")
                 .build();
 
-        Long save = memberService.save(memberDto);
+        Long save = memberService.save(memberReqDto);
 
         // when
         memberService.deleteMember(save);
