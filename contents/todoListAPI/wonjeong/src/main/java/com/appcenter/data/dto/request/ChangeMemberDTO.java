@@ -1,24 +1,17 @@
 package com.appcenter.data.dto.request;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ChangeMemberDTO {
-    private Long number;
+    private Long id;
     private String name;
     private String password;
     private String email;
-
-    public ChangeMemberDTO() {
-
-    }
-
-    public ChangeMemberDTO(Long number, String name, String password, String email) {
-        this.number = number;
-        this.name = name;
-        this.password = password;
-        this.email = email;
-    }
 }

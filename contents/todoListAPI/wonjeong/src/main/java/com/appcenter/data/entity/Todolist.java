@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Todolist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long number;
+    private Long id;
 
     private String title;
 
@@ -22,7 +22,7 @@ public class Todolist {
     // EAGER는 엔티티 조회시 연관된 엔티티를 즉시 한번에 조회
     // LAZY는 실제 사용 시점에 조회
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "MEMBER_NUMBER")
+    @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
 }

@@ -6,8 +6,10 @@ import com.appcenter.data.entity.Todolist;
 import com.appcenter.data.repository.TodolistRepository;
 import com.appcenter.service.TodolistService;
 import javassist.NotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 public class TodolistServiceImpl implements TodolistService {
@@ -17,22 +19,26 @@ public class TodolistServiceImpl implements TodolistService {
     // 오류 메세지 상수 선언
     private final String NOT_FOUND_CONTENT = "유효하지 않은 게시글 번호입니다.";
 
-    @Autowired
     public TodolistServiceImpl(TodolistRepository todolistRepository) {
         this.todolistRepository = todolistRepository;
     }
 
-    @Override
-    public TodolistResponseDTO getContent(Long number) {
-        Todolist todolist = todolistRepository.findById(number).get();
+    @Transactional
+    public TodolistResponseDTO getContent(Long id) throws Exception {
+        Optional<Todolist> todolist = todolistRepository.findById(id);
 
         TodolistResponseDTO todolistResponseDTO = new TodolistResponseDTO();
 
-        todolistResponseDTO.setNumber(todolist.getNumber());
-        todolistResponseDTO.setTitle(todolist.getTitle());
-        todolistResponseDTO.setContents(todolist.getContents());
+        if (todolist.isPresent()) {
+            Todolist content = todolist.get();
+            todolistResponseDTO.setId(content.getId());
+            todolistResponseDTO.setTitle(content.getTitle());
+            todolistResponseDTO.setContents(content.getContents());
 
-        return todolistResponseDTO;
+            return todolistResponseDTO;
+        } else {
+            throw new Exception(NOT_FOUND_CONTENT);
+        }
     }
 
     @Override
@@ -45,7 +51,7 @@ public class TodolistServiceImpl implements TodolistService {
         Todolist savedMember = todolistRepository.save(todolist);
 
         TodolistResponseDTO todolistResponseDTO = new TodolistResponseDTO();
-        todolistResponseDTO.setNumber(savedMember.getNumber());
+        todolistResponseDTO.setId(savedMember.getId());
         todolistResponseDTO.setTitle(savedMember.getTitle());
         todolistResponseDTO.setContents(savedMember.getContents());
 
@@ -53,14 +59,14 @@ public class TodolistServiceImpl implements TodolistService {
     }
 
     @Override
-    public TodolistResponseDTO updateContent(Long number, String name) throws Exception {
+    public TodolistResponseDTO updateContent(Long id, String name) throws Exception {
         return null;
     }
 
     @Override
-    public void deleteContent(Long number) throws Exception {
+    public void deleteContent(Long id) throws Exception {
         try {
-            todolistRepository.deleteById(number);
+            todolistRepository.deleteById(id);
         } catch (Exception e) {
             throw new NotFoundException(NOT_FOUND_CONTENT);
         }
