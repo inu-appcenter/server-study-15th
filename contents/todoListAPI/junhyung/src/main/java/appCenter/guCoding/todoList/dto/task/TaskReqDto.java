@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+
 import static appCenter.guCoding.todoList.util.CustomDateUtil.toDateTimeFormat;
 
 public class TaskReqDto {
@@ -41,6 +42,14 @@ public class TaskReqDto {
                     .isCompleted(false)
                     .user(user)
                     .build();
+
+        }
+
+        private LocalDateTime parseDateTime(String deadline) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDateTime parseDeadline = LocalDate.parse(deadline, formatter).atStartOfDay();
+//            System.out.println("테스트 : parseDeadline" + parseDeadline);
+            return parseDeadline;
 
         }
 

@@ -26,8 +26,15 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class SecurityConfig {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
+
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final JwtAuthorizationFilter jwtAuthorizationFilter;
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        log.debug("디버그 : BCryptPasswordEncoder 등록");
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

@@ -1,6 +1,7 @@
 package appCenter.guCoding.todoList.dto.user;
 
 import appCenter.guCoding.todoList.domain.user.User;
+
 import appCenter.guCoding.todoList.util.CustomDateUtil;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,7 +30,6 @@ public class UserRespDto {
     public static class UserEditRespDto {
 
         private String username;
-
         public UserEditRespDto(User user) {
             this.username = user.getUsername();
         }
