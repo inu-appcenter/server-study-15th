@@ -7,11 +7,21 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class UserReqDto {
+
+    @Getter
+    @Setter
+    public static class LoginReqDto {
+        @Schema(example = "ssar")
+        private String username;
+        @Schema(example = "1234")
+        private String password;
+    }
 
     @Getter
     @Setter
@@ -28,7 +38,7 @@ public class UserReqDto {
         private String password;
 
         @Schema(example = "ssar@nate.com")
-        @Pattern(regexp = "^^[a-zA-Z0-9]{2,10}@[a-zA-Z0-9]{2,6}\\.[a-zA-Z]{2,3}$", message = "이메일 형식으로 작성해주세요.")
+        @Email
         @NotEmpty
         private String email;
 

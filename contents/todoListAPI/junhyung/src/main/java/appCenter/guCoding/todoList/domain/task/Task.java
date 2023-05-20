@@ -3,6 +3,7 @@ package appCenter.guCoding.todoList.domain.task;
 import appCenter.guCoding.todoList.domain.user.User;
 import appCenter.guCoding.todoList.dto.task.TaskReqDto;
 import appCenter.guCoding.todoList.dto.task.TaskReqDto.TaskEditReqDto;
+import appCenter.guCoding.todoList.handler.ex.CustomApiException;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -45,6 +46,12 @@ public class Task {
         this.isCompleted = isCompleted;
         this.user = user;
         this.deadline = deadline;
+    }
+
+    public void checkOwner(Long userId) {
+        if (user.getId().longValue() != userId.longValue()) {
+            throw new CustomApiException("할 일 소유자가 아닙니다.");
+        }
     }
 
 

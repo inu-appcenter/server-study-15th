@@ -1,6 +1,7 @@
 package appCenter.guCoding.todoList.dto.task;
 
 import appCenter.guCoding.todoList.domain.task.Task;
+import appCenter.guCoding.todoList.domain.user.User;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,6 +12,8 @@ import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import static appCenter.guCoding.todoList.util.CustomDateUtil.toDateTimeFormat;
 
 public class TaskReqDto {
 
@@ -30,22 +33,14 @@ public class TaskReqDto {
         @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "잘못된 기한일 형식입니다.")
         private String deadline;
 
-        public Task toEntity() {
+        public Task toEntity(User user) {
             return Task.builder()
                     .title(title)
                     .description(description)
-                    .deadline(parseDateTime(deadline)) // question
+                    .deadline(toDateTimeFormat(deadline)) // question
                     .isCompleted(false)
-//                    .user()
+                    .user(user)
                     .build();
-
-        }
-
-        private LocalDateTime parseDateTime(String deadline) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDateTime parseDeadline = LocalDate.parse(deadline, formatter).atStartOfDay();
-//            System.out.println("테스트 : parseDeadline" + parseDeadline);
-            return parseDeadline;
 
         }
 
