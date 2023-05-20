@@ -1,7 +1,11 @@
 package com.example.todolist.domain;
 
 import com.example.todolist.dto.MemberDto;
-import lombok.*;
+import com.example.todolist.dto.MemberPageRespDto;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -38,11 +42,20 @@ public class Member extends BaseTimeEntity {
     /**
      * 생성 메서드
      */
-    public Member updateMember(MemberDto memberDto) {
-        this.name = memberDto.getName();
-        this.nickName = memberDto.getNickName();
-        this.email = memberDto.getEmail();
-        return this;
+    public Member toMember(MemberDto memberDto) {
+        return Member.builder()
+                .name(memberDto.getName())
+                .nickName(memberDto.getNickName())
+                .email(memberDto.getEmail())
+                .build();
+    }
+
+    public MemberPageRespDto setMemberPageRespDto(Member member) {
+        return MemberPageRespDto.builder()
+                .name(member.getName())
+                .nickName(member.getNickName())
+                .email(member.getEmail())
+                .build();
     }
 
 }
