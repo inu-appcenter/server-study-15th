@@ -2,7 +2,7 @@ package com.appcenter.controller;
 
 import com.appcenter.data.dto.MemberDTO;
 import com.appcenter.data.dto.response.MemberResponseDTO;
-import com.appcenter.data.dto.request.ChangeMemberDTO;
+import com.appcenter.data.dto.request.MemberRequestDTO;
 import com.appcenter.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,11 +34,8 @@ public class MemberController {
     }
 
     @PutMapping()
-    public ResponseEntity<MemberResponseDTO> changeMemberInfo(@RequestBody ChangeMemberDTO changeMemberDTO) throws Exception {
-        MemberResponseDTO memberResponseDTO = memberService.changeMemberinfo(
-                changeMemberDTO.getId(),
-                changeMemberDTO.getName()
-        );
+    public ResponseEntity<MemberResponseDTO> changeMemberInfo(@RequestBody MemberRequestDTO memberRequestDTO) throws Exception {
+        MemberResponseDTO memberResponseDTO = memberService.changeMemberinfo(memberRequestDTO);
 
         return ResponseEntity.status(HttpStatus.OK).body(memberResponseDTO);
     }

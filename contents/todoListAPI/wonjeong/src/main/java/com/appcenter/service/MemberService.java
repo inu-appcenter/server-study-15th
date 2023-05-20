@@ -1,6 +1,7 @@
 package com.appcenter.service;
 
 import com.appcenter.data.dto.MemberDTO;
+import com.appcenter.data.dto.request.MemberRequestDTO;
 import com.appcenter.data.dto.response.MemberResponseDTO;
 
 public interface MemberService {
@@ -9,7 +10,7 @@ public interface MemberService {
 
     MemberResponseDTO savedMember(MemberDTO memberDTO);
 
-    MemberResponseDTO changeMemberinfo(Long id, String name) throws Exception;
+    MemberResponseDTO changeMemberinfo(MemberRequestDTO memberRequestDTO) throws Exception;
 
     void deleteMember(Long id) throws Exception;
 }

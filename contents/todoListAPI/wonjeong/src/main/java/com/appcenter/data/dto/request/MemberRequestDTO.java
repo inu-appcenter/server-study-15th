@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChangeMemberDTO {
+public class MemberRequestDTO {
     private Long id;
     private String name;
     private String password;

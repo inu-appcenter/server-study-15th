@@ -1,6 +1,7 @@
 package com.appcenter.service.impl;
 
 import com.appcenter.data.dto.MemberDTO;
+import com.appcenter.data.dto.request.MemberRequestDTO;
 import com.appcenter.data.dto.response.MemberResponseDTO;
 import com.appcenter.data.entity.Member;
 import com.appcenter.data.repository.MemberRepository;
@@ -54,38 +55,25 @@ public class MemberServiceImpl implements MemberService {
         Member savedMember = memberRepository.save(member);
 
         MemberResponseDTO memberResponseDTO = new MemberResponseDTO();
-        memberResponseDTO.setId(savedMember.getId());
-        memberResponseDTO.setName(savedMember.getName());
-        memberResponseDTO.setPassword(savedMember.getPassword());
-        memberResponseDTO.setEmail(savedMember.getEmail());
-
-        return memberResponseDTO;
+        // 선언된 DTO 객체에 updateMemberResponse 메서드를 이용해 정보를 담아 리턴
+        return memberResponseDTO.updateMemberResponse(savedMember);
     }
 
     @Override
-    public MemberResponseDTO changeMemberinfo(Long id, String name) throws Exception {
-        // 멤버 수정 기능은 재 정의 해야 함
-        Member foundMember = memberRepository.findById(id)
+    public MemberResponseDTO changeMemberinfo(MemberRequestDTO memberRequestDTO) throws Exception {
+        Member foundMember = memberRepository.findById(memberRequestDTO.getId())
                 .orElseThrow(() -> new NotFoundException(NOT_FOUND_MEMBER));
 
-        foundMember.setName(name);
+        Member changedMember = memberRepository.save(foundMember.updateMember(memberRequestDTO));
 
-        Member changedMember = memberRepository.save(foundMember);
-
-        // DTO 객체에 담아 리턴
         // DTO 객체 선언
         MemberResponseDTO memberResponseDTO = new MemberResponseDTO();
-        memberResponseDTO.setId(changedMember.getId());
-        memberResponseDTO.setName(changedMember.getName());
-        memberResponseDTO.setPassword(changedMember.getPassword());
-        memberResponseDTO.setEmail(changedMember.getEmail());
-
-        return memberResponseDTO;
+        // 선언된 DTO 객체에 updateMemberResponse 메서드를 이용해 정보를 담아 리턴
+        return memberResponseDTO.updateMemberResponse(changedMember);
     }
 
     @Override
     public void deleteMember(Long id) throws Exception {
-        // DAO에서 delete 메소드 호출
         try {
             memberRepository.deleteById(id);
         } catch (Exception e) {
