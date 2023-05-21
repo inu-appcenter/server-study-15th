@@ -1,6 +1,5 @@
 package com.appcenter.service.impl;
 
-import com.appcenter.data.dto.MemberDTO;
 import com.appcenter.data.dto.request.MemberRequestDTO;
 import com.appcenter.data.dto.response.MemberResponseDTO;
 import com.appcenter.data.entity.Member;
@@ -46,30 +45,22 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public MemberResponseDTO savedMember(MemberDTO memberDTO) {
-        Member member = new Member();
-        member.setName(memberDTO.getName());
-        member.setPassword(memberDTO.getPassword());
-        member.setEmail(memberDTO.getEmail());
+    public MemberResponseDTO savedMember(MemberRequestDTO memberRequestDTO) {
+        Member member = new Member().createMember(memberRequestDTO);
 
         Member savedMember = memberRepository.save(member);
-
-        MemberResponseDTO memberResponseDTO = new MemberResponseDTO();
         // 선언된 DTO 객체에 updateMemberResponse 메서드를 이용해 정보를 담아 리턴
-        return memberResponseDTO.updateMemberResponse(savedMember);
+        return new MemberResponseDTO().updateMemberResponse(savedMember);
     }
 
     @Override
-    public MemberResponseDTO changeMemberinfo(MemberRequestDTO memberRequestDTO) throws Exception {
-        Member foundMember = memberRepository.findById(memberRequestDTO.getId())
+    public MemberResponseDTO updateMember(Long id, MemberRequestDTO memberRequestDTO) throws Exception {
+        Member foundMember = memberRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(NOT_FOUND_MEMBER));
 
-        Member changedMember = memberRepository.save(foundMember.updateMember(memberRequestDTO));
+        Member changedMember = memberRepository.save(foundMember.updateMember(id, memberRequestDTO));
 
-        // DTO 객체 선언
-        MemberResponseDTO memberResponseDTO = new MemberResponseDTO();
-        // 선언된 DTO 객체에 updateMemberResponse 메서드를 이용해 정보를 담아 리턴
-        return memberResponseDTO.updateMemberResponse(changedMember);
+        return new MemberResponseDTO().updateMemberResponse(changedMember);
     }
 
     @Override
