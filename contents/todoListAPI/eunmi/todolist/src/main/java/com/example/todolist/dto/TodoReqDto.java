@@ -5,16 +5,21 @@ import com.example.todolist.domain.Todo;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
 @Getter
 public class TodoReqDto {
 
     private String content;
 
+    private LocalDateTime deadline;
+
     private boolean checked;
 
     @Builder
-    public TodoReqDto(String content, boolean checked) {
+    public TodoReqDto(String content, LocalDateTime deadline, boolean checked) {
         this.content = content;
+        this.deadline = deadline;
         this.checked = checked;
     }
 

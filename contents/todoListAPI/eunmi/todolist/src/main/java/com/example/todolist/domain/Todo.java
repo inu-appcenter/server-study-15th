@@ -24,16 +24,16 @@ public class Todo {
     private String content;
 
     @Column(nullable = false)
-    private LocalDateTime creatAt;
+    private LocalDateTime deadline;
 
     @Column(nullable = false)
     private boolean checked;
 
     @Builder
-    public Todo(Member member, String content, LocalDateTime creatAt, boolean checked) {
+    public Todo(Member member, String content, LocalDateTime deadline, boolean checked) {
         setMember(member);
         this.content = content;
-        this.creatAt = creatAt;
+        this.deadline = deadline;
         this.checked = checked;
     }
 
@@ -41,6 +41,7 @@ public class Todo {
         return Todo.builder()
                 .member(this.member)
                 .content(todoReqDto.getContent())
+                .deadline(todoReqDto.getDeadline())
                 .checked(todoReqDto.isChecked())
                 .build();
     }
@@ -61,7 +62,7 @@ public class Todo {
         return Todo.builder()
                 .member(this.member)
                 .content(this.content)
-                .creatAt(this.creatAt)
+                .deadline(this.deadline)
                 .checked(todoCheckReqDto.isChecked())
                 .build();
     }
