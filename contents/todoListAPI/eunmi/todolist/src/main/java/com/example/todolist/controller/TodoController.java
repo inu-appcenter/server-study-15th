@@ -25,7 +25,7 @@ public class TodoController {
                 .body(save + "번 할 일 등록 완료");
     }
 
-    @PostMapping("/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<String> updateChecked(@PathVariable Long id, @RequestBody TodoCheckReqDto todoCheckReqDto) {
         Long updateChecked = todoService.updateChecked(id, todoCheckReqDto);
         return ResponseEntity.status(HttpStatus.OK)
