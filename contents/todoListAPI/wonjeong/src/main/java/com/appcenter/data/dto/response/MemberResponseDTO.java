@@ -9,8 +9,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@Builder
 public class MemberResponseDTO {
+
     private Long id;
     private String name;
     private String password;

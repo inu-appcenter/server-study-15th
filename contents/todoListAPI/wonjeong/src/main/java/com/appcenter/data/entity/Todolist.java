@@ -1,9 +1,6 @@
 package com.appcenter.data.entity;
 
-import com.appcenter.data.dto.request.TodolistRequestDTO;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,7 +8,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@NoArgsConstructor
 public class Todolist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,28 +24,5 @@ public class Todolist {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
-
-    @Builder
-    public Todolist(Long id, String title, String contents) {
-        this.id = id;
-        this.title = title;
-        this.contents = contents;
-    }
-
-
-    public Todolist createContent(TodolistRequestDTO todolistRequestDTO) {
-        return Todolist.builder()
-                .title(todolistRequestDTO.getTitle())
-                .contents(todolistRequestDTO.getContents())
-                .build();
-    }
-
-    public Todolist updateContent(Long id, TodolistRequestDTO todolistRequestDTO) {
-        return Todolist.builder()
-                .id(id)
-                .title(todolistRequestDTO.getTitle())
-                .contents(todolistRequestDTO.getContents())
-                .build();
-    }
 
 }
