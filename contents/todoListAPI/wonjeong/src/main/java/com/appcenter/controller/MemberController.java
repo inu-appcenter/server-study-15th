@@ -1,6 +1,5 @@
 package com.appcenter.controller;
 
-import com.appcenter.data.dto.MemberDTO;
 import com.appcenter.data.dto.response.MemberResponseDTO;
 import com.appcenter.data.dto.request.MemberRequestDTO;
 import com.appcenter.service.MemberService;
@@ -27,15 +26,15 @@ public class MemberController {
     }
 
     @PostMapping()
-    public ResponseEntity<MemberResponseDTO> createMember(@RequestBody MemberDTO memberDTO) {
-        MemberResponseDTO memberResponseDTO = memberService.savedMember(memberDTO);
+    public ResponseEntity<MemberResponseDTO> createMember(@RequestBody MemberRequestDTO memberRequestDTO) {
+        MemberResponseDTO memberResponseDTO = memberService.savedMember(memberRequestDTO);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(memberResponseDTO);
     }
 
     @PutMapping()
-    public ResponseEntity<MemberResponseDTO> changeMemberInfo(@RequestBody MemberRequestDTO memberRequestDTO) throws Exception {
-        MemberResponseDTO memberResponseDTO = memberService.changeMemberinfo(memberRequestDTO);
+    public ResponseEntity<MemberResponseDTO> updateMember(@RequestBody MemberRequestDTO memberRequestDTO, Long id) throws Exception {
+        MemberResponseDTO memberResponseDTO = memberService.updateMember(id, memberRequestDTO);
 
         return ResponseEntity.status(HttpStatus.OK).body(memberResponseDTO);
     }
@@ -44,6 +43,6 @@ public class MemberController {
     public ResponseEntity<String> deleteMember(Long id) throws Exception{
         memberService.deleteMember(id);
 
-        return ResponseEntity.status(HttpStatus.OK).body("정상적으로 삭제되었습니다.");
+        return ResponseEntity.status(HttpStatus.OK).body("정상적으로 회원이 삭제되었습니다.");
     }
 }

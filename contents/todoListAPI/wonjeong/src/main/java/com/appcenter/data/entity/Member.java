@@ -36,14 +36,24 @@ public class Member {
         this.email = email;
     }
 
-    // 업데이트 메서드
-    public Member updateMember(MemberRequestDTO memberRequestDTO) {
+    public Member createMember(MemberRequestDTO memberRequestDTO) {
         return Member.builder()
-                .id(memberRequestDTO.getId())
                 .name(memberRequestDTO.getName())
                 .password(memberRequestDTO.getPassword())
                 .email(memberRequestDTO.getEmail())
                 .build();
     }
+
+    // 업데이트 메서드
+    public Member updateMember(Long id, MemberRequestDTO memberRequestDTO) {
+        return Member.builder()
+                .id(id)
+                .name(memberRequestDTO.getName())
+                .password(memberRequestDTO.getPassword())
+                .email(memberRequestDTO.getEmail())
+                .build();
+    }
+
+
 
 }
