@@ -1,6 +1,6 @@
 package com.appcenter.controller;
 
-import com.appcenter.data.dto.TodolistDTO;
+import com.appcenter.data.dto.request.TodolistRequestDTO;
 import com.appcenter.data.dto.response.TodolistResponseDTO;
 import com.appcenter.service.TodolistService;
 import org.springframework.http.HttpStatus;
@@ -26,9 +26,23 @@ public class TodolistController {
     }
 
     @PostMapping()
-    public ResponseEntity<TodolistResponseDTO> createContent(@RequestBody TodolistDTO todolistDTO) {
-        TodolistResponseDTO todolistResponseDTO = todolistService.savedContent(todolistDTO);
+    public ResponseEntity<TodolistResponseDTO> createContent(@RequestBody TodolistRequestDTO todolistRequestDTO, Long id) throws Exception {
+        TodolistResponseDTO todolistResponseDTO = todolistService.savedContent(id, todolistRequestDTO);
 
         return  ResponseEntity.status(HttpStatus.CREATED).body(todolistResponseDTO);
     }
+
+    @PutMapping()
+    public ResponseEntity<TodolistResponseDTO> updateContent(@RequestBody TodolistRequestDTO todolistRequestDTO, Long id) throws Exception {
+        TodolistResponseDTO todolistResponseDTO = todolistService.updateContent(id, todolistRequestDTO);
+
+        return ResponseEntity.status(HttpStatus.OK).body(todolistResponseDTO);
+    }
+
+    @DeleteMapping()
+    public ResponseEntity<String> deleteContent(Long id) throws Exception {
+        todolistService.deleteContent(id);
+        return ResponseEntity.status(HttpStatus.OK).body("정상적으로 글이 삭제되었습니다.");
+    }
+
 }
