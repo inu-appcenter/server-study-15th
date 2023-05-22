@@ -12,7 +12,7 @@ public class TodoReqDto {
 
     private String content;
 
-    private LocalDateTime creatAt = LocalDateTime.now();
+    private LocalDateTime creatAt;
 
     private boolean checked;
 

@@ -13,6 +13,8 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     // select * from task where title = : title
     Optional<Task> findByTitle(String title);
 
+    List<Task> findByUser_id(Long id);
+
     @Query("select t from Task t where t.title = :title")
     List<Task> findByTitle2(String title);
 
