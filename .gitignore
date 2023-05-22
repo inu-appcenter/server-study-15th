@@ -92,3 +92,5 @@ gradle-app.setting
 *.hprof
 
 # End of https://www.toptal.com/developers/gitignore/api/java,macos,gradle,intelli
+/contents/todoListAPI/wonjeong/.gradle/
+/contents/todoListAPI/wonjeong/build/
