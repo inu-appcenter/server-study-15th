@@ -4,12 +4,10 @@ import com.appcenter.data.dto.request.MemberRequestDTO;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 
 @Getter
-@Setter
 @Entity // 이 클래스가 엔티티 클래스임을 명시
 @NoArgsConstructor
 public class Member {

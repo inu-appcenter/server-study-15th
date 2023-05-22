@@ -26,8 +26,8 @@ public class TodolistController {
     }
 
     @PostMapping()
-    public ResponseEntity<TodolistResponseDTO> createContent(@RequestBody TodolistRequestDTO todolistRequestDTO) {
-        TodolistResponseDTO todolistResponseDTO = todolistService.savedContent(todolistRequestDTO);
+    public ResponseEntity<TodolistResponseDTO> createContent(@RequestBody TodolistRequestDTO todolistRequestDTO, Long id) throws Exception {
+        TodolistResponseDTO todolistResponseDTO = todolistService.savedContent(id, todolistRequestDTO);
 
         return  ResponseEntity.status(HttpStatus.CREATED).body(todolistResponseDTO);
     }

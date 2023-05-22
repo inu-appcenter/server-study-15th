@@ -7,7 +7,7 @@ public interface TodolistService {
 
     TodolistResponseDTO getContent(Long id) throws Exception;
 
-    TodolistResponseDTO savedContent(TodolistRequestDTO todolistRequestDTO);
+    TodolistResponseDTO savedContent(Long id, TodolistRequestDTO todolistRequestDTO) throws  Exception;
 
     TodolistResponseDTO updateContent(Long id, TodolistRequestDTO todolistRequestDTO) throws Exception;
 

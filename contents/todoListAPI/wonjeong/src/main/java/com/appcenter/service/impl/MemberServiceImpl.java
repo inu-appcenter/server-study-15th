@@ -8,15 +8,13 @@ import com.appcenter.service.MemberService;
 import javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class MemberServiceImpl implements MemberService {
 
     // MemberRepository를 상수로 선언
     private final MemberRepository memberRepository;
     // 오류 메세지 상수 선언
-    private final String NOT_FOUND_MEMBER = "유효하지 않은 멤버 번호 입니다.";
+    private final String NOT_FOUND_MEMBER = "유효하지 않은 멤버 id 입니다.";
 
     public MemberServiceImpl(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
@@ -25,23 +23,10 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public MemberResponseDTO getMember(Long id) throws Exception{
-        // 나중에 getMember 인터페이스에 예외처리 추가
-        Optional<Member> member = memberRepository.findById(id);
+        Member savedMember = memberRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(NOT_FOUND_MEMBER));
 
-        if(member.isPresent()) {
-            Member content = member.get();
-            // 리턴할 새로운 DTO 객체 생성
-            // Entity 객체에서 get해서 DTO 객체에 set
-            MemberResponseDTO memberResponseDTO = new MemberResponseDTO();
-            memberResponseDTO.setId(content.getId());
-            memberResponseDTO.setName(content.getName());
-            memberResponseDTO.setPassword(content.getPassword());
-            memberResponseDTO.setEmail(content.getEmail());
-
-            return memberResponseDTO;
-        } else {
-            throw new Exception(NOT_FOUND_MEMBER);
-        }
+        return new MemberResponseDTO().updateMemberResponse(savedMember);
     }
 
     @Override

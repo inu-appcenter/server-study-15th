@@ -2,10 +2,13 @@ package com.appcenter.service.impl;
 
 import com.appcenter.data.dto.request.TodolistRequestDTO;
 import com.appcenter.data.dto.response.TodolistResponseDTO;
+import com.appcenter.data.entity.Member;
 import com.appcenter.data.entity.Todolist;
+import com.appcenter.data.repository.MemberRepository;
 import com.appcenter.data.repository.TodolistRepository;
 import com.appcenter.service.TodolistService;
 import javassist.NotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,11 +17,17 @@ public class TodolistServiceImpl implements TodolistService {
 
     // Repository 상수 선언
     private final TodolistRepository todolistRepository;
+    // Repository 상수 선언
+    private final MemberRepository memberRepository;
+
     // 오류 메세지 상수 선언
     private final String NOT_FOUND_CONTENT = "유효하지 않은 게시글 번호입니다.";
+    private final String NOT_FOUND_MEMBER = "유효하지 않은 멤버 번호 입니다.";
 
-    public TodolistServiceImpl(TodolistRepository todolistRepository) {
+    @Autowired
+    public TodolistServiceImpl(TodolistRepository todolistRepository, MemberRepository memberRepository) {
         this.todolistRepository = todolistRepository;
+        this.memberRepository = memberRepository;
     }
 
     @Transactional
@@ -32,12 +41,13 @@ public class TodolistServiceImpl implements TodolistService {
     }
 
     @Override
-    public TodolistResponseDTO savedContent(TodolistRequestDTO todolistRequestDTO) {
+    public TodolistResponseDTO savedContent(Long id, TodolistRequestDTO todolistRequestDTO) throws Exception {
         Todolist todolist = new Todolist();
+        Member findMember = memberRepository.findById(id).orElseThrow(() -> new NotFoundException(NOT_FOUND_MEMBER));
 
-        Todolist savedContent = todolistRepository.save(todolist.createContent(todolistRequestDTO));
+        Todolist savedContent = todolistRepository.save(todolist.createContent(findMember, todolistRequestDTO));
 
-        return new TodolistResponseDTO().updateTodolistResponse(savedContent);
+        return new TodolistResponseDTO().createTodolistResponse(savedContent);
     }
 
     @Override
@@ -45,7 +55,7 @@ public class TodolistServiceImpl implements TodolistService {
         Todolist foundContent = todolistRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(NOT_FOUND_CONTENT));
 
-        Todolist updateContent = todolistRepository.save(foundContent.updateContent(id, todolistRequestDTO));
+        Todolist updateContent = todolistRepository.save(foundContent.updateContent(id, foundContent.getMember(),todolistRequestDTO));
 
         return new TodolistResponseDTO().updateTodolistResponse(updateContent);
     }
