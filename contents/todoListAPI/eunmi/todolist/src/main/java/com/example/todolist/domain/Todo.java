@@ -1,5 +1,7 @@
 package com.example.todolist.domain;
 
+import com.example.todolist.dto.TodoCheckReqDto;
+import com.example.todolist.dto.TodoPageRespDto;
 import com.example.todolist.dto.TodoReqDto;
 import lombok.*;
 
@@ -36,11 +38,12 @@ public class Todo {
     }
 
     public Todo updateTodo(TodoReqDto todoReqDto) {
-        setMember(member);
-        this.content = todoReqDto.getContent();
-        this.creatAt = todoReqDto.getCreatAt();
-        this.checked = todoReqDto.isChecked();
-        return this;
+        return Todo.builder()
+                .member(this.member)
+                .content(todoReqDto.getContent())
+                .creatAt(todoReqDto.getCreatAt())
+                .checked(todoReqDto.isChecked())
+                .build();
     }
 
     /**
@@ -53,5 +56,21 @@ public class Todo {
         }
         this.member = member;
         member.getTodos().add(this);
+    }
+
+    public Todo setChecked(TodoCheckReqDto todoCheckReqDto) {
+        return Todo.builder()
+                .member(this.member)
+                .content(this.content)
+                .creatAt(this.creatAt)
+                .checked(todoCheckReqDto.isChecked())
+                .build();
+    }
+
+    public TodoPageRespDto toTodoPageRespDto(Todo todo) {
+        return TodoPageRespDto.builder()
+                .content(todo.getContent())
+                .checked(todo.isChecked())
+                .build();
     }
 }

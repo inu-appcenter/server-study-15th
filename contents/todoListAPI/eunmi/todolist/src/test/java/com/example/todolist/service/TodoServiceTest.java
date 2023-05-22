@@ -1,7 +1,7 @@
 package com.example.todolist.service;
 
-import com.example.todolist.domain.Todo;
 import com.example.todolist.dto.MemberDto;
+import com.example.todolist.dto.TodoPageRespDto;
 import com.example.todolist.dto.TodoReqDto;
 import com.example.todolist.dto.TodoRespDto;
 import org.assertj.core.api.Assertions;
@@ -92,10 +92,10 @@ class TodoServiceTest {
         // given
 
         // when
-        List<Todo> todos = todoService.findAll(6L);
+        List<TodoPageRespDto> todos = todoService.findAll(6L);
 
         // then
-        for (Todo todo : todos
+        for (TodoPageRespDto todo : todos
         ) {
             System.out.println("todo.getContent() = " + todo.getContent());
         }

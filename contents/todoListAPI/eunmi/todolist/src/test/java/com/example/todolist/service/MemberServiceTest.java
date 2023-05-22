@@ -2,18 +2,15 @@ package com.example.todolist.service;
 
 import com.example.todolist.domain.Member;
 import com.example.todolist.dto.MemberDto;
+import com.example.todolist.dto.MemberPageRespDto;
 import com.example.todolist.repository.MemberRepository;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class MemberServiceTest {
@@ -105,10 +102,10 @@ class MemberServiceTest {
 
 
         // when
-        List<Member> members = memberService.findAll();
+        List<MemberPageRespDto> members = memberService.findAll();
 
         // then
-        for (Member member : members) {
+        for (MemberPageRespDto member : members) {
             System.out.println("member.getNickName() = " + member.getNickName());
         }
     }

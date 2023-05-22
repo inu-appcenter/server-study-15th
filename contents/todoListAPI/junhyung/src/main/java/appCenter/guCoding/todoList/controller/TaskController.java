@@ -21,13 +21,14 @@ public class TaskController {
     // jwt login 이후 수정
     private final TaskService taskService;
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<?> saveTodo(@RequestBody @Valid TaskSaveReqDto taskSaveReqDto, BindingResult bindingResult) {
         TaskSaveRespDto taskSaveRespDto = taskService.할일저장(taskSaveReqDto);
         return new ResponseEntity<>(new ResponseDto<>(1,"할 일 추가 성공", taskSaveRespDto), HttpStatus.CREATED);
     }
 
-    @GetMapping("/")
+
+    @GetMapping
     public ResponseEntity<?> checkTodo(@RequestParam(value = "title",required = false) String title) {
         if (title == null) {
             TaskListRespDto taskListRespDto = taskService.할일목록보기();
