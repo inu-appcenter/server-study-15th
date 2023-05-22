@@ -3,6 +3,8 @@
 
 #!! ERROR: intelli is undefined. Use list command to see defined gitignore types !!#
 
+.idea
+
 ### Java ###
 # Compiled class file
 *.class
