@@ -1,0 +1,34 @@
+server:
+  port: 8097
+  servlet:
+    encoding:
+      charset: utf-8
+      force: true
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/jhTodoList
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: junhyeong
+    password: Kyjgshs9076??
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      '[hibernate.default_batch_fetch_size]': 100
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+logging:
+  level:
+    '[appCenter.guCoding.todoList]': INFO
+
+jwt:
+  secret : "구코딩" # 서버만 알고있는 시크릿 키
+  expiration_time : 604800000 # 1000 * 60 * 60 * 24 * 7 1주일 시간
+  token_prefix : "Bearer "
+  access_header : "ACCESS_TOKEN"
+  refresh_header : "REFRESH_TOKEN"

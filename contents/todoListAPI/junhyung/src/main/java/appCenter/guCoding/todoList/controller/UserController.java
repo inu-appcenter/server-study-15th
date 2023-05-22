@@ -31,7 +31,7 @@ public class UserController {
 
     }
 
-    @PutMapping("/")
+    @PutMapping
     public ResponseEntity<?> editUser(@RequestBody @Valid UserEditReqDto userEditReqDto, BindingResult bindingResult, String username) {
         UserEditRespDto userEditRespDto = userService.사용자정보수정(userEditReqDto, username);
         return new ResponseEntity<>(new ResponseDto<>(1, "사용자 정보 수정 성공", userEditRespDto), HttpStatus.OK);

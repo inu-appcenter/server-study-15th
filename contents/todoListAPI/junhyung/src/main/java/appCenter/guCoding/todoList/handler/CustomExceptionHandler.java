@@ -11,11 +11,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice
+
+@RestControllerAdvice // Controller 에서 발생하는 에러들을 모두 잡아준다.
 public class CustomExceptionHandler {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
+    // Controller 계층에서 발생하는 에러를 잡아서 메서드로 처리해주는 기능
     @ExceptionHandler(CustomApiException.class)
     public ResponseEntity<?> apiException(CustomApiException e) {
         log.error(e.getMessage());
