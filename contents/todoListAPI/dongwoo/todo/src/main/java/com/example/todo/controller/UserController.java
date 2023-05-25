@@ -2,6 +2,8 @@ package com.example.todo.controller;
 
 import com.example.todo.common.dto.CommonResponse;
 import com.example.todo.dto.request.GeneralSignUpRequest;
+import com.example.todo.dto.request.SignInRequestDto;
+import com.example.todo.dto.response.JwtLoginResponse;
 import com.example.todo.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -29,12 +31,18 @@ public class UserController {
             "email 은 꼭 email 형식으로 보내주셔야 합니다")
     @PostMapping("/signup")
     public ResponseEntity<CommonResponse> registerUser(@Valid @RequestBody GeneralSignUpRequest request) {
-
         userService.registerUser(request.toDomain());
 
         CommonResponse response = new CommonResponse("회원가입에 성공했습니다.");
 
         return new ResponseEntity(response, HttpStatus.OK);
+    }
+
+    @Operation(summary = "로그인", description = "바디에 {email, password} 를 json 형식으로 보내주시면 됩니다. " +
+        "email 은 꼭 email 형식으로 보내주셔야 합니다")
+    @PostMapping("/login")
+    public ResponseEntity<JwtLoginResponse> login(@RequestBody SignInRequestDto request) throws Exception {
+        return new ResponseEntity<>(userService.login(request), HttpStatus.OK);
     }
 
 

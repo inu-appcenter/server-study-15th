@@ -1,5 +1,8 @@
 package com.example.todo.common.config;
 
+import com.example.todo.common.jwt.JwtProvider;
+import com.example.todo.common.jwt.filter.JwtAuthenticationFilter;
+import com.example.todo.common.jwt.filter.JwtExceptionHandlerFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
@@ -13,12 +16,15 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
+
+    private JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(new JwtProvider());
 
     private static final String[] PERMIT_URL_ARRAY = {
             "/api/**",
@@ -47,6 +53,10 @@ public class SecurityConfig {
                 .and()
                 .csrf().disable();
 
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .antMatcher("/api/**");
+
+        http.addFilterBefore(new JwtExceptionHandlerFilter(), JwtAuthenticationFilter.class);
 //
 //                .authorizeRequests()
 //                .antMatchers("/api/oauth/login","/api/user/addInfo")
