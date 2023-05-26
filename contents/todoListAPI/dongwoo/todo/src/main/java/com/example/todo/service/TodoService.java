@@ -54,11 +54,12 @@ public class TodoService {
         todo.update(request);
     }
 
-    public Slice<TodoListData> getTodoList(int page, int size) {
+    public Slice<TodoListData> getTodoList(int page, int size, Long userId) {
 
+        User findUser = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
 
         PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdDate"));
-        Slice<Todo> todoSlice = todoRepository.findSliceBy(pageRequest);
+        Slice<Todo> todoSlice = todoRepository.findSliceByUser(pageRequest, findUser);
 
         Slice<TodoListData> todoListData = todoSlice.map(todo -> {
             return new TodoListData(todo);
