@@ -2,6 +2,7 @@ package com.example.todo.controller;
 
 import com.example.todo.common.dto.CommonResponse;
 import com.example.todo.dto.data.TodoListData;
+import com.example.todo.dto.data.UserId;
 import com.example.todo.dto.request.CreateTodoRequest;
 import com.example.todo.dto.request.UpdateTodoRequest;
 import com.example.todo.dto.response.GetTodoListResponse;
@@ -28,9 +29,9 @@ public class TodoController {
 
     @Operation(summary = "todo 생성", description = "바디에 {contents, deadLine} 을 json 형식으로 보내주시면 됩니다.")
     @PostMapping("")
-    public ResponseEntity<CommonResponse> createTodo(@Valid @RequestBody CreateTodoRequest request) {
+    public ResponseEntity<CommonResponse> createTodo(@Valid @RequestBody CreateTodoRequest request, UserId userId) {
 
-        todoService.createTodo(request);
+        todoService.createTodo(request, userId.getId());
 
         CommonResponse response = new CommonResponse("투두 저장 성공 했습니다");
 

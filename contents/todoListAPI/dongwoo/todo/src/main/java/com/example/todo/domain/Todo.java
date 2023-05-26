@@ -34,9 +34,10 @@ public class Todo extends BaseTimeEntity {
     private User user;
 
     @Builder
-    public Todo(String contents, Date deadLine) {
+    public Todo(String contents, Date deadLine, User user) {
         this.contents = contents;
         this.deadLine = deadLine;
+        this.user = user;
         this.finished = false;
     }
 
