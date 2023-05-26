@@ -34,7 +34,8 @@ public class UserIdArgumentResolver implements HandlerMethodArgumentResolver {
             String authorizationHeader = webRequest.getHeader(HttpHeaders.AUTHORIZATION);
             Map<String, Object> parseJwtTokenMap = jwtProvider.parseJwtToken(authorizationHeader);
             Claims claims = (Claims)parseJwtTokenMap.get("claims");
-            Long userId = (Long) claims.get("userId");
+            Integer tmpId = (int) claims.get("userId");
+            Long userId = Long.valueOf(tmpId);
             return new UserId(userId);
         } catch (Exception e) {
             log.info("UserIdArgumentResolver.resolveArgument() : {}", e.getMessage());
