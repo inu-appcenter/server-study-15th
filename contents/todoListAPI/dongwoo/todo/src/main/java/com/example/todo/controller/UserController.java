@@ -55,4 +55,14 @@ public class UserController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @Operation(summary = "회원 탈퇴", description = "jwt 토큰 bearer 헤더에 보내주시면 됩니다")
+    @DeleteMapping
+    public ResponseEntity<CommonResponse> deleteUser(UserId userId) {
+
+        userService.deleteUser(userId.getId());
+        CommonResponse response = new CommonResponse("회원 탈퇴 완료 했습니다");
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
 }

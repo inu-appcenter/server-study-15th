@@ -27,7 +27,7 @@ public class User extends BaseTimeEntity {
     @Column
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Todo> todoList = new ArrayList<>();
 
     @Builder

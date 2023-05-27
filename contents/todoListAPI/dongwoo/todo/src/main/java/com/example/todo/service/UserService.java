@@ -63,4 +63,10 @@ public class UserService {
 
         findUser.update(request);
     }
+
+    public void deleteUser(Long userId) {
+
+        userRepository.deleteById(userId);
+
+    }
 }
