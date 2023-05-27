@@ -1,9 +1,12 @@
 package com.example.todo.service;
 
 import com.example.todo.common.exception.user.AlreadyExistUserException;
+import com.example.todo.common.exception.user.UserNotFoundException;
 import com.example.todo.domain.User;
+import com.example.todo.dto.data.UserId;
 import com.example.todo.dto.request.GeneralSignUpInfo;
-import com.example.todo.dto.request.SignInRequestDto;
+import com.example.todo.dto.request.SignInRequest;
+import com.example.todo.dto.request.UpdateUserRequest;
 import com.example.todo.dto.response.JwtLoginResponse;
 import com.example.todo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +42,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public JwtLoginResponse login(SignInRequestDto request) {
+    public JwtLoginResponse login(SignInRequest request) {
 
         User user = userRepository.findByEmail(request.getEmail()).orElseThrow(() ->
                 new BadCredentialsException("잘못된 계정정보입니다."));
@@ -54,4 +57,10 @@ public class UserService {
                 .build();
     }
 
+    public void updateUser(UpdateUserRequest request, Long userId) {
+
+        User findUser = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+
+        findUser.update(request);
+    }
 }

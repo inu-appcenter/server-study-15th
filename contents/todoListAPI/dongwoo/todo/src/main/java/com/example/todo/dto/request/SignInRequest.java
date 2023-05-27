@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @NoArgsConstructor
-public class SignInRequestDto {
+public class SignInRequest {
 
     @Schema(description = "유저 이메일", example = "xxx@gmail.com")
     @NotBlank
@@ -21,7 +21,7 @@ public class SignInRequestDto {
     @NotBlank
     private String password;
 
-    public SignInRequestDto(String email, String password){
+    public SignInRequest(String email, String password){
         this.email = email;
         this.password = password;
     }

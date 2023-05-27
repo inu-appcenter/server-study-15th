@@ -1,6 +1,7 @@
 package com.example.todo.domain;
 
 import com.example.todo.common.domain.BaseTimeEntity;
+import com.example.todo.dto.request.UpdateUserRequest;
 import lombok.*;
 
 import javax.persistence.*;
@@ -30,10 +31,14 @@ public class User extends BaseTimeEntity {
     private List<Todo> todoList = new ArrayList<>();
 
     @Builder
-    public User(Long id, String name, String email, String password) {
+    public User(String name, String email, String password) {
         this.name = name;
         this. email = email;
         this.password = password;
     }
 
+    public void update(UpdateUserRequest request) {
+        this.name = request.getName();
+        this.email = request.getEmail();
+    }
 }
