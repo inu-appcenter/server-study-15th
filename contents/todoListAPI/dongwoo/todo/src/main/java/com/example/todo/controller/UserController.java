@@ -21,7 +21,7 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@Tag(name = "user", description = "user api 입니다")
+@Tag(name = "user", description = "user api")
 public class UserController {
 
     private final UserService userService;

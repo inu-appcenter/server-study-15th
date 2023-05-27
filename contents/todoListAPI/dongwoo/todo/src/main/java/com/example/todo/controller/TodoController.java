@@ -22,7 +22,7 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@Tag(name = "user", description = "user api 입니다")
+@Tag(name = "user", description = "todo api 입니다")
 public class TodoController {
 
     private final TodoService todoService;
