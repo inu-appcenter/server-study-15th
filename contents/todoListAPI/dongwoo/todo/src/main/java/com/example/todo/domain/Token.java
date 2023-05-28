@@ -15,7 +15,7 @@ import javax.persistence.Id;
  */
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Token extends BaseTimeEntity {
     @Id
     @GeneratedValue
