@@ -23,10 +23,10 @@ public class JwtProvider {
     private String issuer;
 
     @Value("${jwt.secretKey}")
-    private String secretKey = "secretManyUser";
+    private String secretKey;
 
     @Value("${jwt.tokenPrefix}")
-    private String tokenPrefix = "Bearer";
+    private String tokenPrefix;
 
     private final UserDetailsService userDetailsService;
 
