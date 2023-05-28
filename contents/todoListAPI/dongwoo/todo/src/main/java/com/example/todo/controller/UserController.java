@@ -34,7 +34,7 @@ public class UserController {
 
         CommonResponse response = new CommonResponse("회원가입에 성공했습니다.");
 
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(response, HttpStatus.CREATED);
     }
 
     @Operation(summary = "로그인", description = "바디에 {email, password} 를 json 형식으로 보내주시면 됩니다. " +
