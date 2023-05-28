@@ -2,6 +2,7 @@ package com.example.todo.controller;
 
 import com.example.todo.common.dto.CommonResponse;
 import com.example.todo.dto.data.TodoListData;
+import com.example.todo.dto.data.UserId;
 import com.example.todo.dto.request.CreateTodoRequest;
 import com.example.todo.dto.request.UpdateTodoRequest;
 import com.example.todo.dto.response.GetTodoListResponse;
@@ -21,16 +22,17 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@Tag(name = "user", description = "user api 입니다")
+@Tag(name = "user", description = "todo api 입니다")
 public class TodoController {
 
     private final TodoService todoService;
 
-    @Operation(summary = "todo 생성", description = "바디에 {contents, deadLine} 을 json 형식으로 보내주시면 됩니다.")
+    @Operation(summary = "todo 생성", description = "바디에 {contents, deadLine} 을 json 형식으로 보내주시고 jwt 토큰 bearer 헤더에" +
+            "보내주시면 됩니다.")
     @PostMapping("")
-    public ResponseEntity<CommonResponse> createTodo(@Valid @RequestBody CreateTodoRequest request) {
+    public ResponseEntity<CommonResponse> createTodo(@Valid @RequestBody CreateTodoRequest request, UserId userId) {
 
-        todoService.createTodo(request);
+        todoService.createTodo(request, userId.getId());
 
         CommonResponse response = new CommonResponse("투두 저장 성공 했습니다");
 
@@ -58,10 +60,10 @@ public class TodoController {
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
-    @Operation(summary = "최신순 todo 리스트 조회(무한 스크롤)", description = "파라미터에 page, size 보내주시면 됩니다.")
+    @Operation(summary = "내가 쓴 todo 리스트 최신순 조회(무한 스크롤)", description = "파라미터에 page, size 보내주시면 됩니다.")
     @GetMapping("")
-    public ResponseEntity<GetTodoListResponse> getVoteList(@RequestParam int page, @RequestParam int size) {
-        Slice<TodoListData> todoListData = todoService.getTodoList(page, size);
+    public ResponseEntity<GetTodoListResponse> getVoteList(@RequestParam int page, @RequestParam int size, UserId userId) {
+        Slice<TodoListData> todoListData = todoService.getTodoList(page, size, userId.getId());
         GetTodoListResponse todoListResponse = GetTodoListResponse.builder()
                 .todoSlice(todoListData)
                 .message("최신순 todo 리스트 조회를 성공 했습니다")
