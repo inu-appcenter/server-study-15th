@@ -57,11 +57,6 @@ public class SecurityConfig {
                 .antMatcher("/api/**");
 
         http.addFilterBefore(new JwtExceptionHandlerFilter(), JwtAuthenticationFilter.class);
-//
-//                .authorizeRequests()
-//                .antMatchers("/api/oauth/login","/api/user/addInfo")
-//                .authenticated();
-
 
         return http.build();
     }
