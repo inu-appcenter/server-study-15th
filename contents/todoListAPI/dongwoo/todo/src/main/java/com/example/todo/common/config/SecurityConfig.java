@@ -24,7 +24,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
-    private JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(new JwtProvider());
+    private final JwtProvider jwtProvider;
 
     private static final String[] PERMIT_URL_ARRAY = {
             "/api/**",
@@ -53,7 +53,7 @@ public class SecurityConfig {
                 .and()
                 .csrf().disable();
 
-        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+        http.addFilterBefore(new JwtAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
                 .antMatcher("/api/**");
 
         http.addFilterBefore(new JwtExceptionHandlerFilter(), JwtAuthenticationFilter.class);

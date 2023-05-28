@@ -4,6 +4,10 @@ import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
@@ -23,6 +27,8 @@ public class JwtProvider {
 
     @Value("${jwt.tokenPrefix}")
     private String tokenPrefix = "Bearer";
+
+    private final UserDetailsService userDetailsService;
 
     /**
      * JwtToken 생성 메서드
@@ -52,7 +58,7 @@ public class JwtProvider {
 
         hashMap.put("token", token);
         //토큰 검증
-        Claims claims = (Claims) validateToken(token);
+        Claims claims = (Claims) getToken(token);
 
         hashMap.put("claims", claims);
 
@@ -86,7 +92,7 @@ public class JwtProvider {
      * @return                      : 토큰안에 들어있는 유저 이메일 값(user Email)
      * @throws ExpiredJwtException
      */
-    public Object validateToken(String token) throws ExpiredJwtException {
+    public Object getToken(String token) throws ExpiredJwtException {
 
         return Jwts.parser()
                 .setSigningKey(secretKey)
@@ -94,5 +100,24 @@ public class JwtProvider {
                 .getBody();
     }
 
+    public boolean validateToken(String token) {
+        try {
+            Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
+            return !claims.getBody().getExpiration().before(new Date());
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public String getUserEmail(String token) {
+        String info = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
+        return info;
+    }
+
+    public Authentication getAuthentication(String token) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(this.getUserEmail(token));
+
+        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+    }
 
 }
