@@ -2,13 +2,10 @@ package appCenter.guCoding.todoList.service;
 
 import appCenter.guCoding.todoList.domain.task.Task;
 import appCenter.guCoding.todoList.domain.task.TaskRepository;
-
 import appCenter.guCoding.todoList.domain.user.User;
 import appCenter.guCoding.todoList.domain.user.UserRepository;
-
 import appCenter.guCoding.todoList.dto.task.TaskReqDto.TaskEditReqDto;
 import appCenter.guCoding.todoList.dto.task.TaskReqDto.TaskSaveReqDto;
-import appCenter.guCoding.todoList.dto.task.TaskRespDto;
 import appCenter.guCoding.todoList.dto.task.TaskRespDto.*;
 import appCenter.guCoding.todoList.handler.ex.CustomApiException;
 import appCenter.guCoding.todoList.handler.ex.CustomNotFoundException;
@@ -57,9 +54,9 @@ public class TaskService {
     }
 
     @Transactional(readOnly = true)
-    public TaskDtoId 할일_id_조회(Long id) {
+    public TaskIdRespDto 할일_id_조회(Long id) {
         Task taskPS = taskRepository.findById(id).orElseThrow(() -> new CustomNotFoundException("해당 id 에 해당하는 할 일이 없습니다."));
-        return new TaskDtoId(taskPS);
+        return new TaskIdRespDto(taskPS);
     }
 
     // 본인계좌 확인하는 메서드 추가
@@ -70,11 +67,11 @@ public class TaskService {
     }
 
     @Transactional(readOnly = true)
-    public TaskDtoTitle 할일_title_조회(String title) {
+    public TaskTitleRespDto 할일_title_조회(String title) {
         Optional<Task> taskOP = taskRepository.findByTitle(title);
         if (taskOP.isEmpty()) {
             throw new CustomNotFoundException("해당 제목에 해당하는 할 일이 없습니다.");
         }
-        return new TaskDtoTitle(taskOP.get());
+        return new TaskTitleRespDto(taskOP.get());
     }
 }

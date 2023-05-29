@@ -39,7 +39,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtService jwtService) {
         super(authenticationManager);
-        setFilterProcessesUrl("/api/login");
+        setFilterProcessesUrl("/api/users/login");
         this.authenticationManager = authenticationManager;
         this.jwtService = jwtService;
     }
@@ -59,6 +59,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                     loginReqDto.getUsername(), loginReqDto.getPassword());
 
             // UserDetailsService loadByUsername 호출해서 사용자 조회 후 임시로 세션을 만듬 -> successfulAuthentication 에 임시세션 전달(리턴되면사라짐)
+            // authenticationManager 내부에서 PasswordEncoder 를 호출하니 rawPassword 로 인증처리가 됨
             Authentication authentication = authenticationManager.authenticate(authenticationToken);
             return authentication;
 

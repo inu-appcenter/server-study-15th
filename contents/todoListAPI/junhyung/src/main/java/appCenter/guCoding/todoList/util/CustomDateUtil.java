@@ -16,4 +16,11 @@ public class CustomDateUtil {
         return parseDeadline;
 
     }
+
+    private LocalDateTime parseDateTime(String deadline) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime parseDeadline = LocalDate.parse(deadline, formatter).atStartOfDay();
+        return parseDeadline;
+
+    }
 }
