@@ -31,7 +31,7 @@ public class User extends BaseTimeEntity {
     @Column(nullable = false, length = 20)
     private String email;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Task> taskList = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)

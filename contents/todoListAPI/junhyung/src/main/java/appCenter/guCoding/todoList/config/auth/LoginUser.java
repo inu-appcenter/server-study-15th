@@ -1,11 +1,14 @@
 package appCenter.guCoding.todoList.config.auth;
 
 import appCenter.guCoding.todoList.domain.user.User;
+
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
 import org.springframework.security.core.userdetails.UserDetails;
+
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,6 +17,7 @@ import java.util.Collection;
 @Getter
 public class LoginUser implements UserDetails {
 
+    @Hidden
     private final User user;
 
     @Override
@@ -22,7 +26,6 @@ public class LoginUser implements UserDetails {
         authorities.add(() -> "ROLE_" + user.getRole());
         return authorities;
     }
-
     @Override
     public String getPassword() {
         return user.getPassword();

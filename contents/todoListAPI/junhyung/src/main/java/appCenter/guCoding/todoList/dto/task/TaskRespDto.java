@@ -80,14 +80,14 @@ public class TaskRespDto {
 
     @Getter
     @Setter
-    public static class TaskDtoId {
+    public static class TaskIdRespDto {
         private Long id;
         private String title;
         private String description;
         private Boolean isCompleted;
         private LocalDateTime deadline;
 
-        public TaskDtoId(Task task) {
+        public TaskIdRespDto(Task task) {
             this.id = task.getId();
             this.title = task.getTitle();
             this.description = task.getDescription();
@@ -98,14 +98,14 @@ public class TaskRespDto {
 
     @Getter
     @Setter
-    public static class TaskDtoTitle {
+    public static class TaskTitleRespDto {
         private Long id;
         private String title;
         private String description;
         private Boolean isCompleted;
         private LocalDateTime deadline;
 
-        public TaskDtoTitle(Task task) {
+        public TaskTitleRespDto(Task task) {
             this.id = task.getId();
             this.title = task.getTitle();
             this.description = task.getDescription();
