@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/member")
+@RequestMapping("/api/v1/member")
 @RequiredArgsConstructor
 public class MemberController {
 
