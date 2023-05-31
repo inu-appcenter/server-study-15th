@@ -22,7 +22,7 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@Tag(name = "user", description = "todo api 입니다")
+@Tag(name = "todo", description = "todo api 입니다")
 public class TodoController {
 
     private final TodoService todoService;
@@ -41,9 +41,9 @@ public class TodoController {
 
     @Operation(summary = "todo 삭제", description = "파라미터에 todoId 보내주시면 됩니다.")
     @DeleteMapping("/{todoId}")
-    public ResponseEntity<CommonResponse> deleteTodo(@PathVariable("todoId") Long todoId) {
+    public ResponseEntity<CommonResponse> deleteTodo(@PathVariable("todoId") Long todoId, UserId userId) {
 
-        todoService.deleteTodo(todoId);
+        todoService.deleteTodo(todoId, userId.getId());
         CommonResponse response = new CommonResponse("투두 삭제 성공 했습니다");
 
         return new ResponseEntity(response, HttpStatus.OK);
@@ -51,9 +51,9 @@ public class TodoController {
 
     @Operation(summary = "todo 수정", description = "파라미터에 todoId, 바디에 {contents} 을 json 형식으로 보내주시면 됩니다.")
     @PatchMapping("{todoId}")
-    public ResponseEntity<CommonResponse> updateTodo(@PathVariable Long todoId, @Valid @RequestBody UpdateTodoRequest request) {
+    public ResponseEntity<CommonResponse> updateTodo(@PathVariable Long todoId, UserId userId, @Valid @RequestBody UpdateTodoRequest request) {
 
-        todoService.updateTodo(todoId, request);
+        todoService.updateTodo(todoId, userId.getId(), request);
 
         CommonResponse response = new CommonResponse("투두 수정 성공 했습니다");
 
@@ -73,9 +73,9 @@ public class TodoController {
 
     @Operation(summary = "todo 수행 완료", description = "파라미터에 수행 완료된 todoId 보내주시면 됩니다. ")
     @GetMapping("/{todoId}")
-    public ResponseEntity<CommonResponse> doTodo(@PathVariable("todoId") Long todoId) {
+    public ResponseEntity<CommonResponse> doTodo(@PathVariable("todoId") Long todoId, UserId userId) {
 
-        todoService.doTodo(todoId);
+        todoService.doTodo(todoId, userId.getId());
 
         CommonResponse response = new CommonResponse("투두 수행 완료 성공 했습니다");
 

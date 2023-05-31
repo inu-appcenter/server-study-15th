@@ -23,4 +23,10 @@ public class UserExceptionHandler {
         return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(UserNotAccessRightException.class)
+    public ResponseEntity<ExceptionMessage> handle(UserNotAccessRightException e) {
+        final ExceptionMessage message = ExceptionMessage.of(e.getStatus(), e.getMessage());
+        return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+    }
+
 }

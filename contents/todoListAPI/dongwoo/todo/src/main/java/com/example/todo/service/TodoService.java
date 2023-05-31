@@ -1,6 +1,7 @@
 package com.example.todo.service;
 
 import com.example.todo.common.exception.todo.TodoNotFoundException;
+import com.example.todo.common.exception.user.UserNotAccessRightException;
 import com.example.todo.common.exception.user.UserNotFoundException;
 import com.example.todo.domain.Todo;
 import com.example.todo.domain.User;
@@ -38,16 +39,20 @@ public class TodoService {
 
     }
 
-    public void deleteTodo(Long todoId) {
+    public void deleteTodo(Long todoId, Long userId) {
 
-        todoRepository.findById(todoId).orElseThrow(TodoNotFoundException::new);
+        Todo todo = todoRepository.findById(todoId).orElseThrow(TodoNotFoundException::new);
+
+        isUserTodo(todo, userId);
 
         todoRepository.deleteById(todoId);
     }
 
-    public void updateTodo(Long todoId, UpdateTodoRequest request) {
+    public void updateTodo(Long todoId, Long userId, UpdateTodoRequest request) {
 
         Todo todo = todoRepository.findById(todoId).orElseThrow(TodoNotFoundException::new);
+
+        isUserTodo(todo, userId);
 
         todo.builder().contents(request.getContents());
 
@@ -68,10 +73,21 @@ public class TodoService {
         return todoListData;
     }
 
-    public void doTodo(Long todoId) {
+    public void doTodo(Long todoId, Long userId) {
 
         Todo todo = todoRepository.findById(todoId).orElseThrow(TodoNotFoundException::new);
 
+        isUserTodo(todo, userId);
+
         todo.doTodo();
     }
+
+    public void isUserTodo(Todo todo, Long userId) {
+
+        if(!todo.isUsersTodo(userId)) {
+            throw new UserNotAccessRightException();
+        }
+
+    }
+
 }
