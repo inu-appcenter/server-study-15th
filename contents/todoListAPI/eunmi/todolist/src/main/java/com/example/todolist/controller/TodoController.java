@@ -12,8 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/v1/todo")
 @RequiredArgsConstructor
@@ -53,16 +51,18 @@ public class TodoController {
                 .body(new Message(SUCCESS_TODO_DELETE_MESSAGE));
     }
 
-    @GetMapping()
-    public ResponseEntity<List<TodoPageRespDto>> readAllTodo(@RequestBody Long memberId) {
-        List<TodoPageRespDto> todos = todoService.findAll(memberId);
+    @GetMapping("/{id}")
+    public ResponseEntity<TodoPageRespDto> readOneTodo(@PathVariable Long id) {
+        TodoPageRespDto todo = todoService.findOneTodo(id);
         return ResponseEntity.status(HttpStatus.OK)
-                .body(todos);
+                .body(todo);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Page<TodoPageRespDto>> readTodo(@PathVariable Long id, @RequestParam("page") Integer page, @RequestParam("size") Integer size) {
-        Page<TodoPageRespDto> todos = todoService.findTodoList(id, page, size);
+    @GetMapping()
+    public ResponseEntity<Page<TodoPageRespDto>> readTodos(Long memberId,
+                                                           @RequestParam("page") Integer page,
+                                                           @RequestParam("size") Integer size) {
+        Page<TodoPageRespDto> todos = todoService.findTodos(memberId, page, size);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(todos);
     }
