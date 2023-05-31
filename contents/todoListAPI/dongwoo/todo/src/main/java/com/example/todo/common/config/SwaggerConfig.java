@@ -11,7 +11,7 @@ import org.springdoc.core.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@OpenAPIDefinition(servers = { @Server(url = "https://i-don't-know.com/"),
+@OpenAPIDefinition(servers = { @Server(url = "dw-todo.inuappcenter.kr/"),
         @Server(url = "http://localhost:8080/")})
 @Configuration
 public class SwaggerConfig {
