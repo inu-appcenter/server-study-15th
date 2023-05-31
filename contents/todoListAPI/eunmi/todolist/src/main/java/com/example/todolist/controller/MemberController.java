@@ -26,9 +26,10 @@ public class MemberController {
 
     @ApiOperation(value = "로그인")
     @PostMapping("/login")
-    public ResponseEntity<Message> login() {
+    public ResponseEntity<String> login() {
+        String token = memberService.login("", "");
         return ResponseEntity.status(HttpStatus.OK)
-                .body(new Message(SUCCESS_MEMBER_LOGIN_MESSAGE));
+                .body(token);
     }
 
     @ApiOperation(value = "유저 등록")
