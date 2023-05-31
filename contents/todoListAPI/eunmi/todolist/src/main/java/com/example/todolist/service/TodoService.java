@@ -69,7 +69,8 @@ public class TodoService {
 
     @Transactional
     public Long updateChecked(Long id, TodoCheckReqDto todoCheckReqDto) {
-        Todo todo = todoRepository.findById(id).orElseThrow(() -> new NotFoundTodoException(NOT_FOUND_TODO_MESSAGE));
+        Todo todo = todoRepository.findById(id).orElseThrow(()
+                -> new NotFoundTodoException(NOT_FOUND_TODO_MESSAGE));
         Todo updateTodo = todo.setChecked(todoCheckReqDto);
         return updateTodo.getId();
     }

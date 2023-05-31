@@ -1,6 +1,7 @@
 package com.example.todolist.controller;
 
 
+import com.example.todolist.domain.Message;
 import com.example.todolist.dto.MemberReqDto;
 import com.example.todolist.dto.MemberPageRespDto;
 import com.example.todolist.service.MemberService;
@@ -18,26 +19,28 @@ import java.util.List;
 public class MemberController {
 
     private final MemberService memberService;
+    private static final String SUCCESS_MEMBER_UPDATE_MESSAGE = "회원정보가 수정되었습니다.";
+    private static final String SUCCESS_MEMBER_DELETE_MESSAGE = "회원정보가 삭제되었습니다.";
 
     @PostMapping()
-    public ResponseEntity<String> join(@Valid @RequestBody MemberReqDto memberReqDto) {
-        Long save = memberService.save(memberReqDto);
+    public ResponseEntity<Message> join(@Valid @RequestBody MemberReqDto memberReqDto) {
+        Message message = memberService.save(memberReqDto);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("회원정보가 생성 되었습니다.");
+                .body(message);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateMember(@PathVariable Long id, @Valid @RequestBody MemberReqDto memberReqDto) {
+    public ResponseEntity<Message> updateMember(@PathVariable Long id, @Valid @RequestBody MemberReqDto memberReqDto) {
         Long update = memberService.update(id, memberReqDto);
         return ResponseEntity.status(HttpStatus.OK)
-                .body("회원정보가 수정되었습니다.");
+                .body(new Message(SUCCESS_MEMBER_UPDATE_MESSAGE));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteMember(@PathVariable Long id) {
+    public ResponseEntity<Message> deleteMember(@PathVariable Long id) {
         memberService.deleteMember(id);
         return ResponseEntity.status(HttpStatus.OK)
-                .body("회원정보가 삭제 되었습니다.");
+                .body(new Message(SUCCESS_MEMBER_DELETE_MESSAGE));
     }
 
     @GetMapping()
