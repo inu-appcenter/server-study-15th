@@ -53,4 +53,10 @@ public class Todo extends BaseTimeEntity {
     public void doTodo() {
         this.finished = true;
     }
+
+    public boolean isUsersTodo(Long userId) {
+
+        return this.user.getId().equals(userId);
+
+    }
 }
