@@ -10,6 +10,9 @@ import com.example.todolist.exception.NotFoundTodoException;
 import com.example.todolist.repository.MemberRepository;
 import com.example.todolist.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,10 +45,13 @@ public class TodoService {
         return creatTodo.getId();
     }
 
-    public TodoPageRespDto findOne(Long id) {
-        Todo todo = todoRepository.findById(id)
-                .orElseThrow(() -> new NotFoundTodoException(NOT_FOUND_TODO_MESSAGE));
-        return todo.toTodoPageRespDto(todo);
+    public Page<TodoPageRespDto> findTodoList(Long memberId, int page, int size) {
+        Member member = memberRepository.findById(memberId).orElseThrow(()
+                -> new NotFoundMemberException(NOT_FOUND_MEMBER_MESSAGE));
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "creatAt"));
+        Page<Todo> pageByMember = todoRepository.findPageByMember(member, pageRequest);
+        Page<TodoPageRespDto> todos = pageByMember.map(todo -> todo.toTodoPageRespDto(todo));
+        return todos;
     }
 
     @Transactional

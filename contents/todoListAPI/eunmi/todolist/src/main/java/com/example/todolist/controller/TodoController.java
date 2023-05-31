@@ -6,6 +6,7 @@ import com.example.todolist.dto.TodoPageRespDto;
 import com.example.todolist.dto.TodoReqDto;
 import com.example.todolist.service.TodoService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,10 +55,10 @@ public class TodoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TodoPageRespDto> readOneTodo(@PathVariable Long id) {
-        TodoPageRespDto todo = todoService.findOne(id);
+    public ResponseEntity<Page<TodoPageRespDto>> readTodo(@PathVariable Long id, @RequestParam("page") Integer page, @RequestParam("size") Integer size) {
+        Page<TodoPageRespDto> todos = todoService.findTodoList(id, page, size);
         return ResponseEntity.status(HttpStatus.OK)
-                .body(todo);
+                .body(todos);
     }
 
 }

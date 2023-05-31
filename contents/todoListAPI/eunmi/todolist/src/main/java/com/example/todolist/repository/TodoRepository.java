@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface TodoRepository extends JpaRepository<Todo, Long> {
-    List<Todo> findAllByMember(Member member);
+    Page<Todo> findPageByMember(Member member, Pageable pageable);
 }
