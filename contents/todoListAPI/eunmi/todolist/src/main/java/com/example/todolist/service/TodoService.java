@@ -48,7 +48,7 @@ public class TodoService {
     public Page<TodoPageRespDto> findTodoList(Long memberId, int page, int size) {
         Member member = memberRepository.findById(memberId).orElseThrow(()
                 -> new NotFoundMemberException(NOT_FOUND_MEMBER_MESSAGE));
-        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "creatAt"));
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createDate"));
         Page<Todo> pageByMember = todoRepository.findPageByMember(member, pageRequest);
         Page<TodoPageRespDto> todos = pageByMember.map(todo -> todo.toTodoPageRespDto(todo));
         return todos;
