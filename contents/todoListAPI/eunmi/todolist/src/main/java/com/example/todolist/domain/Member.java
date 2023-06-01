@@ -1,6 +1,6 @@
 package com.example.todolist.domain;
 
-import com.example.todolist.dto.MemberDto;
+import com.example.todolist.dto.MemberReqDto;
 import com.example.todolist.dto.MemberPageRespDto;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -42,16 +42,24 @@ public class Member extends BaseTimeEntity {
     /**
      * 생성 메서드
      */
-    public Member toMember(MemberDto memberDto) {
+    public Member toMember(MemberReqDto memberReqDto) {
         return Member.builder()
-                .name(memberDto.getName())
-                .nickName(memberDto.getNickName())
-                .email(memberDto.getEmail())
+                .name(memberReqDto.getName())
+                .nickName(memberReqDto.getNickName())
+                .email(memberReqDto.getEmail())
                 .build();
     }
 
-    public MemberPageRespDto setMemberPageRespDto(Member member) {
+    public MemberPageRespDto toMemberPageRespDto(Member member) {
         return MemberPageRespDto.builder()
+                .name(member.getName())
+                .nickName(member.getNickName())
+                .email(member.getEmail())
+                .build();
+    }
+
+    public MemberReqDto toMemberReqDto(Member member) {
+        return MemberReqDto.builder()
                 .name(member.getName())
                 .nickName(member.getNickName())
                 .email(member.getEmail())
