@@ -26,20 +26,19 @@ public class TodoService {
     private final String NOT_FOUND_TODO_MESSAGE = "등록된 할 일 정보를 찾을 수 없습니다.";
 
     @Transactional
-    public Long save(Long memberId, TodoReqDto todoReqDto) {
+    public void save(Long memberId, TodoReqDto todoReqDto) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new NotFoundMemberException(NOT_FOUND_MEMBER_MESSAGE));
         Todo todo = todoReqDto.toEntity(member, todoReqDto);
         Todo savedTodo = todoRepository.save(todo);
-        return savedTodo.getId();
     }
 
     @Transactional
-    public Long update(Long id, TodoReqDto todoReqDto) {
+    public void update(Long id, TodoReqDto todoReqDto) {
+        //
         Todo todo = todoRepository.findById(id)
                 .orElseThrow(() -> new NotFoundTodoException(NOT_FOUND_TODO_MESSAGE));
         Todo creatTodo = todo.updateTodo(todoReqDto);
-        return creatTodo.getId();
     }
 
     public Page<TodoPageRespDto> findTodos(Long memberId, int page, int size) {
@@ -62,10 +61,9 @@ public class TodoService {
     }
 
     @Transactional
-    public Long updateChecked(Long id, TodoCheckReqDto todoCheckReqDto) {
+    public void updateChecked(Long id, TodoCheckReqDto todoCheckReqDto) {
         Todo todo = todoRepository.findById(id).orElseThrow(()
                 -> new NotFoundTodoException(NOT_FOUND_TODO_MESSAGE));
         Todo updateTodo = todo.setChecked(todoCheckReqDto);
-        return updateTodo.getId();
     }
 }

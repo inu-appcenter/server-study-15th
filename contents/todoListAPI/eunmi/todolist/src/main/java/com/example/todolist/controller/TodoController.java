@@ -28,7 +28,7 @@ public class TodoController {
     @ApiOperation(value = "할 일 등록", notes = "멤버id, 등록할 할일 정보 입력")
     @PostMapping()
     public ResponseEntity<Message> create(Long memberId, @RequestBody TodoReqDto todoReqDto) {
-        Long save = todoService.save(memberId, todoReqDto);
+        todoService.save(memberId, todoReqDto);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new Message(SUCCESS_TODO_CREATE_MESSAGE));
     }
@@ -36,7 +36,7 @@ public class TodoController {
     @ApiOperation(value = "완료 여부 체크 수정", notes = "해당 todo id값과 체크 여부 json으로 입력")
     @PatchMapping("/{id}")
     public ResponseEntity<Message> updateChecked(@PathVariable Long id, @RequestBody TodoCheckReqDto todoCheckReqDto) {
-        Long updateChecked = todoService.updateChecked(id, todoCheckReqDto);
+        todoService.updateChecked(id, todoCheckReqDto);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new Message(SUCCESS_TODO_CHECKED_UPDATE_MESSAGE));
     }
@@ -44,7 +44,7 @@ public class TodoController {
     @ApiOperation(value = "할 일 수정", notes = "수정할 todo id, 수정할 할 일 정보 입력")
     @PutMapping("/{id}")
     public ResponseEntity<Message> updateTodo(@PathVariable Long id, @RequestBody TodoReqDto todoReqDto) {
-        Long update = todoService.update(id, todoReqDto);
+        todoService.update(id, todoReqDto);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new Message(SUCCESS_TODO_UPDATE_MESSAGE));
     }

@@ -1,7 +1,6 @@
 package com.example.todolist.service;
 
 import com.example.todolist.domain.Member;
-import com.example.todolist.domain.Message;
 import com.example.todolist.dto.MemberPageRespDto;
 import com.example.todolist.dto.MemberReqDto;
 import com.example.todolist.exception.NotFoundMemberException;
@@ -25,7 +24,6 @@ public class MemberService {
     private String secretKey;
     private Long expiredMs = 1000*60 * 60L;         // 1h
     private static final String NOT_FOUND_MEMBER_MESSAGE = "회원정보가 존재하지 않습니다.";
-    private static final String SUCCESS_MEMBER_SAVE_MESSAGE = "회원정보가 저장되었습니다.";
 
     public String login(String userName, String password) {
         // 인증과정 생략
@@ -33,18 +31,16 @@ public class MemberService {
     }
 
     @Transactional
-    public Message save(MemberReqDto memberReqDto) {
+    public void save(MemberReqDto memberReqDto) {
         Member member = memberReqDto.toMember(memberReqDto);
         Member savedMember = memberRepository.save(member);
-        return new Message(SUCCESS_MEMBER_SAVE_MESSAGE);
     }
 
     @Transactional
-    public Long update(Long id, MemberReqDto memberReqDto) {
+    public void update(Long id, MemberReqDto memberReqDto) {
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new NotFoundMemberException(NOT_FOUND_MEMBER_MESSAGE));
         Member updateMember = member.toMember(memberReqDto);
-        return updateMember.getId();
     }
 
     public MemberReqDto findOne(Long id) {

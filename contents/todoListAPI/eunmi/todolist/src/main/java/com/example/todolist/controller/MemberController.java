@@ -21,6 +21,7 @@ public class MemberController {
 
     private final MemberService memberService;
     private static final String SUCCESS_MEMBER_LOGIN_MESSAGE = "로그인 성공";
+    private static final String SUCCESS_MEMBER_CREATE_MESSAGE = "회원정보가 등록되었습니다.";
     private static final String SUCCESS_MEMBER_UPDATE_MESSAGE = "회원정보가 수정되었습니다.";
     private static final String SUCCESS_MEMBER_DELETE_MESSAGE = "회원정보가 삭제되었습니다.";
 
@@ -35,15 +36,15 @@ public class MemberController {
     @ApiOperation(value = "유저 등록")
     @PostMapping("/join")
     public ResponseEntity<Message> join(@Valid @RequestBody MemberReqDto memberReqDto) {
-        Message message = memberService.save(memberReqDto);
+        memberService.save(memberReqDto);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(message);
+                .body(new Message(SUCCESS_MEMBER_CREATE_MESSAGE));
     }
 
     @ApiOperation(value = "유저정보 수정")
     @PutMapping("/{id}")
     public ResponseEntity<Message> updateMember(@PathVariable Long id, @Valid @RequestBody MemberReqDto memberReqDto) {
-        Long update = memberService.update(id, memberReqDto);
+        memberService.update(id, memberReqDto);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new Message(SUCCESS_MEMBER_UPDATE_MESSAGE));
     }
@@ -68,8 +69,7 @@ public class MemberController {
     @GetMapping("/{id}")
     public ResponseEntity<MemberReqDto> readOneMember(@PathVariable Long id) {
         MemberReqDto member = memberService.findOne(id);
-        return ResponseEntity
-                .status(HttpStatus.OK)
+        return ResponseEntity.status(HttpStatus.OK)
                 .body(member);
     }
 }
