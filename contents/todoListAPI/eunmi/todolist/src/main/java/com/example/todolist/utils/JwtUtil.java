@@ -8,6 +8,11 @@ import java.util.Date;
 
 public class JwtUtil {
 
+    public static boolean isExpired(String token, String secretKey) {
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJwt(token).getBody().getExpiration().before(new Date());
+        // 시크릿 키를 이용하여 토큰 정보를 열어서 유효시간 여부 확인
+    }
+
     public static String createJwt(String userName, String secretKey, Long expiredMs) {
         Claims claims = Jwts.claims();  // claims : 원하는 정보를 담아 둘 수 있음
         claims.put("userName", userName);
