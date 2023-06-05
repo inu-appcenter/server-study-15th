@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.validation.Valid;
+
 @Getter
 public class UserRequestDto {
 
@@ -15,11 +17,14 @@ public class UserRequestDto {
         private String password;
         private String email;
 
+        private String roles;
+
         public User changeEntity(BCryptPasswordEncoder bCryptPasswordEncoder) {
             return User.builder()
                     .name(name)
                     .password(bCryptPasswordEncoder.encode(password))
                     .email(email)
+                    .roles(roles)
                     .build();
         }
     }
@@ -29,6 +34,7 @@ public class UserRequestDto {
     public static class UserLoginReqDto {
         private String name;
         private String password;
+
 
     }
 
