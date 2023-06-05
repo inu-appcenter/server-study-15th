@@ -1,6 +1,6 @@
 package com.example.todolist.dto.taskdto;
 
-import com.example.todolist.domain.Task;
+import com.example.todolist.domain.Todo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,11 +13,11 @@ import java.time.format.DateTimeFormatter;
 
 @Getter
 @Schema(description = "TodoRequest")
-public class TaskRequestDto {
+public class TodoRequestDto {
 
     @Getter
     @Setter
-    public static class TaskSaveReqDto {
+    public static class TodoSaveReqDto {
         @Schema(example = "Todo 제목")
         @NotEmpty
         private String title;
@@ -30,12 +30,12 @@ public class TaskRequestDto {
 
         private boolean isCompleted;
 
-        public Task changeEntity(TaskSaveReqDto TaskSaveReqDto) {
-            return Task.builder()
-                    .title(TaskSaveReqDto.title)
-                    .contents(TaskSaveReqDto.contents)
-                    .deadline(parseDatetime(TaskSaveReqDto.deadline))
-                    .isCompleted(TaskSaveReqDto.isCompleted)
+        public Todo changeEntity(TodoSaveReqDto TodoSaveReqDto) {
+            return Todo.builder()
+                    .title(TodoSaveReqDto.title)
+                    .contents(TodoSaveReqDto.contents)
+                    .deadline(parseDatetime(TodoSaveReqDto.deadline))
+                    .isCompleted(TodoSaveReqDto.isCompleted)
                     .build();
         }
     }
@@ -43,7 +43,7 @@ public class TaskRequestDto {
     @Getter
     @Setter
     @AllArgsConstructor
-    public static class TaskEditRequestDto {
+    public static class TodoEditRequestDto {
         private String title;
         private String contents;
         private String deadline;

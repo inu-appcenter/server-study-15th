@@ -1,6 +1,6 @@
 package com.example.todolist.dto.taskdto;
 
-import com.example.todolist.domain.Task;
+import com.example.todolist.domain.Todo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 import javax.validation.constraints.NotEmpty;
 
 
-public class TaskResponseDto {
+public class TodoResponseDto {
 
     @Getter
     @Setter
@@ -26,11 +26,11 @@ public class TaskResponseDto {
 
         private boolean isCompleted;
 
-        public TaskSaveRespDto(Task task) {
-            this.title = task.getTitle();
-            this.contents = task.getContents();
-            this.deadline = task.getDeadline().toString();
-            this.isCompleted = task.getIsCompleted();
+        public TaskSaveRespDto(Todo todo) {
+            this.title = todo.getTitle();
+            this.contents = todo.getContents();
+            this.deadline = todo.getDeadline().toString();
+            this.isCompleted = todo.getIsCompleted();
         }
     }
 
@@ -49,11 +49,11 @@ public class TaskResponseDto {
 
         private boolean isCompleted;
 
-        public TaskDeleteRespDto(Task task) {
-            this.title = task.getTitle();
-            this.contents = task.getContents();
-            this.deadline = task.getDeadline().toString();
-            this.isCompleted = task.getIsCompleted();
+        public TaskDeleteRespDto(Todo todo) {
+            this.title = todo.getTitle();
+            this.contents = todo.getContents();
+            this.deadline = todo.getDeadline().toString();
+            this.isCompleted = todo.getIsCompleted();
         }
     }
 
@@ -66,11 +66,11 @@ public class TaskResponseDto {
         private String deadline;
         private boolean isCompleted;
 
-        public TaskEditRespDto(Task task) {
-            this.title = task.getTitle();
-            this.contents = task.getContents();
-            this.deadline = task.getDeadline().toString();
-            this.isCompleted = task.getIsCompleted();
+        public TaskEditRespDto(Todo todo) {
+            this.title = todo.getTitle();
+            this.contents = todo.getContents();
+            this.deadline = todo.getDeadline().toString();
+            this.isCompleted = todo.getIsCompleted();
         }
     }
 }

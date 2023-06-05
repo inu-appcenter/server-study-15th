@@ -1,6 +1,7 @@
 package com.example.todolist.domain;
 
 
+import com.example.todolist.domain.user.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -8,9 +9,9 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Task {
+public class Todo {
 
     @Id @GeneratedValue
     private Long id;
@@ -30,7 +31,7 @@ public class Task {
     private User user;
 
     @Builder
-    public Task(Long id, String title, String contents, Boolean isCompleted, User user, LocalDateTime deadline) {
+    public Todo(Long id, String title, String contents, Boolean isCompleted, User user, LocalDateTime deadline) {
         this.id = id;
         this.title = title;
         this.contents = contents;
