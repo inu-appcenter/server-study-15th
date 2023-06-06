@@ -1,17 +1,15 @@
 package com.example.todolist.service;
 
-import com.example.todolist.domain.Task;
-import com.example.todolist.exception.TodoNotFoundException;
+import com.example.todolist.domain.Todo;
+import com.example.todolist.exception.todo.TodoNotFoundException;
 import com.example.todolist.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Optional;
-
-import static com.example.todolist.dto.taskdto.TaskRequestDto.*;
-import static com.example.todolist.dto.taskdto.TaskResponseDto.*;
+import static com.example.todolist.dto.taskdto.TodoRequestDto.*;
+import static com.example.todolist.dto.taskdto.TodoResponseDto.*;
 
 @Service
 @RequiredArgsConstructor
@@ -20,44 +18,44 @@ public class TodoService {
     private final TodoRepository todoRepository;
 
     @Transactional
-    public TaskSaveRespDto writeTodo(TaskSaveReqDto TaskSaveReqDto) {
-        Task task = todoRepository.save(TaskSaveReqDto.changeEntity(TaskSaveReqDto));
-        return new TaskSaveRespDto(task);
+    public TaskSaveRespDto writeTodo(TodoSaveReqDto TodoSaveReqDto) {
+        Todo todo = todoRepository.save(TodoSaveReqDto.changeEntity(TodoSaveReqDto));
+        return new TaskSaveRespDto(todo);
     }
 
     @Transactional
     public TaskDeleteRespDto deleteTodo(Long id) {
-        Optional<Task> optionalTask = todoRepository.findById(id);
+        Optional<Todo> optionalTask = todoRepository.findById(id);
 
         if(optionalTask.isEmpty()) {
             throw new TodoNotFoundException();
         }
-        Task task = optionalTask.get();
+        Todo todo = optionalTask.get();
 
         todoRepository.deleteById(id);
 
-        return new TaskDeleteRespDto(task);
+        return new TaskDeleteRespDto(todo);
     }
 
     @Transactional
-    public TaskEditRespDto editTodo(Long id, TaskEditRequestDto taskEditRequestDto) {
-        Optional<Task> optionalTask = todoRepository.findById(id);
+    public TaskEditRespDto editTodo(Long id, TodoEditRequestDto todoEditRequestDto) {
+        Optional<Todo> optionalTask = todoRepository.findById(id);
 
-        if (optionalTask.isPresent()) {
-            Task task = optionalTask.get();
+            if (optionalTask.isPresent()) {
+                Todo todo = optionalTask.get();
 
-            task.setContents(taskEditRequestDto.getContents());
-            task.setTitle(taskEditRequestDto.getTitle());
-            task.setDeadline(parseDatetime(taskEditRequestDto.getDeadline()));
+                todo.setContents(todoEditRequestDto.getContents());
+                todo.setTitle(todoEditRequestDto.getTitle());
+                todo.setDeadline(parseDatetime(todoEditRequestDto.getDeadline()));
 
-            return new TaskEditRespDto(task);
+            return new TaskEditRespDto(todo);
         } else {
             throw new TodoNotFoundException();
         }
     }
 
-    @Transactional
-    public List<Task> findAll() {
+    @Transactional(readOnly = true)
+    public List<Todo> findAll() {
         return todoRepository.findAll();
     }
 }
