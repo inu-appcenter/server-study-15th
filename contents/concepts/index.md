@@ -45,4 +45,4 @@
 
 ### Etc
 
-- [HTTP Status code & Response](./etc/juwon/HTTP%20Status%20code%20Response.md)
+- [HTTP Status code & Response](./etc/juwon/HTTP%20Status%20code%20&%20Response.md)
