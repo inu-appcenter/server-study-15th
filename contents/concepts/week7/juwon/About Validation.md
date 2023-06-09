@@ -1,0 +1,63 @@
+# About Validation
+
+## Validation?
+
+유효성 검사는 애플리케이션의 비즈니스 로직이 올바르게 동작하기 위해 데이터를 사전에 검증하는 작업
+
+## Validation in Spring boot
+
+이전에는 Spring boot의 의존성 중 spring-boot-starter-web에 포함  
+Spring boot 2.3 이후 별도의 라이브러리 (spring-boot-starter-validation) 제공
+
+Spring boot에서의 유효성 검사는 각 계층으로 데이터가 넘어오는 시점에 실시  
+계층 간 데이터 전송을 하는 객체 = DTO(Data Transfer Object) 객체이므로, DTO 객체에서 수행하는 것이 일반적
+
+![도메인 모델에 유효성 검사 적용](./img/validation_fig1.png)
+
+### Validation Annotations
+
+- 문자열 검증  
+@Null : null 값만 허용  
+
+@NotNull : null을 허용하지 않음 ("", " "는 허용)  
+@NotEmpty : null, ""를 허용하지 않음 (" "는 허용)  
+@NotBlank : null, "", " " 모두 허용하지 않음  
+
+- 최댓값/최솟값 검증 (BigDecimal, BigInteger, int, long)  
+@DemicalMin(value = "$numberString") : numberString보다 큰 값 허용  
+@DemicalMax(value = "$numberString") : numberString보다 작은 값 허용  
+
+@Min(value = "$number") : $number 이상의 값 허용  
+@Max(value = "$number") : $number 이하 값 허용  
+
+- 값의 범위 검증 (BigDecimal, BigInteger, int, long)  
+@Positive : 양수 허용  
+@Negative : 음수 허용  
+
+@PositiveOrZero : 0을 포함한 양수 허용  
+@NegativeOrZero : 0을 포함한 음수 허용  
+
+- 시간에 대한 검증 (Date, LocalDate, LocalDateTime)  
+@Future : 현재보다 미래의 날짜 허용  
+@Past : 현재보다 과거의 날짜 허용  
+
+@FutureOrPresent : 현재를 포함한 미래의 날짜 허용  
+@PastOrPresent : 현재를 포함한 과거의 날짜 허용  
+
+- 이메일 검증  
+@Email : 이메일 형식을 검사, ""는 허용 
+
+- 자릿수 범위 검증 (BigDecimal, BigInteger, int, long)  
+@Digits(integer = $number1, fraction = $number2) : $number1의 정수 자릿수와 $number2의 소수 자릿수 허용  
+
+- Boolean 검증  
+@AssertTrue : true인지 체크, null은 체크하지 않음  
+@AssertFalse : false인지 체크, null은 체크하지 않음  
+
+- 문자열 길이 검증  
+@Size(min = $number1, max = $number2) : $number1 이상 $number2 이하의 범위 허용  
+
+- 정규식 검증  
+@Pattern(reqexp = "$expr") : 정규식을 검사 (정규식은 java.util.regex.Pattern 패키지의 컨벤션)  
+
+### Valid vs Validated
