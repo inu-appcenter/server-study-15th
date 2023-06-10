@@ -29,12 +29,10 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         this.userRepository = userRepository;
     }
 
-
     // 인증이나 권한이 필요한 요청이 있을 때 해당 필터를 타게된다.
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-        super.doFilterInternal(request, response, chain);
         System.out.println("인증이나 권한이 필요한 주소 요청이 됨");
 
         String jwtHeader = request.getHeader("Authorization");
