@@ -2,7 +2,7 @@
 
 ## Validation?
 
-유효성 검사는 애플리케이션의 비즈니스 로직이 올바르게 동작하기 위해 데이터를 사전에 검증하는 작업
+애플리케이션의 비즈니스 로직이 올바르게 동작하기 위해 데이터를 사전에 검증하는 작업
 
 ## Validation in Spring boot
 
@@ -18,7 +18,6 @@ Spring boot에서의 유효성 검사는 각 계층으로 데이터가 넘어오는 시점에 실시
 
 - 문자열 검증  
 @Null : null 값만 허용  
-
 @NotNull : null을 허용하지 않음 ("", " "는 허용)  
 @NotEmpty : null, ""를 허용하지 않음 (" "는 허용)  
 @NotBlank : null, "", " " 모두 허용하지 않음  
@@ -26,21 +25,18 @@ Spring boot에서의 유효성 검사는 각 계층으로 데이터가 넘어오는 시점에 실시
 - 최댓값/최솟값 검증 (BigDecimal, BigInteger, int, long)  
 @DemicalMin(value = "$numberString") : numberString보다 큰 값 허용  
 @DemicalMax(value = "$numberString") : numberString보다 작은 값 허용  
-
 @Min(value = "$number") : $number 이상의 값 허용  
 @Max(value = "$number") : $number 이하 값 허용  
 
 - 값의 범위 검증 (BigDecimal, BigInteger, int, long)  
 @Positive : 양수 허용  
 @Negative : 음수 허용  
-
 @PositiveOrZero : 0을 포함한 양수 허용  
 @NegativeOrZero : 0을 포함한 음수 허용  
 
 - 시간에 대한 검증 (Date, LocalDate, LocalDateTime)  
 @Future : 현재보다 미래의 날짜 허용  
 @Past : 현재보다 과거의 날짜 허용  
-
 @FutureOrPresent : 현재를 포함한 미래의 날짜 허용  
 @PastOrPresent : 현재를 포함한 과거의 날짜 허용  
 
@@ -58,6 +54,24 @@ Spring boot에서의 유효성 검사는 각 계층으로 데이터가 넘어오는 시점에 실시
 @Size(min = $number1, max = $number2) : $number1 이상 $number2 이하의 범위 허용  
 
 - 정규식 검증  
-@Pattern(reqexp = "$expr") : 정규식을 검사 (정규식은 java.util.regex.Pattern 패키지의 컨벤션)  
+@Pattern(regexp = "$expr") : 정규식을 검사 (정규식은 java.util.regex.Pattern 패키지의 컨벤션)  
+
+---
 
 ### Valid vs Validated
+
+유효성 검사를 시행할 때, @Valid와 @Validated 어노테이션이 존재합니다.  
+과연 이 두가지 어노테이션의 차이가 무엇일까요?
+
+> Valid : 자바 진영 / Validated : Spring에서만 사용 가능
+
+주로, Controller에서 유효성 검사를 진행할 때는 원하는 것을 사용하는 편이고,  
+Service 등 불가피하게 유효성 검사를 다른 곳에서 진행하거나 그룹화하여 검증하는 경우 @Validated를 사용한다고 합니다.
+
+#### @Valid의 동작 원리
+
+HandlerMethodArgumentResolver Interface의 구현체인 RequestResponseBodyMethodProcessor Class에서 요청 처리
+
+#### @Validated의 동작 원리
+
+AOP를 기반으로 동작

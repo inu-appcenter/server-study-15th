@@ -38,8 +38,8 @@
 
 ### Week 7
 
-- [About Validation]
-- [About Exception Handling]
+- [About Validation](./week7/juwon/About%20Validation.md)
+- [About Exception Handling](./week7/juwon/About%20Exception%20Handling.md)
 
 ---
 
