@@ -38,17 +38,23 @@ public class UserController {
     @GetMapping("/all")
     @ApiResponse(responseCode = "200", description = "정보조회 성공")
     public ResponseEntity<?> findAllUser() {
-        return new ResponseEntity<>(new ResponseDto<>(1, "유저 정보 반환", userService.findAll()), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseDto<>(1, "전체 유저 정보 반환", userService.findAll()), HttpStatus.OK);
+    }
+
+    @GetMapping("/find/{id}")
+    @ApiResponse(responseCode = "200",description = "유저 정보 조회 성공")
+    public ResponseEntity<?> findUser(@PathVariable Long id, UserId userId) {
+        return new ResponseEntity<>(new ResponseDto<>(1, "유저 정보 반환", userService.findUser(id, userId)),HttpStatus.OK);
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<?> editUser(@PathVariable Long id, @RequestBody UserEditReqDto userEditReqDto) {
-        return new ResponseEntity<>(new ResponseDto<>(1, "회원 수정 성공", userService.editUser(id, userEditReqDto)), HttpStatus.OK);
+    public ResponseEntity<?> editUser(@PathVariable Long id, @RequestBody UserEditReqDto userEditReqDto, UserId userId) {
+        return new ResponseEntity<>(new ResponseDto<>(1, "회원 수정 성공", userService.editUser(id, userEditReqDto, userId)), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
-        return new ResponseEntity<>(new ResponseDto<>(1, "유저 삭제", userService.deleteUser(id)), HttpStatus.OK);
+    public ResponseEntity<?> deleteUser(@PathVariable Long id, UserId userId) {
+        return new ResponseEntity<>(new ResponseDto<>(1, "유저 삭제", userService.deleteUser(id, userId)), HttpStatus.OK);
     }
 
     @PostMapping("/login")

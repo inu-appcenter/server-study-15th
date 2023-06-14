@@ -29,7 +29,8 @@ public class UserService {
     }
 
     @Transactional
-    public UserEditRespDto editUser(Long id, UserEditReqDto userEditReqDto) {
+    public UserEditRespDto editUser(Long id, UserEditReqDto userEditReqDto, UserId userId) {
+        checkIdCorrect(id, userId.getId());
         Optional<User> optionalUser = userRepository.findById(id);
 
         if (optionalUser.isPresent()) {
@@ -42,13 +43,29 @@ public class UserService {
     }
 
     @Transactional
-    public UserDeleteRespDto deleteUser(Long id) {
+    public UserDeleteRespDto deleteUser(Long id, UserId userId) {
+        checkIdCorrect(id, userId.getId());
+
         Optional<User> optionalUser = userRepository.findById(id);
 
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             userRepository.delete(user);
             return new UserDeleteRespDto(user);
+        } else {
+            throw new UserNotFoundException();
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public UserFindRespDto findUser(Long id, UserId userId) {
+        checkIdCorrect(id, userId.getId());
+
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            return new UserFindRespDto(user);
         } else {
             throw new UserNotFoundException();
         }
@@ -65,4 +82,11 @@ public class UserService {
         }
         return userFindRespDtoList;
     }
+
+    public void checkIdCorrect(Long parameterId, Long userId) {
+        if(!parameterId.equals(userId)) {
+            throw new UserNotFoundException();
+        }
+    }
+
 }
