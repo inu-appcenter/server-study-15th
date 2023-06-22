@@ -70,8 +70,12 @@ Service 등 불가피하게 유효성 검사를 다른 곳에서 진행하거나 그룹화하여 검증하는 �
 
 #### @Valid의 동작 원리
 
-HandlerMethodArgumentResolver Interface의 구현체인 RequestResponseBodyMethodProcessor Class에서 요청 처리
+- HandlerMethodArgumentResolver Interface의 구현체인 RequestResponseBodyMethodProcessor Class에서 요청 처리
+- resolveArgument() 메서드 내부에서 유효성 검증이 진행되며, 문제 발생 시 MethodArgumentNotValidException 발생
 
 #### @Validated의 동작 원리
 
-AOP를 기반으로 동작
+AOP를 기반으로 동작  
+- ValidationAutoConfiguration class의 methodValidationPostProcessor() 메소드에서 FilteredMethodValidationPostProcessor이 빈으로 등록
+- 해당 클래스의 메소드 중 createMethodValidationAdvice() 메소드를 통해 AOP Advice인 MethodValidationInterceptor를 등록
+- MethodValidationInterceptor class invoke() 메소드에서 유효성 검증 진행 - ConstraintViolationException 발생
