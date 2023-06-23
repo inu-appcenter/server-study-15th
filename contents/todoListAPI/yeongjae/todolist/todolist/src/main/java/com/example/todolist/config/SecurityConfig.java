@@ -2,6 +2,7 @@ package com.example.todolist.config;
 
 import com.example.todolist.config.jwt.JwtAuthenticationFilter;
 import com.example.todolist.config.jwt.JwtAuthorizationFilter;
+import com.example.todolist.domain.user.UserEnum;
 import com.example.todolist.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -36,8 +37,8 @@ public class SecurityConfig {
                     .apply(new MyCustomDsl())
                     .and()
                     .authorizeRequests()
-                    .antMatchers("/todos/**")
-                    .access("hasRole('USER') or hasRole('ADMIN')")
+                    .antMatchers("/users/join", "/users/login").permitAll()
+                    .antMatchers("/todos/**", "/users/**").hasAnyRole(UserEnum.USER.name(), UserEnum.ADMIN.name())
                     .anyRequest().permitAll()
                     .and().build();
     }

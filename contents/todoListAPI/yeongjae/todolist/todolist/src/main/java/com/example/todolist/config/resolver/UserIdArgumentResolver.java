@@ -33,7 +33,6 @@ public class UserIdArgumentResolver implements HandlerMethodArgumentResolver {
     public UserId resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
                                   NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         try {
-            log.info("안녕 나는 리졸버야");
             String jwtToken = webRequest.getHeader(JwtProperties.HEADER_STRING).replace(JwtProperties.TOKEN_PREFIX, "");
             String username = JWT.require(Algorithm.HMAC512(JwtProperties.SECRET)).build().verify(jwtToken).getClaim("username").asString();
             User user = userRepository.findByName(username);

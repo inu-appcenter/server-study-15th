@@ -3,10 +3,8 @@ package com.example.todolist.config.jwt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.example.todolist.config.auth.PrincipalDetails;
-import com.example.todolist.dto.userdto.UserResponseDto;
 import com.example.todolist.util.CustomResponseUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -36,8 +34,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        System.out.println("JwtAuthenticationFilter : 진입");
-
         ObjectMapper om = new ObjectMapper();
         UserLoginReqDto userLoginReqDto = new UserLoginReqDto();
 
@@ -47,19 +43,14 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             e.printStackTrace();
         }
 
-        System.out.println("JwtAuthenticationFilter : "+ userLoginReqDto);
-
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(
                         userLoginReqDto.getName(),
                         userLoginReqDto.getPassword());
 
-        System.out.println("JwtAuthenticationFilter : 토큰생성완료");
-
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
         PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
-        System.out.println("Authentication : "+principalDetails.getUser().getName());
         return authentication;
     }
 

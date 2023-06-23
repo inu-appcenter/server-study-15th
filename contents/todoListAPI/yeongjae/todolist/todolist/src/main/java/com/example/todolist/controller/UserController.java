@@ -48,11 +48,13 @@ public class UserController {
     }
 
     @PutMapping("/edit/{id}")
+    @ApiResponse(responseCode = "200",description = "유저 정보 수정 성공")
     public ResponseEntity<?> editUser(@PathVariable Long id, @RequestBody UserEditReqDto userEditReqDto, UserId userId) {
         return new ResponseEntity<>(new ResponseDto<>(1, "회원 수정 성공", userService.editUser(id, userEditReqDto, userId)), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
+    @ApiResponse(responseCode = "200",description = "유저 정보 삭제 성공")
     public ResponseEntity<?> deleteUser(@PathVariable Long id, UserId userId) {
         return new ResponseEntity<>(new ResponseDto<>(1, "유저 삭제", userService.deleteUser(id, userId)), HttpStatus.OK);
     }

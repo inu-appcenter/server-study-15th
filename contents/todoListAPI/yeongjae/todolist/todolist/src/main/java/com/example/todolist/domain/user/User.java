@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.scheduling.config.Task;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class User {
     private String email;
 
     @Column(nullable = false)
-    private String roles;
+    private UserEnum role;
 
     @OneToMany(mappedBy = "user")
     private List<Todo> todoList = new ArrayList<>();
@@ -44,17 +45,11 @@ public class User {
     }
 
     @Builder
-    public User(String name, String password, String email, String roles) {
+    public User(String name, String password, String email, List<Todo> taskList, UserEnum role) {
         this.name = name;
         this.password = password;
         this.email = email;
-        this.roles = roles;
-    }
-
-    public List<String> getRoleList() {
-        if (this.roles.length() > 0) {
-            return Arrays.asList(this.roles.split(","));
-        }
-        return new ArrayList<>();
+        this.todoList = taskList;
+        this.role = role;
     }
 }
