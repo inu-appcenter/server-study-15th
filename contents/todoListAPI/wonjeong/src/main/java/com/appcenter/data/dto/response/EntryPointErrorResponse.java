@@ -5,6 +5,7 @@ import lombok.*;
 @Getter
 @NoArgsConstructor
 @Builder
+@Setter
 public class EntryPointErrorResponse {
     private String msg;
 

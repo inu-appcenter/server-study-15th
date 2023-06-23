@@ -5,8 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="81f51037-4901-472c-bd73-05bd8d4b8b65" name="Changes" comment="Changes">
+      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/common/CommonResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/controller/SignController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/data/dto/result/SignInResultDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/data/dto/result/SignUpResultDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/service/SignService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/service/impl/SignServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/service/impl/UserDetailsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/Appcenter-Springboot.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-study-15th" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/.gradle/8.1.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/.gradle/8.1.1/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/.gradle/8.1.1/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/.gradle/8.1.1/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/.gradle/8.1.1/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/.gradle/8.1.1/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/.gradle/8.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/.gradle/8.1.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/.gradle/8.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/.gradle/8.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/data/dto/response/EntryPointErrorResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/data/dto/response/EntryPointErrorResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/data/entity/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/data/entity/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/data/repository/MemberRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/data/repository/MemberRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/security/CustomAuthenticationEntryPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/security/CustomAuthenticationEntryPoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/security/JwtTokenProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/security/JwtTokenProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/security/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/security/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/service/MemberService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/service/impl/MemberServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/service/impl/MemberServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +87,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -105,18 +130,24 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "wonjeong",
-    "last_opened_file_path": "/Users/kim-wonjeong/Documents/GitHub/server-study-15th/contents/todoListAPI",
+    "last_opened_file_path": "/Users/kim-wonjeong/Documents/GitHub/server-study-15th/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/data/dto/result",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "spring.configuration.checksum": "cf6532d4509614d6fef6fe5894a77461",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/data/dto/result" />
       <recent name="$PROJECT_DIR$/contents/todoListAPI" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.appcenter.service.impl" />
+      <recent name="com.appcenter.common" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -149,6 +180,8 @@
       <workItem from="1685683435863" duration="314000" />
       <workItem from="1686891687561" duration="3355000" />
       <workItem from="1687432011853" duration="264000" />
+      <workItem from="1687445018704" duration="750000" />
+      <workItem from="1687448240117" duration="12857000" />
     </task>
     <servers />
   </component>

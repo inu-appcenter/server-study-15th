@@ -38,9 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 // 권한을 설정하는 역할
                 // 하단 요청에 대해서는 허용
                 .antMatchers("/sign-in", "/sign-up",
-                        "/exception", "/member").permitAll()
-                // member로 들어오는 GET 요청은 모두 허용
-                .antMatchers(HttpMethod.GET, "/member/**").permitAll()
+                        "/exception").permitAll()
                 // exception 단어가 들어가도 허용
                 .antMatchers("**exception**").permitAll()
 

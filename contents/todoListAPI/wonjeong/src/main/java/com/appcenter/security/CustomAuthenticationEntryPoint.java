@@ -17,7 +17,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
         ObjectMapper objectMapper = new ObjectMapper();
 
         EntryPointErrorResponse entryPointErrorResponse = new EntryPointErrorResponse();
-        entryPointErrorResponse.updateEntryPointErrorResponse("인증이 실패했습니다.");
+        entryPointErrorResponse.setMsg("로그인 해주세요");
 
         response.setStatus(401);
         response.setContentType("application/json");

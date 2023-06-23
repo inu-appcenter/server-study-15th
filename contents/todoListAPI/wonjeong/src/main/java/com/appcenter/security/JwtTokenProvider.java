@@ -43,6 +43,8 @@ public class JwtTokenProvider {
 
     // 토큰 생성 메서드
     public String createToken(String userUid, List<String> roles) {
+
+        System.out.println("토큰 생성");
         // JWT 토큰에 값을 넣기 위해 Claims 객체를 생성하고
         // Claims 객체에는 토큰에 포함된 모든 정보에 대한 속성이 포함되어 있다.
         // Claims 의 sub 속성에 값을 추가하기 위해 User의 uid 값을 사용한다.
@@ -91,7 +93,6 @@ public class JwtTokenProvider {
         /* UserDetailsSerivce.
         *  Spring Security에서 유저의 정보를 가져오는 인터페이스
         *   loadUserByUsername 메서드를 구현해야 함*/
-
         UserDetails userDetails = userDetailsService.loadUserByUsername(this.getUsername(token));
 
 
