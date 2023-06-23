@@ -7,26 +7,32 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
-
+@Schema
 public class TodoResponseDto {
 
     @Getter
     @Setter
-    public static class TaskSaveRespDto {
-        @Schema(example = "Todo 제목")
+    @Schema(description = "Todo 저장 응답 Dto")
+    public static class TodoSaveRespDto {
+        @Schema(description = "Todo 제목")
         @NotEmpty
         private String title;
 
-        @Schema(example = "Todo 내용")
+        @Schema(description = "Todo 내용")
         private String contents;
+
         @NotEmpty
-        @Schema(example = "Todo 기한")
+        @Schema(description = "Todo 기한")
         private String deadline;
 
+        @Schema(description = "Todo 실행 여부")
         private boolean isCompleted;
 
-        public TaskSaveRespDto(Todo todo) {
+        public TodoSaveRespDto(Todo todo) {
             this.title = todo.getTitle();
             this.contents = todo.getContents();
             this.deadline = todo.getDeadline().toString();
@@ -36,7 +42,8 @@ public class TodoResponseDto {
 
     @Getter
     @Setter
-    public static class TaskDeleteRespDto {
+    @Schema(description = "Todo 삭제 응답 Dto")
+    public static class TodoDeleteRespDto {
         @Schema(example = "Todo 제목")
         @NotEmpty
         private String title;
@@ -46,10 +53,10 @@ public class TodoResponseDto {
         @NotEmpty
         @Schema(example = "Todo 기한")
         private String deadline;
-
+        @Schema(description = "Todo 실행 여부")
         private boolean isCompleted;
 
-        public TaskDeleteRespDto(Todo todo) {
+        public TodoDeleteRespDto(Todo todo) {
             this.title = todo.getTitle();
             this.contents = todo.getContents();
             this.deadline = todo.getDeadline().toString();
@@ -60,17 +67,54 @@ public class TodoResponseDto {
     @Getter
     @Setter
     @AllArgsConstructor
-    public static class TaskEditRespDto {
+    @Schema(description = "Todo 수정 응답 Dto")
+    public static class TodoEditRespDto {
+
+        @Schema(example = "Todo 제목")
         private String title;
+        @Schema(example = "Todo 내용")
         private String contents;
+        @Schema(example = "Todo 기한")
         private String deadline;
+        @Schema(description = "Todo 실행 여부")
         private boolean isCompleted;
 
-        public TaskEditRespDto(Todo todo) {
+        public TodoEditRespDto(Todo todo) {
             this.title = todo.getTitle();
             this.contents = todo.getContents();
             this.deadline = todo.getDeadline().toString();
             this.isCompleted = todo.getIsCompleted();
+        }
+    }
+
+    @Getter
+    @Setter
+    @Schema
+    public static class TodoListRespDto {
+        private List<TodoOneDto> todos;
+
+        public TodoListRespDto(List<Todo> todos) {
+            this.todos = todos.stream()
+                    .map(TodoOneDto::new)
+                    .collect(Collectors.toList());
+        }
+
+        @Getter
+        @Setter
+        public static class TodoOneDto {
+            private Long id;
+            private String title;
+            private String contents;
+            private Boolean isCompleted;
+            private LocalDateTime deadline;
+
+            public TodoOneDto(Todo todo) {
+                this.id = todo.getId();
+                this.title = todo.getTitle();
+                this.contents = todo.getContents();
+                this.isCompleted = todo.getIsCompleted();
+                this.deadline = todo.getDeadline();
+            }
         }
     }
 }
