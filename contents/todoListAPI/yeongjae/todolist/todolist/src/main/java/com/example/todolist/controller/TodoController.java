@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static com.example.todolist.dto.taskdto.TodoRequestDto.*;
@@ -37,7 +38,7 @@ public class TodoController {
     @PostMapping("")
     @Operation(summary = "Todo 작성", description = "Todo 작성 api 입니다")
     @ApiResponse(responseCode = "201", description = "Todo 작성 성공" , content = @Content(schema = @Schema(implementation = TodoSaveRespDto.class)))
-    public ResponseEntity<?> writeTodo(@RequestBody TodoSaveReqDto TodoSaveReqDto, UserId userId) {
+    public ResponseEntity<?> writeTodo(@RequestBody @Valid final TodoSaveReqDto TodoSaveReqDto, UserId userId) {
         TodoSaveRespDto todoSaveRespDto = todoService.writeTodo(TodoSaveReqDto, userId.getId());
         return new ResponseEntity<>(new ResponseDto<>(1, "Todo 작성 성공", todoSaveRespDto), HttpStatus.CREATED);
     }
@@ -53,7 +54,7 @@ public class TodoController {
     @PutMapping("/{id}")
     @Operation(summary = "Todo 수정", description = "Todo 수정 api 입니다")
     @ApiResponse(responseCode = "200", description = "Todo 수정 성공")
-    public ResponseEntity<?> editTodo(@PathVariable Long id, @RequestBody TodoEditRequestDto todoEditRequestDto, UserId userId) {
+    public ResponseEntity<?> editTodo(@PathVariable Long id, @RequestBody @Valid final TodoEditRequestDto todoEditRequestDto, UserId userId) {
         TodoEditRespDto todoEditRespDto = todoService.editTodo(id, todoEditRequestDto, userId.getId());
         return new ResponseEntity<>(new ResponseDto<>(1, "Todo 수정 성공", todoEditRespDto), HttpStatus.CREATED);
     }

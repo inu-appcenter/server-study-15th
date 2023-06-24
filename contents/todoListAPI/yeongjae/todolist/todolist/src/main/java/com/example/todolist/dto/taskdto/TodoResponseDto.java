@@ -6,13 +6,18 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Schema
 public class TodoResponseDto {
+    public static final int MIN_TITLE_VALUE = 1;
+    public static final int MAX_TITLE_VALUE = 30;
+
 
     @Getter
     @Setter
@@ -20,6 +25,7 @@ public class TodoResponseDto {
     public static class TodoSaveRespDto {
         @Schema(description = "Todo 제목")
         @NotEmpty
+        @Size(min = MIN_TITLE_VALUE, max = MAX_TITLE_VALUE)
         private String title;
 
         @Schema(description = "Todo 내용")
@@ -30,6 +36,8 @@ public class TodoResponseDto {
         private String deadline;
 
         @Schema(description = "Todo 실행 여부")
+        @NotEmpty
+        @FutureOrPresent
         private boolean isCompleted;
 
         public TodoSaveRespDto(Todo todo) {
@@ -46,14 +54,17 @@ public class TodoResponseDto {
     public static class TodoDeleteRespDto {
         @Schema(example = "Todo 제목")
         @NotEmpty
+        @Size(min = MIN_TITLE_VALUE, max = MAX_TITLE_VALUE)
         private String title;
 
         @Schema(example = "Todo 내용")
         private String contents;
         @NotEmpty
         @Schema(example = "Todo 기한")
+        @FutureOrPresent
         private String deadline;
         @Schema(description = "Todo 실행 여부")
+        @NotEmpty
         private boolean isCompleted;
 
         public TodoDeleteRespDto(Todo todo) {
@@ -71,12 +82,17 @@ public class TodoResponseDto {
     public static class TodoEditRespDto {
 
         @Schema(example = "Todo 제목")
+        @NotEmpty
+        @Size(min = MIN_TITLE_VALUE, max = MAX_TITLE_VALUE)
         private String title;
         @Schema(example = "Todo 내용")
         private String contents;
+        @NotEmpty
         @Schema(example = "Todo 기한")
+        @FutureOrPresent
         private String deadline;
         @Schema(description = "Todo 실행 여부")
+        @NotEmpty
         private boolean isCompleted;
 
         public TodoEditRespDto(Todo todo) {

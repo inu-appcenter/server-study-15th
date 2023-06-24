@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import static com.example.todolist.dto.taskdto.TodoRequestDto.*;
@@ -33,7 +35,9 @@ public class TodoService {
 
         Todo todo = todoRepository.save(TodoSaveReqDto.changeEntity(TodoSaveReqDto,user));
 
-        return new TodoSaveRespDto(todo);
+        @Valid final TodoSaveRespDto todoSaveRespDto = new TodoSaveRespDto(todo);
+
+        return todoSaveRespDto;
     }
 
     @Transactional
@@ -49,7 +53,9 @@ public class TodoService {
 
         todoRepository.deleteById(id);
 
-        return new TodoDeleteRespDto(todo);
+        @Valid final TodoDeleteRespDto todoDeleteRespDto = new TodoDeleteRespDto(todo);
+
+        return todoDeleteRespDto;
     }
 
     @Transactional
@@ -59,13 +65,15 @@ public class TodoService {
 
         checkUserHaveTodo(optionalTodo, optionalUser);
 
-        Todo todo = optionalTodo. get();
+        Todo todo = optionalTodo.get();
 
         todo.setContents(todoEditRequestDto.getContents());
         todo.setTitle(todoEditRequestDto.getTitle());
         todo.setDeadline(parseDatetime(todoEditRequestDto.getDeadline()));
 
-        return new TodoEditRespDto(todo);
+        @Valid final TodoEditRespDto todoEditRespDto = new TodoEditRespDto(todo);
+
+        return todoEditRespDto;
     }
 
     @Transactional(readOnly = true)

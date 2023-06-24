@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +26,9 @@ public class UserService {
     @Transactional
     public UserJoinRespDto join(UserJoinReqDto userJoinReqDto) {
         User user = userRepository.save(userJoinReqDto.changeEntity(bCryptPasswordEncoder));
-        return new UserJoinRespDto(user);
+        @Valid final UserJoinRespDto userJoinRespDto = new UserJoinRespDto(user);
+
+        return userJoinRespDto;
     }
 
     @Transactional
@@ -33,13 +36,16 @@ public class UserService {
         checkIdCorrect(id, userId.getId());
         Optional<User> optionalUser = userRepository.findById(id);
 
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            user.editByDto(userEditReqDto);
-            return new UserEditRespDto(user);
-        } else {
+        if (optionalUser.isEmpty()) {
             throw new UserNotFoundException();
         }
+
+        User user = optionalUser.get();
+        user.editByDto(userEditReqDto);
+
+        @Valid final UserEditRespDto userEditRespDto = new UserEditRespDto(user);
+
+        return userEditRespDto;
     }
 
     @Transactional
@@ -48,13 +54,14 @@ public class UserService {
 
         Optional<User> optionalUser = userRepository.findById(id);
 
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            userRepository.delete(user);
-            return new UserDeleteRespDto(user);
-        } else {
+        if (optionalUser.isEmpty()) {
             throw new UserNotFoundException();
         }
+        User user = optionalUser.get();
+        userRepository.delete(user);
+        @Valid final UserDeleteRespDto userDeleteRespDto = new UserDeleteRespDto(user);
+
+        return userDeleteRespDto;
     }
 
     @Transactional(readOnly = true)
@@ -63,12 +70,14 @@ public class UserService {
 
         Optional<User> optionalUser = userRepository.findById(id);
 
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            return new UserFindRespDto(user);
-        } else {
+        if (optionalUser.isEmpty()) {
             throw new UserNotFoundException();
         }
+
+        User user = optionalUser.get();
+        @Valid final UserFindRespDto userFindRespDto = new UserFindRespDto(user);
+
+        return userFindRespDto;
     }
 
     @Transactional(readOnly = true)
@@ -88,5 +97,4 @@ public class UserService {
             throw new UserNotFoundException();
         }
     }
-
 }
