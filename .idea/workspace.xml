@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="81f51037-4901-472c-bd73-05bd8d4b8b65" name="Changes" comment="Feat: Spring Security를 통한 로그인, 회원가입 구현&#10;&#10;#49">
+    <list default="true" id="81f51037-4901-472c-bd73-05bd8d4b8b65" name="Changes" comment="Fix:  workspace.xml&#10;&#10;#49">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/Appcenter-Springboot.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/Appcenter-Springboot.main.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/.gradle/8.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/.gradle/8.1.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/.gradle/8.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/.gradle/8.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,26 +101,26 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "wonjeong",
-    "last_opened_file_path": "/Users/kim-wonjeong/Documents/GitHub/server-study-15th/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/data/dto/result",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "spring.configuration.checksum": "cf6532d4509614d6fef6fe5894a77461",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;wonjeong&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/kim-wonjeong/Documents/GitHub/server-study-15th/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/data/dto/result&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;cf6532d4509614d6fef6fe5894a77461&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/data/dto/result" />
@@ -131,10 +137,8 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="AppCenterSpringbootApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <option name="ALTERNATIVE_JRE_PATH" value="temurin-11" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <module name="com.appcenter.Appcenter-Springboot.main" />
+    <configuration name="AppCenterSpringbootApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="Appcenter-Springboot.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.appcenter.AppCenterSpringbootApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -157,6 +161,7 @@
       <workItem from="1687432011853" duration="264000" />
       <workItem from="1687445018704" duration="750000" />
       <workItem from="1687448240117" duration="13251000" />
+      <workItem from="1687699963723" duration="329000" />
     </task>
     <task id="LOCAL-00001" summary="Feat: Spring Security를 통한 로그인, 회원가입 구현&#10;&#10;#49">
       <option name="closed" value="true" />
@@ -166,7 +171,15 @@
       <option name="project" value="LOCAL" />
       <updated>1687531934766</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Fix:  workspace.xml&#10;&#10;#49">
+      <option name="closed" value="true" />
+      <created>1687700021961</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1687700021961</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -185,6 +198,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Feat: Spring Security를 통한 로그인, 회원가입 구현&#10;&#10;#49" />
-    <option name="LAST_COMMIT_MESSAGE" value="Feat: Spring Security를 통한 로그인, 회원가입 구현&#10;&#10;#49" />
+    <MESSAGE value="Fix:  workspace.xml&#10;&#10;#49" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix:  workspace.xml&#10;&#10;#49" />
   </component>
 </project>
