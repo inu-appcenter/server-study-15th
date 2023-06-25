@@ -2,7 +2,6 @@ package com.example.todolist.dto.userdto;
 
 import com.example.todolist.domain.user.User;
 import com.example.todolist.domain.user.UserEnum;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

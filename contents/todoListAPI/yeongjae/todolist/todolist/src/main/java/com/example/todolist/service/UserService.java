@@ -2,6 +2,7 @@ package com.example.todolist.service;
 
 import com.example.todolist.domain.user.User;
 import com.example.todolist.dto.userdto.UserResponseDto.UserJoinRespDto;
+import com.example.todolist.exception.CustomException;
 import com.example.todolist.exception.user.UserNotFoundException;
 import com.example.todolist.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.Optional;
 
 import static com.example.todolist.dto.userdto.UserRequestDto.*;
 import static com.example.todolist.dto.userdto.UserResponseDto.*;
+import static com.example.todolist.exception.ErrorCode.USER_NOT_FOUND_EXCEPTION;
 
 @Service
 @RequiredArgsConstructor
@@ -34,13 +36,7 @@ public class UserService {
     @Transactional
     public UserEditRespDto editUser(Long id, UserEditReqDto userEditReqDto, UserId userId) {
         checkIdCorrect(id, userId.getId());
-        Optional<User> optionalUser = userRepository.findById(id);
-
-        if (optionalUser.isEmpty()) {
-            throw new UserNotFoundException();
-        }
-
-        User user = optionalUser.get();
+        User user = userRepository.findById(id).orElseThrow(() -> new CustomException(USER_NOT_FOUND_EXCEPTION));
         user.editByDto(userEditReqDto);
 
         @Valid final UserEditRespDto userEditRespDto = new UserEditRespDto(user);
@@ -51,13 +47,8 @@ public class UserService {
     @Transactional
     public UserDeleteRespDto deleteUser(Long id, UserId userId) {
         checkIdCorrect(id, userId.getId());
+        User user = userRepository.findById(id).orElseThrow(() -> new CustomException(USER_NOT_FOUND_EXCEPTION));
 
-        Optional<User> optionalUser = userRepository.findById(id);
-
-        if (optionalUser.isEmpty()) {
-            throw new UserNotFoundException();
-        }
-        User user = optionalUser.get();
         userRepository.delete(user);
         @Valid final UserDeleteRespDto userDeleteRespDto = new UserDeleteRespDto(user);
 
@@ -67,14 +58,8 @@ public class UserService {
     @Transactional(readOnly = true)
     public UserFindRespDto findUser(Long id, UserId userId) {
         checkIdCorrect(id, userId.getId());
+        User user = userRepository.findById(id).orElseThrow(() -> new CustomException(USER_NOT_FOUND_EXCEPTION));
 
-        Optional<User> optionalUser = userRepository.findById(id);
-
-        if (optionalUser.isEmpty()) {
-            throw new UserNotFoundException();
-        }
-
-        User user = optionalUser.get();
         @Valid final UserFindRespDto userFindRespDto = new UserFindRespDto(user);
 
         return userFindRespDto;
