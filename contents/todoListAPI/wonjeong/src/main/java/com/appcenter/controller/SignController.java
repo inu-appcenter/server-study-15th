@@ -2,8 +2,6 @@ package com.appcenter.controller;
 
 import com.appcenter.data.dto.result.SignInResultDTO;
 import com.appcenter.data.dto.result.SignUpResultDTO;
-import com.appcenter.data.entity.Member;
-import com.appcenter.service.MemberService;
 import com.appcenter.service.impl.SignServiceImpl;
 import io.swagger.annotations.ApiParam;
 import org.springframework.http.HttpHeaders;
@@ -30,16 +28,12 @@ public class SignController {
             @ApiParam(value = "Password", required = true) @RequestParam String password)
             throws RuntimeException {
 
-        // 엥 왜 오류가 날까
-        // signIn에서 signInResultDTO를 리턴하는데..?
-        // 서비스 인터페이스 타입을 잘못 설정해 준 거였음 ㅡ ㅡ
-        SignInResultDTO signInResultDTO = signService.signIn(id, password);
+        SignInResultDTO signIn = signService.signIn(id, password);
 
-        if (signInResultDTO.getCode() == 0) {
-            System.out.println("test");
-            signInResultDTO.getToken();
+        if (signIn.getCode() == 0) {
+            signIn.getToken();
         }
-        return signInResultDTO;
+        return signIn;
     }
 
     @PostMapping(value = "/sign-up")
@@ -48,9 +42,8 @@ public class SignController {
             @ApiParam(value = "비밀번호", required = true) @RequestParam String password,
             @ApiParam(value = "이름", required = true) @RequestParam String name,
             @ApiParam(value = "권한", required = true) @RequestParam String role) {
-        SignUpResultDTO signUpResultDTO = signService.signUp(id, password, name, role);
 
-        return signUpResultDTO;
+        return signService.signUp(id, password, name, role);
     }
 
     @GetMapping(value = "/exception")
@@ -67,8 +60,7 @@ public class SignController {
 
         map.put("error type", httpStatus.getReasonPhrase());
         map.put("code", "400");
-        map.put("message", "에러 발생");
-        map.put("내용", e.getMessage());
+        map.put("message", e.getMessage());
 
         return new ResponseEntity<>(map, responseHeaders, httpStatus);
     }

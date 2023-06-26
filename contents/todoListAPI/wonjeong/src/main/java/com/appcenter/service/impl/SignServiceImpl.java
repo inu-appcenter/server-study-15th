@@ -48,6 +48,7 @@ public class SignServiceImpl implements SignService {
         }
 
         Member savedUser = memberRepository.save(member);
+
         SignUpResultDTO signUpResultDTO = new SignUpResultDTO();
 
         if (!savedUser.getName().isEmpty()) {
@@ -60,14 +61,17 @@ public class SignServiceImpl implements SignService {
 
     @Override
     public SignInResultDTO signIn(String id, String password) throws RuntimeException {
-        Member user = memberRepository.getByUid(id);
+        // ID (User id)로 멤버를 가져오기
+        Member member = memberRepository.getByUid(id);
 
-        if (!passwordEncoder.matches(password, user.getPassword())) {
+        // 컨트롤러를 통해 제공된 password와 DB에 저장된 패스워드가 다르면 오류를 던짐
+        if (!passwordEncoder.matches(password, member.getPassword())) {
             throw new RuntimeException();
         }
 
+        // Builder를 통해 인스턴스 생성
         SignInResultDTO signInResultDTO = SignInResultDTO.builder()
-                .token(jwtTokenProvider.createToken(String.valueOf(user.getUid()), user.getRoles()))
+                .token(jwtTokenProvider.createToken(String.valueOf(member.getUid()), member.getRoles()))
                 .build();
 
         setSuccessResult(signInResultDTO);
@@ -76,15 +80,10 @@ public class SignServiceImpl implements SignService {
     }
 
     private void setSuccessResult(SignUpResultDTO result) {
-        result.setSuccess(true);
-        result.setCode(CommonResponse.SUCCESS.getCode());
-        result.setMsg(CommonResponse.SUCCESS.getMsg());
-        System.out.println("SignUpResultDTO를 성공적으로 생성");
+        result.updateSignUpResultDTO(true, CommonResponse.SUCCESS.getCode(), CommonResponse.SUCCESS.getMsg());
     }
 
     private void setFailResult(SignUpResultDTO result) {
-        result.setSuccess(false);
-        result.setCode(CommonResponse.FAIL.getCode());
-        result.setMsg(CommonResponse.FAIL.getMsg());
+        result.updateSignUpResultDTO(false, CommonResponse.FAIL.getCode(), CommonResponse.FAIL.getMsg());
     }
 }

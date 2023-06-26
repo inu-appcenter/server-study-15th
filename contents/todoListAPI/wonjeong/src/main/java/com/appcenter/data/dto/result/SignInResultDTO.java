@@ -2,11 +2,11 @@ package com.appcenter.data.dto.result;
 
 import lombok.*;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class SignInResultDTO extends SignUpResultDTO{
+@Getter
+public class SignInResultDTO extends SignUpResultDTO {
 
     private String token;
     @Builder
@@ -14,4 +14,5 @@ public class SignInResultDTO extends SignUpResultDTO{
         super(success, code, msg);
         this.token = token;
     }
+
 }
