@@ -24,7 +24,7 @@ import java.util.List;
 public class JwtTokenProvider {
     private final UserDetailsService userDetailsService;
 
-    // application.properties 에서 값을 가져 옴
+    // application.yml 에서 값을 가져 옴
     @Value("${springboot.jwt.secret}")
     private String secretKey = "secretKey";
 
