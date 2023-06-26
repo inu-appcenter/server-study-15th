@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/todolist")
 public class TodolistController {
@@ -30,6 +32,17 @@ public class TodolistController {
 
         return ResponseEntity.status(HttpStatus.OK).body(todolistResponseDTO);
     }
+
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "발급 받은 Token",
+                    required = true, dataType = "String", paramType = "header")
+    })
+    @GetMapping("/getContentList")
+    public List<TodolistResponseDTO> getContentList(Long id) throws Exception{
+
+        return todolistService.getContentsList(id);
+    }
+
 
     @ApiImplicitParams({
             @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 Token",

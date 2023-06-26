@@ -1,13 +1,11 @@
 package com.appcenter.data.entity;
 
 import com.appcenter.data.dto.request.TodolistRequestDTO;
+import com.appcenter.data.dto.response.TodolistResponseDTO;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.LastModifiedDate;
-
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Getter
 @Entity
@@ -49,6 +47,17 @@ public class Todolist extends BaseTimeEntity{
     public void updateContent(TodolistRequestDTO todolistRequestDTO) {
         this.title = todolistRequestDTO.getTitle();
         this.contents = todolistRequestDTO.getContents();
+    }
+
+    public TodolistResponseDTO toTodolistResponseDTO(Todolist todolist) {
+        return TodolistResponseDTO.builder()
+                .member_id(todolist.getMember().getId())
+                .id(todolist.getId())
+                .title(todolist.getTitle())
+                .contents(todolist.getContents())
+                .createDate(todolist.getCreatedDate())
+                .lastModifiedDate(todolist.getLastModifiedDate())
+                .build();
     }
 
 }

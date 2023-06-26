@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TodolistServiceImpl implements TodolistService {
@@ -40,6 +41,13 @@ public class TodolistServiceImpl implements TodolistService {
                 .orElseThrow(() -> new NotFoundException(NOT_FOUND_CONTENT));
 
        return new TodolistResponseDTO().updateTodolistResponse(todolist);
+    }
+
+    @Override
+    public List<TodolistResponseDTO> getContentsList(Long member_id) throws Exception {
+        memberRepository.findById(member_id).orElseThrow(() -> new NotFoundException("존재하지 않는 사용자 입니다."));
+        List<Todolist> contentsList = todolistRepository.findByMember_id(member_id);
+        return contentsList.stream().map(contents -> contents.toTodolistResponseDTO(contents)).collect(Collectors.toList());
     }
 
     @Override

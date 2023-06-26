@@ -4,13 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="81f51037-4901-472c-bd73-05bd8d4b8b65" name="Changes" comment="Fix:  불필요하게 선언된 어노테이션 삭제&#10;&#10;SignInResultDTO와 SignUpResultDTO에 선언되었던 @Data 어노테이션을 삭제하였습니다&#10;&#10;#49">
+    <list default="true" id="81f51037-4901-472c-bd73-05bd8d4b8b65" name="Changes" comment="Feat: TodolistController에서 List 목록 제공&#10;&#10;TodolistController: Member가 작성한 글 목록을 확인할 수 있음&#10;&#10;#49">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/.gradle/8.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/.gradle/8.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/.gradle/8.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/.gradle/8.1.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/security/JwtTokenProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/security/JwtTokenProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/controller/TodolistController.java" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/controller/TodolistController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/data/entity/Todolist.java" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/data/entity/Todolist.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/data/repository/TodolistRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/data/repository/TodolistRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/service/TodolistService.java" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/service/TodolistService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/service/impl/TodolistServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/contents/todoListAPI/wonjeong/src/main/java/com/appcenter/service/impl/TodolistServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,7 +164,7 @@
       <workItem from="1687445018704" duration="750000" />
       <workItem from="1687448240117" duration="13251000" />
       <workItem from="1687699963723" duration="432000" />
-      <workItem from="1687765751984" duration="17075000" />
+      <workItem from="1687765751984" duration="20109000" />
     </task>
     <task id="LOCAL-00001" summary="Feat: Spring Security를 통한 로그인, 회원가입 구현&#10;&#10;#49">
       <option name="closed" value="true" />
@@ -203,7 +206,15 @@
       <option name="project" value="LOCAL" />
       <updated>1687799691626</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fix:  application.properties를 .yml으로 변경&#10;&#10;#49">
+      <option name="closed" value="true" />
+      <created>1687799980304</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1687799980304</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -226,6 +237,8 @@
     <MESSAGE value="Fix:  build project&#10;&#10;#49" />
     <MESSAGE value="Fix:  BaseTimeEntity 추가 및 Controller 수정&#10;&#10;Controller: Token 받는 부분 추가&#10;&#10;#49" />
     <MESSAGE value="Fix:  불필요하게 선언된 어노테이션 삭제&#10;&#10;SignInResultDTO와 SignUpResultDTO에 선언되었던 @Data 어노테이션을 삭제하였습니다&#10;&#10;#49" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix:  불필요하게 선언된 어노테이션 삭제&#10;&#10;SignInResultDTO와 SignUpResultDTO에 선언되었던 @Data 어노테이션을 삭제하였습니다&#10;&#10;#49" />
+    <MESSAGE value="Fix:  application.properties를 .yml으로 변경&#10;&#10;#49" />
+    <MESSAGE value="Feat: TodolistController에서 List 목록 제공&#10;&#10;TodolistController: Member가 작성한 글 목록을 확인할 수 있음&#10;&#10;#49" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat: TodolistController에서 List 목록 제공&#10;&#10;TodolistController: Member가 작성한 글 목록을 확인할 수 있음&#10;&#10;#49" />
   </component>
 </project>
