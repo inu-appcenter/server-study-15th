@@ -54,6 +54,7 @@ public class MemberServiceImpl implements MemberService {
         Member foundMember = memberRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(NOT_FOUND_MEMBER));
 
+
         Member changedMember = memberRepository.save(foundMember.updateMember(id, memberRequestDTO));
 
         return new MemberResponseDTO().updateMemberResponse(changedMember);
