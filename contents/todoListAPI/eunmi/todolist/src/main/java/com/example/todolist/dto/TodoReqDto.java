@@ -12,14 +12,14 @@ public class TodoReqDto {
 
     private String content;
 
-    private LocalDateTime creatAt;
+    private LocalDateTime deadline;
 
     private boolean checked;
 
     @Builder
-    public TodoReqDto(String content, LocalDateTime creatAt, boolean checked) {
+    public TodoReqDto(String content, LocalDateTime deadline, boolean checked) {
         this.content = content;
-        this.creatAt = creatAt;
+        this.deadline = deadline;
         this.checked = checked;
     }
 
@@ -27,7 +27,6 @@ public class TodoReqDto {
         return Todo.builder()
                 .member(member)
                 .content(todoReqDto.getContent())
-                .creatAt(todoReqDto.getCreatAt())
                 .checked(false)
                 .build();
     }

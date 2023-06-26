@@ -1,22 +1,23 @@
 package appCenter.guCoding.todoList.service;
 
 import appCenter.guCoding.todoList.config.auth.LoginUser;
+import appCenter.guCoding.todoList.domain.task.Task;
+import appCenter.guCoding.todoList.domain.task.TaskRepository;
 import appCenter.guCoding.todoList.domain.user.User;
 import appCenter.guCoding.todoList.domain.user.UserRepository;
 import appCenter.guCoding.todoList.dto.user.UserReqDto.UserEditReqDto;
 import appCenter.guCoding.todoList.dto.user.UserReqDto.JoinReqDto;
-
 import appCenter.guCoding.todoList.dto.user.UserRespDto;
 import appCenter.guCoding.todoList.dto.user.UserRespDto.UserEditRespDto;
 import appCenter.guCoding.todoList.dto.user.UserRespDto.JoinRespDto;
 import appCenter.guCoding.todoList.dto.user.UserRespDto.UserListRespDto;
+import appCenter.guCoding.todoList.dto.user.UserRespDto.UserMyInfoRespDto;
 import appCenter.guCoding.todoList.handler.ex.CustomApiException;
 import appCenter.guCoding.todoList.handler.ex.CustomNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +28,7 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final TaskRepository taskRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public JoinRespDto 회원가입(JoinReqDto joinReqDto) {
@@ -38,16 +40,14 @@ public class UserService {
         return new JoinRespDto(userPS);
     }
 
-    public UserEditRespDto 사용자정보수정(UserEditReqDto userEditReqDto, Long userId) {
-        Optional<User> userOP = userRepository.findById(userId);
-        if (userOP.isEmpty()) {
-            throw new CustomNotFoundException("해당 id 의 사용자가 없습니다.");
 
-        }
+    public UserEditRespDto 사용자정보수정(UserEditReqDto userEditReqDto, Long userId) {
+
+        User userPS = userRepository.findById(userId).orElseThrow(() -> new CustomNotFoundException("해당 id 의 사용자가 없습니다."));
+
         String encPassword = bCryptPasswordEncoder.encode(userEditReqDto.getPassword());
-        User user = userOP.get();
-        user.changeField(userEditReqDto, encPassword);
-        return new UserEditRespDto(user);
+        userPS.changeField(userEditReqDto, encPassword);
+        return new UserEditRespDto(userPS);
     }
 
     @Transactional(readOnly = true)
@@ -63,6 +63,13 @@ public class UserService {
         userRepository.findById(id).orElseThrow(() -> new CustomNotFoundException("해당 id 에 해당하는 사용자가 없습니다."));
         userRepository.deleteById(id);
 
+    }
+
+    @Transactional(readOnly = true)
+    public UserMyInfoRespDto 본인정보확인(Long userId) {
+        User userPS = userRepository.findById(userId).orElseThrow(() -> new CustomNotFoundException("해당 id 의 사용자가 없습니다."));
+        List<Task> taskListPS = taskRepository.findByUser_id(userId);
+        return new UserMyInfoRespDto(userPS, taskListPS);
     }
 
 

@@ -13,7 +13,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
 import static appCenter.guCoding.todoList.util.CustomDateUtil.toDateTimeFormat;
 
 public class TaskReqDto {
@@ -45,25 +44,20 @@ public class TaskReqDto {
 
         }
 
-        private LocalDateTime parseDateTime(String deadline) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDateTime parseDeadline = LocalDate.parse(deadline, formatter).atStartOfDay();
-//            System.out.println("테스트 : parseDeadline" + parseDeadline);
-            return parseDeadline;
-
-        }
-
-
     }
 
     @Getter
     @Setter
     public static class TaskEditReqDto {
 
+        @Schema(example = "수정된 테스트 제목")
         private String title;
+        @Schema(example = "수정된 테스트 본문")
         private String description;
+        @Schema(example = "2023-05-02")
         @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "잘못된 기한일 형식입니다.")
         private String deadline;
+        @Schema(example = "true")
         private Boolean isCompleted;
 
         public Task toEntity() {

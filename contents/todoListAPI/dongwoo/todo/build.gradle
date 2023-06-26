@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.example'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 sourceCompatibility = '11'
 
 configurations {
@@ -32,9 +32,15 @@ dependencies {
 	// spring security
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	// jwt
-	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.2'
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
+	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
 	//h2
 	runtimeOnly 'com.h2database:h2'
+}
+
+jar {
+	enabled = false
 }
 
 tasks.named('test') {

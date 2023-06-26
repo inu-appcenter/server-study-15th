@@ -1,5 +1,6 @@
 package appCenter.guCoding.todoList.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

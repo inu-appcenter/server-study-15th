@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
@@ -24,6 +23,8 @@ public class UserReqDto {
         private String password;
     }
 
+    @Getter
+    @Setter
     public static class JoinReqDto {
 
         @Schema(example = "ssar")

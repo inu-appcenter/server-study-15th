@@ -1,15 +1,13 @@
 package com.example.todolist.service;
 
-import com.example.todolist.dto.MemberDto;
+import com.example.todolist.dto.MemberReqDto;
 import com.example.todolist.dto.TodoPageRespDto;
 import com.example.todolist.dto.TodoReqDto;
-import com.example.todolist.dto.TodoRespDto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -26,17 +24,16 @@ class TodoServiceTest {
     @Test
     public void 할일_등록() throws Exception {
         // given
-        MemberDto memberDto = MemberDto.builder()
+        MemberReqDto memberReqDto = MemberReqDto.builder()
                 .name("test1")
                 .nickName("test1")
                 .email("test@naver.com")
                 .build();
 
-        Long save = memberService.save(memberDto);
+        Long save = memberService.save(memberReqDto);
 
         TodoReqDto todoReqDto = TodoReqDto.builder()
                 .content("할일 1")
-                .creatAt(LocalDateTime.now())
                 .checked(false)
                 .build();
 
@@ -54,7 +51,6 @@ class TodoServiceTest {
         // given
         TodoReqDto todoReqDto = TodoReqDto.builder()
                 .content("할일 2")
-                .creatAt(LocalDateTime.now())
                 .checked(false)
                 .build();
 
@@ -63,7 +59,6 @@ class TodoServiceTest {
         // when
         TodoReqDto todoReqDto2 = TodoReqDto.builder()
                 .content("할일 3")
-                .creatAt(LocalDateTime.now())
                 .checked(true)
                 .build();
 
@@ -80,7 +75,7 @@ class TodoServiceTest {
 
 
         // when
-        TodoRespDto todo = todoService.findOne(4L);
+        TodoPageRespDto todo = todoService.findOne(4L);
 
         // then
         Assertions.assertThat(todo.getContent()).isEqualTo("할일 3");

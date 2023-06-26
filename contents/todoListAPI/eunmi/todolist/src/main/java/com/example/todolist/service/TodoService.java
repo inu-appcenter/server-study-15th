@@ -5,17 +5,16 @@ import com.example.todolist.domain.Todo;
 import com.example.todolist.dto.TodoCheckReqDto;
 import com.example.todolist.dto.TodoPageRespDto;
 import com.example.todolist.dto.TodoReqDto;
-import com.example.todolist.dto.TodoRespDto;
 import com.example.todolist.exception.NotFoundMemberException;
 import com.example.todolist.exception.NotFoundTodoException;
 import com.example.todolist.repository.MemberRepository;
 import com.example.todolist.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -43,31 +42,29 @@ public class TodoService {
         return creatTodo.getId();
     }
 
-    public TodoRespDto findOne(Long id) {
-        Todo todo = todoRepository.findById(id)
-                .orElseThrow(() -> new NotFoundTodoException(NOT_FOUND_TODO_MESSAGE));
-        return TodoRespDto.builder()
-                .id(todo.getId())
-                .content(todo.getContent())
-                .creatAt(todo.getCreatAt())
-                .checked(todo.isChecked())
-                .build();
+    public Page<TodoPageRespDto> findTodos(Long memberId, int page, int size) {
+        Member member = memberRepository.findById(memberId).orElseThrow(()
+                -> new NotFoundMemberException(NOT_FOUND_MEMBER_MESSAGE));
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createDate"));
+        Page<Todo> pageByMember = todoRepository.findPageByMember(member, pageRequest);
+        return pageByMember.map(todo -> todo.toTodoPageRespDto(todo));
     }
 
-    public List<TodoPageRespDto> findAll(Long memberId) {
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new NotFoundMemberException(NOT_FOUND_MEMBER_MESSAGE));
-        List<Todo> todos = todoRepository.findAllByMember(member);
-        return todos.stream().map(todo -> todo.toTodoPageRespDto(todo))
-                .collect(Collectors.toList());
+    @Transactional
+    public TodoPageRespDto findOneTodo(Long id) {
+        Todo todo = todoRepository.findById(id)
+                .orElseThrow(() -> new NotFoundMemberException(NOT_FOUND_TODO_MESSAGE));
+        return todo.toTodoPageRespDto(todo);
     }
 
     public void deleteTodo(Long id) {
         todoRepository.deleteById(id);
     }
 
+    @Transactional
     public Long updateChecked(Long id, TodoCheckReqDto todoCheckReqDto) {
-        Todo todo = todoRepository.findById(id).orElseThrow(() -> new NotFoundTodoException(NOT_FOUND_TODO_MESSAGE));
+        Todo todo = todoRepository.findById(id).orElseThrow(()
+                -> new NotFoundTodoException(NOT_FOUND_TODO_MESSAGE));
         Todo updateTodo = todo.setChecked(todoCheckReqDto);
         return updateTodo.getId();
     }

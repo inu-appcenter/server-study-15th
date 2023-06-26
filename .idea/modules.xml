@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Appcenter-Springboot.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Appcenter-Springboot.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Appcenter-Springboot.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Appcenter-Springboot.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.appcenter.Appcenter-Springboot.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.appcenter.Appcenter-Springboot.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/server-study-15th.iml" filepath="$PROJECT_DIR$/.idea/server-study-15th.iml" />
     </modules>
