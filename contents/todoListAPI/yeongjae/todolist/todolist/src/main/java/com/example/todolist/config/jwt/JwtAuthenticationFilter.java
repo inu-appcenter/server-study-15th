@@ -3,8 +3,8 @@ package com.example.todolist.config.jwt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.example.todolist.config.auth.PrincipalDetails;
+import com.example.todolist.util.CustomResponseUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,16 +20,20 @@ import java.io.IOException;
 import java.util.Date;
 
 import static com.example.todolist.dto.userdto.UserRequestDto.*;
+import static com.example.todolist.dto.userdto.UserResponseDto.*;
 
-@RequiredArgsConstructor
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
 
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
+        setFilterProcessesUrl("/users/login");
+    }
+
+
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        System.out.println("JwtAuthenticationFilter : 진입");
-
         ObjectMapper om = new ObjectMapper();
         UserLoginReqDto userLoginReqDto = new UserLoginReqDto();
 
@@ -39,19 +43,14 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             e.printStackTrace();
         }
 
-        System.out.println("JwtAuthenticationFilter : "+ userLoginReqDto);
-
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(
                         userLoginReqDto.getName(),
                         userLoginReqDto.getPassword());
 
-        System.out.println("JwtAuthenticationFilter : 토큰생성완료");
-
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
         PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
-        System.out.println("Authentication : "+principalDetails.getUser().getName());
         return authentication;
     }
 
@@ -64,8 +63,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withExpiresAt(new Date(System.currentTimeMillis()+(60000 * 10)))
                 .withClaim("id", principalDetails.getUser().getId())
                 .withClaim("username", principalDetails.getUser().getName())
-                .sign(Algorithm.HMAC512("lee"));
+                .sign(Algorithm.HMAC512("cos"));
 
-        response.addHeader("Authorization", "Bearer " + jwtToken);
+        UserLoginRespDto userLoginRespDto = new UserLoginRespDto(principalDetails.getUsername(), jwtToken);
+
+        response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + jwtToken);
+        CustomResponseUtil.success(response, userLoginRespDto);
     }
 }

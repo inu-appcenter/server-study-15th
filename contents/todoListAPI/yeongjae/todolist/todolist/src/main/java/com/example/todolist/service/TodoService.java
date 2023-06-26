@@ -1,61 +1,83 @@
 package com.example.todolist.service;
 
 import com.example.todolist.domain.Todo;
+import com.example.todolist.domain.user.User;
+import com.example.todolist.exception.CustomException;
+import com.example.todolist.exception.ErrorCode;
 import com.example.todolist.exception.todo.TodoNotFoundException;
+import com.example.todolist.exception.user.UserNotFoundException;
 import com.example.todolist.repository.TodoRepository;
+import com.example.todolist.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import static com.example.todolist.dto.taskdto.TodoRequestDto.*;
 import static com.example.todolist.dto.taskdto.TodoResponseDto.*;
+import static com.example.todolist.exception.ErrorCode.*;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class TodoService {
 
     private final TodoRepository todoRepository;
+    private final UserRepository userRepository;
 
     @Transactional
-    public TaskSaveRespDto writeTodo(TodoSaveReqDto TodoSaveReqDto) {
-        Todo todo = todoRepository.save(TodoSaveReqDto.changeEntity(TodoSaveReqDto));
-        return new TaskSaveRespDto(todo);
+    public TodoSaveRespDto writeTodo(TodoSaveReqDto TodoSaveReqDto, Long id) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new CustomException(USER_NOT_FOUND_EXCEPTION));
+        Todo todo = todoRepository.save(TodoSaveReqDto.changeEntity(TodoSaveReqDto,user));
+
+        @Valid final TodoSaveRespDto todoSaveRespDto = new TodoSaveRespDto(todo);
+
+        return todoSaveRespDto;
     }
 
     @Transactional
-    public TaskDeleteRespDto deleteTodo(Long id) {
-        Optional<Todo> optionalTask = todoRepository.findById(id);
+    public TodoDeleteRespDto deleteTodo(Long id, Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new CustomException(USER_NOT_FOUND_EXCEPTION));
+        Todo todo = todoRepository.findById(id).orElseThrow(() -> new CustomException(TODO_NOT_FOUND_EXCEPTION));
 
-        if(optionalTask.isEmpty()) {
-            throw new TodoNotFoundException();
-        }
-        Todo todo = optionalTask.get();
+        checkUserHaveTodo(user, todo);
 
         todoRepository.deleteById(id);
 
-        return new TaskDeleteRespDto(todo);
+        @Valid final TodoDeleteRespDto todoDeleteRespDto = new TodoDeleteRespDto(todo);
+
+        return todoDeleteRespDto;
     }
 
     @Transactional
-    public TaskEditRespDto editTodo(Long id, TodoEditRequestDto todoEditRequestDto) {
-        Optional<Todo> optionalTask = todoRepository.findById(id);
+    public TodoEditRespDto editTodo(Long id, TodoEditRequestDto todoEditRequestDto, Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new CustomException(USER_NOT_FOUND_EXCEPTION));
+        Todo todo = todoRepository.findById(id).orElseThrow(() -> new CustomException(TODO_NOT_FOUND_EXCEPTION));
 
-            if (optionalTask.isPresent()) {
-                Todo todo = optionalTask.get();
+        checkUserHaveTodo(user, todo);
 
-                todo.setContents(todoEditRequestDto.getContents());
-                todo.setTitle(todoEditRequestDto.getTitle());
-                todo.setDeadline(parseDatetime(todoEditRequestDto.getDeadline()));
+        todo.setContents(todoEditRequestDto.getContents());
+        todo.setTitle(todoEditRequestDto.getTitle());
+        todo.setDeadline(parseDatetime(todoEditRequestDto.getDeadline()));
 
-            return new TaskEditRespDto(todo);
-        } else {
-            throw new TodoNotFoundException();
-        }
+        @Valid final TodoEditRespDto todoEditRespDto = new TodoEditRespDto(todo);
+
+        return todoEditRespDto;
     }
 
     @Transactional(readOnly = true)
-    public List<Todo> findAll() {
-        return todoRepository.findAll();
+    public List<Todo> findTodoById(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new CustomException(USER_NOT_FOUND_EXCEPTION));
+
+        return todoRepository.findByUser_id(userId);
+    }
+
+    public void checkUserHaveTodo(User user, Todo todo) {
+        if(todo.getUser() != user) {
+            throw new UserNotFoundException();
+        }
     }
 }
