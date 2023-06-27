@@ -3,9 +3,6 @@ package com.example.todolist.service;
 import com.example.todolist.domain.Todo;
 import com.example.todolist.domain.user.User;
 import com.example.todolist.exception.CustomException;
-import com.example.todolist.exception.ErrorCode;
-import com.example.todolist.exception.todo.TodoNotFoundException;
-import com.example.todolist.exception.user.UserNotFoundException;
 import com.example.todolist.repository.TodoRepository;
 import com.example.todolist.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 import static com.example.todolist.dto.taskdto.TodoRequestDto.*;
 import static com.example.todolist.dto.taskdto.TodoResponseDto.*;
 import static com.example.todolist.exception.ErrorCode.*;
@@ -30,7 +26,7 @@ public class TodoService {
 
     @Transactional
     public TodoSaveRespDto writeTodo(TodoSaveReqDto TodoSaveReqDto, Long id) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new CustomException(USER_NOT_FOUND_EXCEPTION));
+        User user = userRepository.findById(id).orElseThrow(() -> new CustomException(USER_NOT_FOUND_EXCEPTION));
         Todo todo = todoRepository.save(TodoSaveReqDto.changeEntity(TodoSaveReqDto,user));
 
         @Valid final TodoSaveRespDto todoSaveRespDto = new TodoSaveRespDto(todo);
@@ -77,7 +73,7 @@ public class TodoService {
 
     public void checkUserHaveTodo(User user, Todo todo) {
         if(todo.getUser() != user) {
-            throw new UserNotFoundException();
+            throw new CustomException(USER_NOT_FOUND_EXCEPTION);
         }
     }
 }

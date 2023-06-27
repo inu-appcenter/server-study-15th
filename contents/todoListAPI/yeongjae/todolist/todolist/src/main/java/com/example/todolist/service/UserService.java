@@ -3,7 +3,6 @@ package com.example.todolist.service;
 import com.example.todolist.domain.user.User;
 import com.example.todolist.dto.userdto.UserResponseDto.UserJoinRespDto;
 import com.example.todolist.exception.CustomException;
-import com.example.todolist.exception.user.UserNotFoundException;
 import com.example.todolist.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -79,7 +78,7 @@ public class UserService {
 
     public void checkIdCorrect(Long parameterId, Long userId) {
         if(!parameterId.equals(userId)) {
-            throw new UserNotFoundException();
+            throw new CustomException(USER_NOT_FOUND_EXCEPTION);
         }
     }
 }

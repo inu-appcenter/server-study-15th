@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,8 +28,8 @@ public class TodoController {
     private final TodoService todoService;
 
     @GetMapping("")
-    @Operation(summary = "Todo 조회", description = "Todo 리스트를 조회합니다")
-    @ApiResponse(responseCode = "200", description = "Todo 조회 성공")
+    @Operation(summary = "Todo 조회", description = "Authorize 에 토큰값을 삽입하고 실행해주세요")
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "Todo 조회 성공")})
     public ResponseEntity<?> findTodo(UserId userId) {
         List<Todo> todoList = todoService.findTodoById(userId.getId());
         TodoListRespDto todoListRespDto = new TodoListRespDto(todoList);
@@ -36,15 +37,16 @@ public class TodoController {
     }
 
     @PostMapping("")
-    @Operation(summary = "Todo 작성", description = "Todo 작성 api 입니다")
-    @ApiResponse(responseCode = "201", description = "Todo 작성 성공" , content = @Content(schema = @Schema(implementation = TodoSaveRespDto.class)))
+    @Operation(summary = "Todo 작성", description = "바디에 {title, contents, deadLine, isCompleted} 를 json 형식으로 보내주시고" +
+            " Authorize 에 토큰값을 삽입시켜 주시면됩니다")
+    @ApiResponses({@ApiResponse(responseCode = "201", description = "Todo 작성 성공")})
     public ResponseEntity<?> writeTodo(@RequestBody @Valid final TodoSaveReqDto TodoSaveReqDto, UserId userId) {
         TodoSaveRespDto todoSaveRespDto = todoService.writeTodo(TodoSaveReqDto, userId.getId());
         return new ResponseEntity<>(new ResponseDto<>(1, "Todo 작성 성공", todoSaveRespDto), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Todo 삭제", description = "Todo 삭제 api 입니다")
+    @Operation(summary = "Todo 삭제", description = "파라미터에 todoId를 보내주세요")
     @ApiResponse(responseCode = "200", description = "Todo 삭제 성공")
     public ResponseEntity<?> deleteTodo(@PathVariable Long id, UserId userId) {
         TodoDeleteRespDto todoDeleteRespDto = todoService.deleteTodo(id, userId.getId());
@@ -52,7 +54,8 @@ public class TodoController {
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Todo 수정", description = "Todo 수정 api 입니다")
+    @Operation(summary = "Todo 수정", description = "파라미터에 todoId, " +
+            "바디에 {title, contents, deadLine, isCompleted} 을 json 형식으로 보내주시면 됩니다.")
     @ApiResponse(responseCode = "200", description = "Todo 수정 성공")
     public ResponseEntity<?> editTodo(@PathVariable Long id, @RequestBody @Valid final TodoEditRequestDto todoEditRequestDto, UserId userId) {
         TodoEditRespDto todoEditRespDto = todoService.editTodo(id, todoEditRequestDto, userId.getId());
