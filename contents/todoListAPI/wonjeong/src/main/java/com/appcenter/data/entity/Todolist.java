@@ -1,16 +1,16 @@
 package com.appcenter.data.entity;
 
 import com.appcenter.data.dto.request.TodolistRequestDTO;
+import com.appcenter.data.dto.response.TodolistResponseDTO;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 
 @Getter
 @Entity
 @NoArgsConstructor
-public class Todolist {
+public class Todolist extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -44,12 +44,19 @@ public class Todolist {
                 .build();
     }
 
-    public Todolist updateContent(Long id, Member member, TodolistRequestDTO todolistRequestDTO) {
-        return Todolist.builder()
-                .id(id)
-                .member(member)
-                .title(todolistRequestDTO.getTitle())
-                .contents(todolistRequestDTO.getContents())
+    public void updateContent(TodolistRequestDTO todolistRequestDTO) {
+        this.title = todolistRequestDTO.getTitle();
+        this.contents = todolistRequestDTO.getContents();
+    }
+
+    public TodolistResponseDTO toTodolistResponseDTO(Todolist todolist) {
+        return TodolistResponseDTO.builder()
+                .member_id(todolist.getMember().getId())
+                .id(todolist.getId())
+                .title(todolist.getTitle())
+                .contents(todolist.getContents())
+                .createDate(todolist.getCreatedDate())
+                .lastModifiedDate(todolist.getLastModifiedDate())
                 .build();
     }
 

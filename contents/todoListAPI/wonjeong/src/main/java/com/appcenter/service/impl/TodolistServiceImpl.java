@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class TodolistServiceImpl implements TodolistService {
 
@@ -41,10 +44,20 @@ public class TodolistServiceImpl implements TodolistService {
     }
 
     @Override
+    public List<TodolistResponseDTO> getContentsList(Long member_id) throws Exception {
+        memberRepository.findById(member_id).orElseThrow(() -> new NotFoundException("존재하지 않는 사용자 입니다."));
+        List<Todolist> contentsList = todolistRepository.findByMember_id(member_id);
+        return contentsList.stream().map(contents -> contents.toTodolistResponseDTO(contents)).collect(Collectors.toList());
+    }
+
+    @Override
     public TodolistResponseDTO savedContent(Long id, TodolistRequestDTO todolistRequestDTO) throws Exception {
         Todolist todolist = new Todolist();
+
+        // 지금 요청한 멤버가 존재하는 멤버인지 확인
         Member findMember = memberRepository.findById(id).orElseThrow(() -> new NotFoundException(NOT_FOUND_MEMBER));
 
+        //
         Todolist savedContent = todolistRepository.save(todolist.createContent(findMember, todolistRequestDTO));
 
         return new TodolistResponseDTO().createTodolistResponse(savedContent);
@@ -52,11 +65,13 @@ public class TodolistServiceImpl implements TodolistService {
 
     @Override
     public TodolistResponseDTO updateContent(Long id, TodolistRequestDTO todolistRequestDTO) throws Exception {
+        // id로 존재하는 콘텐츠인지 확인
         Todolist foundContent = todolistRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(NOT_FOUND_CONTENT));
 
-        Todolist updateContent = todolistRepository.save(foundContent.updateContent(id, foundContent.getMember(),todolistRequestDTO));
+        foundContent.updateContent(todolistRequestDTO);
 
+        Todolist updateContent = todolistRepository.save(foundContent);
         return new TodolistResponseDTO().updateTodolistResponse(updateContent);
     }
 
