@@ -10,6 +10,6 @@ import lombok.Getter;
 @Builder
 public class MemberPageRespDto {
     private String name;
-    private String nickName;
+    private String userName;
     private String email;
 }

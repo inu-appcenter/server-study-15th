@@ -69,10 +69,14 @@ public class Member extends BaseTimeEntity implements UserDetails {
                 .build();
     }
 
+    public void updateMember(UpdateMemberReqDto updateMemberReqDto) {
+        this.email = updateMemberReqDto.getEmail();
+    }
+
     public MemberPageRespDto toMemberPageRespDto(Member member) {
         return MemberPageRespDto.builder()
                 .name(member.getName())
-                .nickName(member.getNickName())
+                .userName(member.getUsername())
                 .email(member.getEmail())
                 .build();
     }
