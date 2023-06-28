@@ -34,11 +34,12 @@ public class TodoService {
     }
 
     @Transactional
-    public void update(Long id, TodoReqDto todoReqDto) {
-        //
+    public void update(Long memberId, Long id, TodoReqDto todoReqDto) {
         Todo todo = todoRepository.findById(id)
-                .orElseThrow(() -> new NotFoundTodoException(NOT_FOUND_TODO_MESSAGE));
-        Todo creatTodo = todo.updateTodo(todoReqDto);
+                .orElseThrow(() -> new NotFoundException(NOT_FOUND_TODO_MESSAGE));
+        isCheckMember(memberId, todo);  // 해당 회원의 todo가 맞는지 검사
+        todo.updateTodo(todoReqDto);
+        log.info(SUCCESS_TODO_UPDATE_MESSAGE);
     }
 
     public Page<TodoPageRespDto> findTodos(Long memberId, int page, int size) {
@@ -61,9 +62,15 @@ public class TodoService {
     }
 
     @Transactional
-    public void updateChecked(Long id, TodoCheckReqDto todoCheckReqDto) {
-        Todo todo = todoRepository.findById(id).orElseThrow(()
-                -> new NotFoundTodoException(NOT_FOUND_TODO_MESSAGE));
-        Todo updateTodo = todo.setChecked(todoCheckReqDto);
+    public void updateChecked(Long memberId, Long id, TodoCheckReqDto todoCheckReqDto) {
+        Todo todo = todoRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(NOT_FOUND_TODO_MESSAGE));
+        isCheckMember(memberId, todo);
+        todo.setChecked(todoCheckReqDto);
+    }
+
+    public void isCheckMember(Long userId, Todo todo) {
+        if (!todo.isCheckMember(userId))
+            throw new BadRequestException(BAD_REQUEST_MEMBER_MESSAGE);
     }
 }

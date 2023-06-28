@@ -27,8 +27,8 @@ public class TodoController {
 
     @ApiOperation(value = "할 일 등록", notes = "멤버id, 등록할 할일 정보 입력")
     @PostMapping()
-    public ResponseEntity<Message> create(Long memberId, @RequestBody TodoReqDto todoReqDto) {
-        todoService.save(memberId, todoReqDto);
+    public ResponseEntity<Message> create(@RequestBody TodoReqDto todoReqDto) {
+        todoService.save(getMember().getId(), todoReqDto);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new Message(SUCCESS_TODO_CREATE_MESSAGE));
     }
