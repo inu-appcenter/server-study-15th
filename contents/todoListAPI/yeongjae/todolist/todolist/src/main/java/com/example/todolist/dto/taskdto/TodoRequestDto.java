@@ -60,6 +60,13 @@ public class TodoRequestDto {
         private boolean isCompleted;
     }
 
+    @Getter
+    @Setter
+    public static class TodoFindRequestDto {
+        @NotEmpty
+        private String title;
+    }
+
     public static LocalDateTime parseDatetime(String deadline) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return LocalDate.parse(deadline, dateTimeFormatter).atStartOfDay();

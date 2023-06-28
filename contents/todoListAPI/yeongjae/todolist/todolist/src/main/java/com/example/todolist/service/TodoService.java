@@ -71,9 +71,18 @@ public class TodoService {
         return todoRepository.findByUser_id(userId);
     }
 
+    @Transactional(readOnly = true)
+    public List<Todo> findTodoByTitle(String title, Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new CustomException(USER_NOT_FOUND_EXCEPTION));
+
+        return todoRepository.findByTitle(title, userId);
+    }
+
     public void checkUserHaveTodo(User user, Todo todo) {
         if(todo.getUser() != user) {
             throw new CustomException(USER_NOT_FOUND_EXCEPTION);
         }
     }
+
+
 }

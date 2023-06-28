@@ -36,6 +36,14 @@ public class TodoController {
         return new ResponseEntity<>(new ResponseDto<>(1, "Todo 조회 성공", todoListRespDto),HttpStatus.OK);
     }
 
+    @GetMapping("/title")
+    @Operation(summary = "제목으로 Todo 조회", description = "Authorize 에 토큰값을 삽입하고 바디에 {title} 을 json 형식으로 보내주세요")
+    public ResponseEntity<?> findTodoByTitle(TodoFindRequestDto todoFindRequestDto, UserId userId) {
+        List<Todo> todoList = todoService.findTodoByTitle(todoFindRequestDto.getTitle(), userId.getId());
+        TodoListRespDto todoListRespDto = new TodoListRespDto(todoList);
+        return new ResponseEntity<>(new ResponseDto<>(1, "Todo 제목으로 조회 성공", todoListRespDto), HttpStatus.OK);
+    }
+
     @PostMapping("")
     @Operation(summary = "Todo 작성", description = "바디에 {title, contents, deadLine, isCompleted} 를 json 형식으로 보내주시고" +
             " Authorize 에 토큰값을 삽입시켜 주시면됩니다")

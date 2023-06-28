@@ -59,10 +59,19 @@ public class UserController {
 
     @GetMapping("/all")
     @Operation(summary = "전체 유저 정보 조회", description = "ADMIN 권한만 가능합니다")
-    @ApiResponses({@ApiResponse(responseCode = "200", description = "유저 삭제 성공"),
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "전체 유저 정보 조회 성공"),
             @ApiResponse(responseCode = "404", description = "해당 식별자를 가진 회원을 찾을 수 없습니다.")})
-    @ApiResponse(responseCode = "200", description = "전체 유저 정보 조회 성공")
     public ResponseEntity<?> findAllUser() {
         return new ResponseEntity<>(new ResponseDto<>(1, "전체 유저 정보 반환", userService.findAll()), HttpStatus.OK);
     }
+
+    @PostMapping("/login")
+    @Operation(summary = "로그인", description = "바디에 {username, password} 을 json 형식으로 보내주세요")
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "로그인 성공"),
+            @ApiResponse(responseCode = "404", description = "아이디와 비밀번호가 맞지 않습니다.")})
+    public ResponseEntity<?> login(@RequestBody @Valid final UserLoginReqDto userLoginReqDto) {
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
 }
