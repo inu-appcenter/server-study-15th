@@ -16,6 +16,7 @@ import java.util.Optional;
 
 import static com.example.todolist.dto.userdto.UserRequestDto.*;
 import static com.example.todolist.dto.userdto.UserResponseDto.*;
+import static com.example.todolist.exception.ErrorCode.SAME_USER_EXCEPTION;
 import static com.example.todolist.exception.ErrorCode.USER_NOT_FOUND_EXCEPTION;
 
 @Service
@@ -26,6 +27,11 @@ public class UserService {
 
     @Transactional
     public UserJoinRespDto join(UserJoinReqDto userJoinReqDto) {
+        Optional<User> userOp = userRepository.findByUserName(userJoinReqDto.getName());
+        if(userOp.isPresent()) {
+            throw new CustomException(SAME_USER_EXCEPTION);
+        }
+
         User user = userRepository.save(userJoinReqDto.changeEntity(bCryptPasswordEncoder));
         @Valid final UserJoinRespDto userJoinRespDto = new UserJoinRespDto(user);
 

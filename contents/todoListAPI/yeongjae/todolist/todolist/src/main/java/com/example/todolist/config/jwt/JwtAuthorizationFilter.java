@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
 // 시큐리티가 filter 가지고있는데 그 필터중에 BasicAuthenticationFilter 라는 것이 있다.
 // 권한이나 인증이 필요한 특정 주소를 요청했을때 위 필터를 무조건 타게 되어있음
@@ -49,11 +50,12 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
                 JWT.require(Algorithm.HMAC512(JwtProperties.SECRET)).build().verify(jwtToken).getClaim("username").asString();
 
         if(username != null) {
-            User userEntity = userRepository.findByName(username);
+            Optional<User> userEntity = userRepository.findByUserName(username);
+            User user = userEntity.get();
 
             // 인증은 토큰 검증시 끝. 인증을 하기 위해서가 아닌 스프링 시큐리티가 수행하는 권한처리를 위해
             // 아래와 같이 토큰을 만들어서 Authentication 객체를 강제로 만들고 그걸 세션에 저장
-            PrincipalDetails principalDetails = new PrincipalDetails(userEntity);
+            PrincipalDetails principalDetails = new PrincipalDetails(user);
             Authentication authentication =
                     new UsernamePasswordAuthenticationToken(principalDetails, null, principalDetails.getAuthorities());
 
