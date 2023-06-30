@@ -14,19 +14,17 @@ public class TodoReqDto {
 
     private LocalDateTime deadline;
 
-    private boolean checked;
-
     @Builder
-    public TodoReqDto(String content, LocalDateTime deadline, boolean checked) {
+    public TodoReqDto(String content, LocalDateTime deadline) {
         this.content = content;
         this.deadline = deadline;
-        this.checked = checked;
     }
 
     public Todo toEntity(Member member, TodoReqDto todoReqDto) {
         return Todo.builder()
                 .member(member)
                 .content(todoReqDto.getContent())
+                .deadline(todoReqDto.getDeadline())
                 .checked(false)
                 .build();
     }

@@ -37,13 +37,14 @@ public class Todo {
         this.checked = checked;
     }
 
-    public Todo updateTodo(TodoReqDto todoReqDto) {
-        return Todo.builder()
-                .member(this.member)
-                .content(todoReqDto.getContent())
-                .deadline(todoReqDto.getDeadline())
-                .checked(todoReqDto.isChecked())
-                .build();
+    public void updateTodo(TodoReqDto todoReqDto) {
+        this.content = todoReqDto.getContent();
+        this.deadline = todoReqDto.getDeadline();
+    }
+
+    public boolean isCheckMember(Long newId) {
+        if (newId == null) return false;
+        return newId.equals(this.member.getId());
     }
 
     /**
@@ -58,13 +59,8 @@ public class Todo {
         member.getTodos().add(this);
     }
 
-    public Todo setChecked(TodoCheckReqDto todoCheckReqDto) {
-        return Todo.builder()
-                .member(this.member)
-                .content(this.content)
-                .deadline(this.deadline)
-                .checked(todoCheckReqDto.isChecked())
-                .build();
+    public void setChecked(TodoCheckReqDto todoCheckReqDto) {
+        this.checked = todoCheckReqDto.isChecked();
     }
 
     public TodoPageRespDto toTodoPageRespDto(Todo todo) {
