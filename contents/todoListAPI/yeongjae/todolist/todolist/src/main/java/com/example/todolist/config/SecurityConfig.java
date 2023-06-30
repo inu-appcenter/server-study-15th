@@ -37,7 +37,8 @@ public class SecurityConfig {
                     .apply(new MyCustomDsl())
                     .and()
                     .authorizeRequests()
-                    .antMatchers("/users/join", "/users/login").permitAll()
+                    .antMatchers("/users/login", "/users/join").permitAll()
+                    .antMatchers("/users/all").hasRole(UserEnum.ADMIN.name())
                     .antMatchers("/todos/**", "/users/**").hasAnyRole(UserEnum.USER.name(), UserEnum.ADMIN.name())
                     .anyRequest().permitAll()
                     .and().build();

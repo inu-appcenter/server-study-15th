@@ -2,13 +2,11 @@ package com.example.todolist.dto.taskdto;
 
 import com.example.todolist.domain.Todo;
 import com.example.todolist.domain.user.User;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -30,11 +28,10 @@ public class TodoRequestDto {
         private String title;
 
         private String contents;
-        @NotEmpty
-        @FutureOrPresent
+
+        @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "잘못된 기한일 형식입니다.")
         private String deadline;
 
-        @NotEmpty
         private boolean isCompleted;
 
         public Todo changeEntity(TodoSaveReqDto TodoSaveReqDto, User user) {
@@ -55,17 +52,19 @@ public class TodoRequestDto {
 
         @NotEmpty
         @Size(min = MIN_TITLE_VALUE, max = MAX_TITLE_VALUE)
-        @Schema(description = "Todo 제목")
         private String title;
-        @Schema(description = "Todo 내용")
         private String contents;
-        @Schema(description = "Todo 기한")
-        @NotEmpty
-        @FutureOrPresent
+
+        @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "잘못된 기한일 형식입니다.")
         private String deadline;
-        @Schema(description = "Todo 실행 여부")
-        @NotEmpty
         private boolean isCompleted;
+    }
+
+    @Getter
+    @Setter
+    public static class TodoFindRequestDto {
+        @NotEmpty
+        private String title;
     }
 
     public static LocalDateTime parseDatetime(String deadline) {

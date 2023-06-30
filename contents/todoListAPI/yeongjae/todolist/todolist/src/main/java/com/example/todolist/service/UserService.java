@@ -3,7 +3,6 @@ package com.example.todolist.service;
 import com.example.todolist.domain.user.User;
 import com.example.todolist.dto.userdto.UserResponseDto.UserJoinRespDto;
 import com.example.todolist.exception.CustomException;
-import com.example.todolist.exception.user.UserNotFoundException;
 import com.example.todolist.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,6 +16,7 @@ import java.util.Optional;
 
 import static com.example.todolist.dto.userdto.UserRequestDto.*;
 import static com.example.todolist.dto.userdto.UserResponseDto.*;
+import static com.example.todolist.exception.ErrorCode.SAME_USER_EXCEPTION;
 import static com.example.todolist.exception.ErrorCode.USER_NOT_FOUND_EXCEPTION;
 
 @Service
@@ -27,6 +27,11 @@ public class UserService {
 
     @Transactional
     public UserJoinRespDto join(UserJoinReqDto userJoinReqDto) {
+        Optional<User> userOp = userRepository.findByUserName(userJoinReqDto.getName());
+        if(userOp.isPresent()) {
+            throw new CustomException(SAME_USER_EXCEPTION);
+        }
+
         User user = userRepository.save(userJoinReqDto.changeEntity(bCryptPasswordEncoder));
         @Valid final UserJoinRespDto userJoinRespDto = new UserJoinRespDto(user);
 
@@ -79,7 +84,7 @@ public class UserService {
 
     public void checkIdCorrect(Long parameterId, Long userId) {
         if(!parameterId.equals(userId)) {
-            throw new UserNotFoundException();
+            throw new CustomException(USER_NOT_FOUND_EXCEPTION);
         }
     }
 }

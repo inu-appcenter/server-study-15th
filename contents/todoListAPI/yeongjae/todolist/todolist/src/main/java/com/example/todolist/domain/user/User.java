@@ -1,10 +1,7 @@
 package com.example.todolist.domain.user;
 
 import com.example.todolist.domain.Todo;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;

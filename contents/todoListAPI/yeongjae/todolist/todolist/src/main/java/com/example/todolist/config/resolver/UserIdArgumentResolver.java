@@ -5,6 +5,8 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.example.todolist.config.jwt.JwtProperties;
 import com.example.todolist.domain.user.User;
+import com.example.todolist.exception.CustomException;
+import com.example.todolist.exception.ErrorCode;
 import com.example.todolist.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +19,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 
 import static com.example.todolist.dto.userdto.UserRequestDto.*;
+import static com.example.todolist.exception.ErrorCode.USER_NOT_FOUND_EXCEPTION;
 
 @Slf4j
 @Component
@@ -35,7 +38,7 @@ public class UserIdArgumentResolver implements HandlerMethodArgumentResolver {
         try {
             String jwtToken = webRequest.getHeader(JwtProperties.HEADER_STRING).replace(JwtProperties.TOKEN_PREFIX, "");
             String username = JWT.require(Algorithm.HMAC512(JwtProperties.SECRET)).build().verify(jwtToken).getClaim("username").asString();
-            User user = userRepository.findByName(username);
+            User user = userRepository.findByUserName(username).orElseThrow(() -> new CustomException(USER_NOT_FOUND_EXCEPTION));
 
             UserId userId = new UserId(user.getId());
 
