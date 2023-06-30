@@ -3,7 +3,7 @@ package com.example.todolist.controller;
 import com.example.todolist.domain.Message;
 import com.example.todolist.dto.LoginReqDto;
 import com.example.todolist.dto.SignupReqDto;
-import com.example.todolist.service.SignService;
+import com.example.todolist.service.LoginService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,14 +23,14 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class LoginController {
 
-    private final SignService signService;
+    private final LoginService loginService;
     private static final String SUCCESS_MEMBER_LOGIN_MESSAGE = "로그인 성공";
     private static final String SUCCESS_MEMBER_CREATE_MESSAGE = "회원가입을 성공했습니다.";
 
     @ApiOperation(value = "로그인")
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginReqDto loginReqDto) {
-        String token = signService.login(loginReqDto);
+        String token = loginService.login(loginReqDto);
         log.info(SUCCESS_MEMBER_LOGIN_MESSAGE);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(token);
@@ -39,7 +39,7 @@ public class LoginController {
     @ApiOperation(value = "회원 가입")
     @PostMapping("/signup")
     public ResponseEntity<Message> join(@Valid @RequestBody SignupReqDto signupReqDto) {
-        signService.join(signupReqDto);
+        loginService.join(signupReqDto);
         log.info(SUCCESS_MEMBER_CREATE_MESSAGE);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new Message(SUCCESS_MEMBER_CREATE_MESSAGE));
