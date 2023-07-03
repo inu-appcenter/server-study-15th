@@ -32,8 +32,8 @@
 ---
 
 ## 📘 스터디 진행 내용
-- [개념 정리](contents/concepts/index.md)
-- TodoList API
+- ### [개념 정리](contents/concepts/index.md)
+- ### TodoList API
 	- [구준형](contents/todoListAPI/junhyung/README.md)
 	- [김동우](contents/todoListAPI/dongwoo/README.md)
 	- [김원정](contents/todoListAPI/wonjeong/README.md)
@@ -237,9 +237,20 @@
 ---
 
 ### Validation & Exception Handling
-- ##### 7주차
+- ##### 7주차 2023-06-02 (금) - 2023-06-22 (목)
 
 - 진행 내용
 	- 유효성 검사 로직 추가
 	- 예외처리 구현
 	- 각자 구현한 내용에 대한 설명 및 테스트 진행
+
+---
+
+### Java의 정석 6장 객체지향 프로그래밍 I
+- ##### 8주차 2023-06-30 (금) - 2023-07-06 (목)
+
+- 발표 내용
+	- JAVA의 정석 6장 발표
+   	- Spring boot 관련 발표
+
+---
