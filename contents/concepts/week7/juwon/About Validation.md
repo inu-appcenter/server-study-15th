@@ -2,80 +2,80 @@
 
 ## Validation?
 
-¾ÖÇÃ¸®ÄÉÀÌ¼ÇÀÇ ºñÁî´Ï½º ·ÎÁ÷ÀÌ ¿Ã¹Ù¸£°Ô µ¿ÀÛÇÏ±â À§ÇØ µ¥ÀÌÅÍ¸¦ »çÀü¿¡ °ËÁõÇÏ´Â ÀÛ¾÷
+ì• í”Œë¦¬ì¼€ì´ì…˜ì˜ ë¹„ì¦ˆë‹ˆìŠ¤ ë¡œì§ì´ ì˜¬ë°”ë¥´ê²Œ ë™ì‘í•˜ê¸° ìœ„í•´ ë°ì´í„°ë¥¼ ì‚¬ì „ì— ê²€ì¦í•˜ëŠ” ì‘ì—…
 
 ## Validation in Spring boot
 
-ÀÌÀü¿¡´Â Spring bootÀÇ ÀÇÁ¸¼º Áß spring-boot-starter-web¿¡ Æ÷ÇÔ  
-Spring boot 2.3 ÀÌÈÄ º°µµÀÇ ¶óÀÌºê·¯¸® (spring-boot-starter-validation) Á¦°ø
+ì´ì „ì—ëŠ” Spring bootì˜ ì˜ì¡´ì„± ì¤‘ spring-boot-starter-webì— í¬í•¨  
+Spring boot 2.3 ì´í›„ ë³„ë„ì˜ ë¼ì´ë¸ŒëŸ¬ë¦¬ (spring-boot-starter-validation) ì œê³µ
 
-Spring boot¿¡¼­ÀÇ À¯È¿¼º °Ë»ç´Â °¢ °èÃşÀ¸·Î µ¥ÀÌÅÍ°¡ ³Ñ¾î¿À´Â ½ÃÁ¡¿¡ ½Ç½Ã  
-°èÃş °£ µ¥ÀÌÅÍ Àü¼ÛÀ» ÇÏ´Â °´Ã¼ = DTO(Data Transfer Object) °´Ã¼ÀÌ¹Ç·Î, DTO °´Ã¼¿¡¼­ ¼öÇàÇÏ´Â °ÍÀÌ ÀÏ¹İÀû
+Spring bootì—ì„œì˜ ìœ íš¨ì„± ê²€ì‚¬ëŠ” ê° ê³„ì¸µìœ¼ë¡œ ë°ì´í„°ê°€ ë„˜ì–´ì˜¤ëŠ” ì‹œì ì— ì‹¤ì‹œ  
+ê³„ì¸µ ê°„ ë°ì´í„° ì „ì†¡ì„ í•˜ëŠ” ê°ì²´ = DTO(Data Transfer Object) ê°ì²´ì´ë¯€ë¡œ, DTO ê°ì²´ì—ì„œ ìˆ˜í–‰í•˜ëŠ” ê²ƒì´ ì¼ë°˜ì 
 
-![µµ¸ŞÀÎ ¸ğµ¨¿¡ À¯È¿¼º °Ë»ç Àû¿ë](./img/validation_fig1.png)
+![ë„ë©”ì¸ ëª¨ë¸ì— ìœ íš¨ì„± ê²€ì‚¬ ì ìš©](./img/validation_fig1.png)
 
 ### Validation Annotations
 
-- ¹®ÀÚ¿­ °ËÁõ  
-@Null : null °ª¸¸ Çã¿ë  
-@NotNull : nullÀ» Çã¿ëÇÏÁö ¾ÊÀ½ ("", " "´Â Çã¿ë)  
-@NotEmpty : null, ""¸¦ Çã¿ëÇÏÁö ¾ÊÀ½ (" "´Â Çã¿ë)  
-@NotBlank : null, "", " " ¸ğµÎ Çã¿ëÇÏÁö ¾ÊÀ½  
+- ë¬¸ìì—´ ê²€ì¦  
+@Null : null ê°’ë§Œ í—ˆìš©  
+@NotNull : nullì„ í—ˆìš©í•˜ì§€ ì•ŠìŒ ("", " "ëŠ” í—ˆìš©)  
+@NotEmpty : null, ""ë¥¼ í—ˆìš©í•˜ì§€ ì•ŠìŒ (" "ëŠ” í—ˆìš©)  
+@NotBlank : null, "", " " ëª¨ë‘ í—ˆìš©í•˜ì§€ ì•ŠìŒ  
 
-- ÃÖ´ñ°ª/ÃÖ¼Ú°ª °ËÁõ (BigDecimal, BigInteger, int, long)  
-@DemicalMin(value = "$numberString") : numberStringº¸´Ù Å« °ª Çã¿ë  
-@DemicalMax(value = "$numberString") : numberStringº¸´Ù ÀÛÀº °ª Çã¿ë  
-@Min(value = "$number") : $number ÀÌ»óÀÇ °ª Çã¿ë  
-@Max(value = "$number") : $number ÀÌÇÏ °ª Çã¿ë  
+- ìµœëŒ“ê°’/ìµœì†Ÿê°’ ê²€ì¦ (BigDecimal, BigInteger, int, long)  
+@DemicalMin(value = "$numberString") : numberStringë³´ë‹¤ í° ê°’ í—ˆìš©  
+@DemicalMax(value = "$numberString") : numberStringë³´ë‹¤ ì‘ì€ ê°’ í—ˆìš©  
+@Min(value = "$number") : $number ì´ìƒì˜ ê°’ í—ˆìš©  
+@Max(value = "$number") : $number ì´í•˜ ê°’ í—ˆìš©  
 
-- °ªÀÇ ¹üÀ§ °ËÁõ (BigDecimal, BigInteger, int, long)  
-@Positive : ¾ç¼ö Çã¿ë  
-@Negative : À½¼ö Çã¿ë  
-@PositiveOrZero : 0À» Æ÷ÇÔÇÑ ¾ç¼ö Çã¿ë  
-@NegativeOrZero : 0À» Æ÷ÇÔÇÑ À½¼ö Çã¿ë  
+- ê°’ì˜ ë²”ìœ„ ê²€ì¦ (BigDecimal, BigInteger, int, long)  
+@Positive : ì–‘ìˆ˜ í—ˆìš©  
+@Negative : ìŒìˆ˜ í—ˆìš©  
+@PositiveOrZero : 0ì„ í¬í•¨í•œ ì–‘ìˆ˜ í—ˆìš©  
+@NegativeOrZero : 0ì„ í¬í•¨í•œ ìŒìˆ˜ í—ˆìš©  
 
-- ½Ã°£¿¡ ´ëÇÑ °ËÁõ (Date, LocalDate, LocalDateTime)  
-@Future : ÇöÀçº¸´Ù ¹Ì·¡ÀÇ ³¯Â¥ Çã¿ë  
-@Past : ÇöÀçº¸´Ù °ú°ÅÀÇ ³¯Â¥ Çã¿ë  
-@FutureOrPresent : ÇöÀç¸¦ Æ÷ÇÔÇÑ ¹Ì·¡ÀÇ ³¯Â¥ Çã¿ë  
-@PastOrPresent : ÇöÀç¸¦ Æ÷ÇÔÇÑ °ú°ÅÀÇ ³¯Â¥ Çã¿ë  
+- ì‹œê°„ì— ëŒ€í•œ ê²€ì¦ (Date, LocalDate, LocalDateTime)  
+@Future : í˜„ì¬ë³´ë‹¤ ë¯¸ë˜ì˜ ë‚ ì§œ í—ˆìš©  
+@Past : í˜„ì¬ë³´ë‹¤ ê³¼ê±°ì˜ ë‚ ì§œ í—ˆìš©  
+@FutureOrPresent : í˜„ì¬ë¥¼ í¬í•¨í•œ ë¯¸ë˜ì˜ ë‚ ì§œ í—ˆìš©  
+@PastOrPresent : í˜„ì¬ë¥¼ í¬í•¨í•œ ê³¼ê±°ì˜ ë‚ ì§œ í—ˆìš©  
 
-- ÀÌ¸ŞÀÏ °ËÁõ  
-@Email : ÀÌ¸ŞÀÏ Çü½ÄÀ» °Ë»ç, ""´Â Çã¿ë 
+- ì´ë©”ì¼ ê²€ì¦  
+@Email : ì´ë©”ì¼ í˜•ì‹ì„ ê²€ì‚¬, ""ëŠ” í—ˆìš© 
 
-- ÀÚ¸´¼ö ¹üÀ§ °ËÁõ (BigDecimal, BigInteger, int, long)  
-@Digits(integer = $number1, fraction = $number2) : $number1ÀÇ Á¤¼ö ÀÚ¸´¼ö¿Í $number2ÀÇ ¼Ò¼ö ÀÚ¸´¼ö Çã¿ë  
+- ìë¦¿ìˆ˜ ë²”ìœ„ ê²€ì¦ (BigDecimal, BigInteger, int, long)  
+@Digits(integer = $number1, fraction = $number2) : $number1ì˜ ì •ìˆ˜ ìë¦¿ìˆ˜ì™€ $number2ì˜ ì†Œìˆ˜ ìë¦¿ìˆ˜ í—ˆìš©  
 
-- Boolean °ËÁõ  
-@AssertTrue : trueÀÎÁö Ã¼Å©, nullÀº Ã¼Å©ÇÏÁö ¾ÊÀ½  
-@AssertFalse : falseÀÎÁö Ã¼Å©, nullÀº Ã¼Å©ÇÏÁö ¾ÊÀ½  
+- Boolean ê²€ì¦  
+@AssertTrue : trueì¸ì§€ ì²´í¬, nullì€ ì²´í¬í•˜ì§€ ì•ŠìŒ  
+@AssertFalse : falseì¸ì§€ ì²´í¬, nullì€ ì²´í¬í•˜ì§€ ì•ŠìŒ  
 
-- ¹®ÀÚ¿­ ±æÀÌ °ËÁõ  
-@Size(min = $number1, max = $number2) : $number1 ÀÌ»ó $number2 ÀÌÇÏÀÇ ¹üÀ§ Çã¿ë  
+- ë¬¸ìì—´ ê¸¸ì´ ê²€ì¦  
+@Size(min = $number1, max = $number2) : $number1 ì´ìƒ $number2 ì´í•˜ì˜ ë²”ìœ„ í—ˆìš©  
 
-- Á¤±Ô½Ä °ËÁõ  
-@Pattern(regexp = "$expr") : Á¤±Ô½ÄÀ» °Ë»ç (Á¤±Ô½ÄÀº java.util.regex.Pattern ÆĞÅ°ÁöÀÇ ÄÁº¥¼Ç)  
+- ì •ê·œì‹ ê²€ì¦  
+@Pattern(regexp = "$expr") : ì •ê·œì‹ì„ ê²€ì‚¬ (ì •ê·œì‹ì€ java.util.regex.Pattern íŒ¨í‚¤ì§€ì˜ ì»¨ë²¤ì…˜)  
 
 ---
 
 ### Valid vs Validated
 
-À¯È¿¼º °Ë»ç¸¦ ½ÃÇàÇÒ ¶§, @Valid¿Í @Validated ¾î³ëÅ×ÀÌ¼ÇÀÌ Á¸ÀçÇÕ´Ï´Ù.  
-°ú¿¬ ÀÌ µÎ°¡Áö ¾î³ëÅ×ÀÌ¼ÇÀÇ Â÷ÀÌ°¡ ¹«¾ùÀÏ±î¿ä?
+ìœ íš¨ì„± ê²€ì‚¬ë¥¼ ì‹œí–‰í•  ë•Œ, @Validì™€ @Validated ì–´ë…¸í…Œì´ì…˜ì´ ì¡´ì¬í•©ë‹ˆë‹¤.  
+ê³¼ì—° ì´ ë‘ê°€ì§€ ì–´ë…¸í…Œì´ì…˜ì˜ ì°¨ì´ê°€ ë¬´ì—‡ì¼ê¹Œìš”?
 
-> Valid : ÀÚ¹Ù Áø¿µ / Validated : Spring¿¡¼­¸¸ »ç¿ë °¡´É
+> Valid : ìë°” ì§„ì˜ / Validated : Springì—ì„œë§Œ ì‚¬ìš© ê°€ëŠ¥
 
-ÁÖ·Î, Controller¿¡¼­ À¯È¿¼º °Ë»ç¸¦ ÁøÇàÇÒ ¶§´Â ¿øÇÏ´Â °ÍÀ» »ç¿ëÇÏ´Â ÆíÀÌ°í,  
-Service µî ºÒ°¡ÇÇÇÏ°Ô À¯È¿¼º °Ë»ç¸¦ ´Ù¸¥ °÷¿¡¼­ ÁøÇàÇÏ°Å³ª ±×·ìÈ­ÇÏ¿© °ËÁõÇÏ´Â °æ¿ì @Validated¸¦ »ç¿ëÇÑ´Ù°í ÇÕ´Ï´Ù.
+ì£¼ë¡œ, Controllerì—ì„œ ìœ íš¨ì„± ê²€ì‚¬ë¥¼ ì§„í–‰í•  ë•ŒëŠ” ì›í•˜ëŠ” ê²ƒì„ ì‚¬ìš©í•˜ëŠ” í¸ì´ê³ ,  
+Service ë“± ë¶ˆê°€í”¼í•˜ê²Œ ìœ íš¨ì„± ê²€ì‚¬ë¥¼ ë‹¤ë¥¸ ê³³ì—ì„œ ì§„í–‰í•˜ê±°ë‚˜ ê·¸ë£¹í™”í•˜ì—¬ ê²€ì¦í•˜ëŠ” ê²½ìš° @Validatedë¥¼ ì‚¬ìš©í•œë‹¤ê³  í•©ë‹ˆë‹¤.
 
-#### @ValidÀÇ µ¿ÀÛ ¿ø¸®
+#### @Validì˜ ë™ì‘ ì›ë¦¬
 
-- HandlerMethodArgumentResolver InterfaceÀÇ ±¸ÇöÃ¼ÀÎ RequestResponseBodyMethodProcessor Class¿¡¼­ ¿äÃ» Ã³¸®
-- resolveArgument() ¸Ş¼­µå ³»ºÎ¿¡¼­ À¯È¿¼º °ËÁõÀÌ ÁøÇàµÇ¸ç, ¹®Á¦ ¹ß»ı ½Ã MethodArgumentNotValidException ¹ß»ı
+- HandlerMethodArgumentResolver Interfaceì˜ êµ¬í˜„ì²´ì¸ RequestResponseBodyMethodProcessor Classì—ì„œ ìš”ì²­ ì²˜ë¦¬
+- resolveArgument() ë©”ì„œë“œ ë‚´ë¶€ì—ì„œ ìœ íš¨ì„± ê²€ì¦ì´ ì§„í–‰ë˜ë©°, ë¬¸ì œ ë°œìƒ ì‹œ MethodArgumentNotValidException ë°œìƒ
 
-#### @ValidatedÀÇ µ¿ÀÛ ¿ø¸®
+#### @Validatedì˜ ë™ì‘ ì›ë¦¬
 
-AOP¸¦ ±â¹İÀ¸·Î µ¿ÀÛ  
-- ValidationAutoConfiguration classÀÇ methodValidationPostProcessor() ¸Ş¼Òµå¿¡¼­ FilteredMethodValidationPostProcessorÀÌ ºóÀ¸·Î µî·Ï
-- ÇØ´ç Å¬·¡½ºÀÇ ¸Ş¼Òµå Áß createMethodValidationAdvice() ¸Ş¼Òµå¸¦ ÅëÇØ AOP AdviceÀÎ MethodValidationInterceptor¸¦ µî·Ï
-- MethodValidationInterceptor class invoke() ¸Ş¼Òµå¿¡¼­ À¯È¿¼º °ËÁõ ÁøÇà - ConstraintViolationException ¹ß»ı
+AOPë¥¼ ê¸°ë°˜ìœ¼ë¡œ ë™ì‘  
+- ValidationAutoConfiguration classì˜ methodValidationPostProcessor() ë©”ì†Œë“œì—ì„œ FilteredMethodValidationPostProcessorì´ ë¹ˆìœ¼ë¡œ ë“±ë¡
+- í•´ë‹¹ í´ë˜ìŠ¤ì˜ ë©”ì†Œë“œ ì¤‘ createMethodValidationAdvice() ë©”ì†Œë“œë¥¼ í†µí•´ AOP Adviceì¸ MethodValidationInterceptorë¥¼ ë“±ë¡
+- MethodValidationInterceptor class invoke() ë©”ì†Œë“œì—ì„œ ìœ íš¨ì„± ê²€ì¦ ì§„í–‰ - ConstraintViolationException ë°œìƒ
