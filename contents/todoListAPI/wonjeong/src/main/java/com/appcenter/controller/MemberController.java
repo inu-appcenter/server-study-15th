@@ -32,17 +32,6 @@ public class MemberController {
     }
 
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 Token",
-                    required = true, dataType = "String", paramType = "header")
-    })
-    @PostMapping()
-    public ResponseEntity<MemberResponseDTO> createMember(@RequestBody MemberRequestDTO memberRequestDTO) {
-        MemberResponseDTO memberResponseDTO = memberService.savedMember(memberRequestDTO);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(memberResponseDTO);
-    }
-
-    @ApiImplicitParams({
             @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "발급 받은 Token",
                     required = true, dataType = "String", paramType = "header")
     })

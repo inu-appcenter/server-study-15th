@@ -23,7 +23,7 @@ public class TodolistController {
     }
 
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 Token",
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "발급 받은 Token",
                     required = true, dataType = "String", paramType = "header")
     })
     @GetMapping()
@@ -45,7 +45,7 @@ public class TodolistController {
 
 
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 Token",
+            @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "발급 받은 Token",
                     required = true, dataType = "String", paramType = "header")
     })
     @PostMapping()
