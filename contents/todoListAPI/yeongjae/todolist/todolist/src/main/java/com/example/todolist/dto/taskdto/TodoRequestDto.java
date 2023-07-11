@@ -10,6 +10,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 @Getter
@@ -30,16 +31,21 @@ public class TodoRequestDto {
         private String contents;
 
         @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "잘못된 기한일 형식입니다.")
-        private String deadline;
+        private String deadlineDay;
+
+        private String deadlineTime;
 
         private boolean isCompleted;
 
         public Todo changeEntity(TodoSaveReqDto TodoSaveReqDto, User user) {
+            LocalDate date = LocalDate.parse(deadlineDay);
+            LocalTime time = LocalTime.parse(deadlineTime);
+
             return Todo.builder()
                     .title(TodoSaveReqDto.title)
                     .contents(TodoSaveReqDto.contents)
                     .user(user)
-                    .deadline(parseDatetime(TodoSaveReqDto.deadline))
+                    .deadline(LocalDateTime.of(date, time))
                     .isCompleted(TodoSaveReqDto.isCompleted)
                     .build();
         }

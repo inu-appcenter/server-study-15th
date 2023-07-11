@@ -9,6 +9,7 @@ import lombok.Setter;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,15 +30,14 @@ public class TodoResponseDto {
 
         private String contents;
 
-        @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "잘못된 기한일 형식입니다.")
-        private String deadline;
+        private LocalDateTime deadline;
 
         private boolean isCompleted;
 
         public TodoSaveRespDto(Todo todo) {
             this.title = todo.getTitle();
             this.contents = todo.getContents();
-            this.deadline = todo.getDeadline().toString();
+            this.deadline = todo.getDeadline();
             this.isCompleted = todo.getIsCompleted();
         }
     }
