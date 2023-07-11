@@ -43,33 +43,18 @@ public class Member implements UserDetails {
     @Builder.Default
     private List<String> roles = new ArrayList<>();
 
-    @Builder
-    public Member(Long id, String name, String password, String email, String uid) {
+    public void setMember(MemberRequestDTO memberRequestDTO) {
+        this.name = memberRequestDTO.getName();
+        this.password = memberRequestDTO.getPassword();
+        this.email = memberRequestDTO.getEmail();
+    }
+
+    public void setMember(Long id, MemberRequestDTO memberRequestDTO) {
         this.id = id;
-        this.name = name;
-        this.password = password;
-        this.email = email;
-        this.uid = uid;
+        this.name = memberRequestDTO.getName();
+        this.password = memberRequestDTO.getPassword();
+        this.email = memberRequestDTO.getEmail();
     }
-
-    public Member createMember(MemberRequestDTO memberRequestDTO) {
-        return Member.builder()
-                .name(memberRequestDTO.getName())
-                .password(memberRequestDTO.getPassword())
-                .email(memberRequestDTO.getEmail())
-                .build();
-    }
-
-    // 업데이트 메서드
-    public Member updateMember(Long id, MemberRequestDTO memberRequestDTO) {
-        return Member.builder()
-                .id(id)
-                .name(memberRequestDTO.getName())
-                .password(memberRequestDTO.getPassword())
-                .email(memberRequestDTO.getEmail())
-                .build();
-    }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

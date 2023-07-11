@@ -1,10 +1,7 @@
 package com.appcenter.service.impl;
 
-import com.appcenter.common.CommonResponse;
 import com.appcenter.data.dto.request.MemberRequestDTO;
 import com.appcenter.data.dto.response.MemberResponseDTO;
-import com.appcenter.data.dto.result.SignInResultDTO;
-import com.appcenter.data.dto.result.SignUpResultDTO;
 import com.appcenter.data.entity.Member;
 import com.appcenter.data.repository.MemberRepository;
 import com.appcenter.security.JwtTokenProvider;
@@ -12,8 +9,6 @@ import com.appcenter.service.MemberService;
 import javassist.NotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Collections;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -37,16 +32,22 @@ public class MemberServiceImpl implements MemberService {
         Member savedMember = memberRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(NOT_FOUND_MEMBER));
 
-        return new MemberResponseDTO().updateMemberResponse(savedMember);
+        MemberResponseDTO memberResponseDTO = new MemberResponseDTO();
+        memberResponseDTO.setMemberResponse(savedMember);
+
+        return memberResponseDTO;
     }
 
     @Override
     public MemberResponseDTO savedMember(MemberRequestDTO memberRequestDTO) {
-        Member member = new Member().createMember(memberRequestDTO);
+        Member member = new Member();
+        member.setMember(memberRequestDTO);
 
         Member savedMember = memberRepository.save(member);
-        // 선언된 DTO 객체에 updateMemberResponse 메서드를 이용해 정보를 담아 리턴
-        return new MemberResponseDTO().updateMemberResponse(savedMember);
+        MemberResponseDTO memberResponseDTO = new MemberResponseDTO();
+        memberResponseDTO.setMemberResponse(savedMember);
+
+        return memberResponseDTO;
     }
 
     @Override
@@ -54,10 +55,14 @@ public class MemberServiceImpl implements MemberService {
         Member foundMember = memberRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(NOT_FOUND_MEMBER));
 
+        foundMember.setMember(id, memberRequestDTO);
 
-        Member changedMember = memberRepository.save(foundMember.updateMember(id, memberRequestDTO));
+        Member changedMember = memberRepository.save(foundMember);
 
-        return new MemberResponseDTO().updateMemberResponse(changedMember);
+        MemberResponseDTO memberResponseDTO = new MemberResponseDTO();
+        memberResponseDTO.setMemberResponse(changedMember);
+
+        return memberResponseDTO;
     }
 
     @Override

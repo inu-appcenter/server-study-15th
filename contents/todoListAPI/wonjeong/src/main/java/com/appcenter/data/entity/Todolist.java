@@ -50,14 +50,9 @@ public class Todolist extends BaseTimeEntity{
     }
 
     public TodolistResponseDTO toTodolistResponseDTO(Todolist todolist) {
-        return TodolistResponseDTO.builder()
-                .member_id(todolist.getMember().getId())
-                .id(todolist.getId())
-                .title(todolist.getTitle())
-                .contents(todolist.getContents())
-                .createDate(todolist.getCreatedDate())
-                .lastModifiedDate(todolist.getLastModifiedDate())
-                .build();
+        TodolistResponseDTO todolistResponseDTO = new TodolistResponseDTO();
+        todolistResponseDTO.setTodolistResponse(todolist);
+        return todolistResponseDTO;
     }
 
 }

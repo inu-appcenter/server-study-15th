@@ -40,7 +40,9 @@ public class TodolistServiceImpl implements TodolistService {
         Todolist todolist = todolistRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(NOT_FOUND_CONTENT));
 
-       return new TodolistResponseDTO().updateTodolistResponse(todolist);
+        TodolistResponseDTO todolistResponseDTO = new TodolistResponseDTO();
+        todolistResponseDTO.setTodolistResponse(todolist);
+       return todolistResponseDTO;
     }
 
     @Override
@@ -57,10 +59,13 @@ public class TodolistServiceImpl implements TodolistService {
         // 지금 요청한 멤버가 존재하는 멤버인지 확인
         Member findMember = memberRepository.findById(id).orElseThrow(() -> new NotFoundException(NOT_FOUND_MEMBER));
 
-        //
         Todolist savedContent = todolistRepository.save(todolist.createContent(findMember, todolistRequestDTO));
 
-        return new TodolistResponseDTO().createTodolistResponse(savedContent);
+        // 응답 인스턴스 생성
+        TodolistResponseDTO todolistResponseDTO = new TodolistResponseDTO();
+        todolistResponseDTO.setTodolistResponse(savedContent);
+
+        return todolistResponseDTO;
     }
 
     @Override
@@ -72,7 +77,10 @@ public class TodolistServiceImpl implements TodolistService {
         foundContent.updateContent(todolistRequestDTO);
 
         Todolist updateContent = todolistRepository.save(foundContent);
-        return new TodolistResponseDTO().updateTodolistResponse(updateContent);
+
+        TodolistResponseDTO todolistResponseDTO = new TodolistResponseDTO();
+        todolistResponseDTO.setTodolistResponse(updateContent);
+        return todolistResponseDTO;
     }
 
     @Override
