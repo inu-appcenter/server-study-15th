@@ -1,6 +1,7 @@
 package com.appcenter.data.entity;
 
 import com.appcenter.data.dto.request.MemberRequestDTO;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 @Entity
 @Getter
 @NoArgsConstructor
+@Builder
 public class Member implements UserDetails {
     // Id 어노테이션
     @Id
