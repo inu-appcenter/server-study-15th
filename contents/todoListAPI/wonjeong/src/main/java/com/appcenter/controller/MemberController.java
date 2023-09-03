@@ -1,24 +1,21 @@
 package com.appcenter.controller;
 
-import com.appcenter.data.dto.response.MemberResponseDTO;
 import com.appcenter.data.dto.request.MemberRequestDTO;
+import com.appcenter.data.dto.response.MemberResponseDTO;
 import com.appcenter.service.MemberService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/member")
+@RequiredArgsConstructor
 public class MemberController {
 
-    // MemberService를 상수로 선언
     private final MemberService memberService;
-
-    public MemberController(MemberService memberService) {
-        this.memberService = memberService;
-    }
 
     @ApiImplicitParams({
             @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "발급 받은 Token",

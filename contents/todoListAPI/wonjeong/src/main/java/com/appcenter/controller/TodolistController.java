@@ -5,6 +5,7 @@ import com.appcenter.data.dto.response.TodolistResponseDTO;
 import com.appcenter.service.TodolistService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,15 +13,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/todolist")
 public class TodolistController {
 
-    // TodolistService 상수 선언
     private final TodolistService todolistService;
-
-    public TodolistController(TodolistService todolistService) {
-        this.todolistService = todolistService;
-    }
 
     @ApiImplicitParams({
             @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 발급 받은 Token",

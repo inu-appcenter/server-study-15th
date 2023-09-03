@@ -8,7 +8,7 @@ import com.appcenter.data.repository.MemberRepository;
 import com.appcenter.data.repository.TodolistRepository;
 import com.appcenter.service.TodolistService;
 import javassist.NotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,22 +16,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class TodolistServiceImpl implements TodolistService {
 
-    // Repository 상수 선언
     private final TodolistRepository todolistRepository;
-    // Repository 상수 선언
     private final MemberRepository memberRepository;
 
     // 오류 메세지 상수 선언
     private final String NOT_FOUND_CONTENT = "유효하지 않은 게시글 번호입니다.";
     private final String NOT_FOUND_MEMBER = "유효하지 않은 멤버 번호 입니다.";
-
-    @Autowired
-    public TodolistServiceImpl(TodolistRepository todolistRepository, MemberRepository memberRepository) {
-        this.todolistRepository = todolistRepository;
-        this.memberRepository = memberRepository;
-    }
 
     @Transactional
     // 트랜젝션이 있는데 왜 Exception이 있을까.. 내가 왜 그랬을까..

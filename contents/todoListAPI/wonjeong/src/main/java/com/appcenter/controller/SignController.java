@@ -4,6 +4,7 @@ import com.appcenter.data.dto.result.SignInResultDTO;
 import com.appcenter.data.dto.result.SignUpResultDTO;
 import com.appcenter.service.impl.SignServiceImpl;
 import io.swagger.annotations.ApiParam;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +15,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping
+@RequiredArgsConstructor
 public class SignController {
 
     private final SignServiceImpl signService;
-
-    public SignController(SignServiceImpl signService) {
-        this.signService = signService;
-    }
 
     @PostMapping(value = "/sign-in")
     public SignInResultDTO signIn(

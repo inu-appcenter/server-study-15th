@@ -1,32 +1,24 @@
 package com.appcenter.service.impl;
 
-import com.appcenter.common.CommonResponse;
+import com.appcenter.data.dto.common.CommonResponse;
 import com.appcenter.data.dto.result.SignInResultDTO;
 import com.appcenter.data.dto.result.SignUpResultDTO;
 import com.appcenter.data.entity.Member;
 import com.appcenter.data.repository.MemberRepository;
 import com.appcenter.security.JwtTokenProvider;
 import com.appcenter.service.SignService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 
 @Service
+@RequiredArgsConstructor
 public class SignServiceImpl implements SignService {
-    public MemberRepository memberRepository;
-    public JwtTokenProvider jwtTokenProvider;
-    public PasswordEncoder passwordEncoder;
-
-    @Autowired
-    public SignServiceImpl(MemberRepository memberRepository, JwtTokenProvider jwtTokenProvider,
-                           PasswordEncoder passwordEncoder) {
-        this.memberRepository = memberRepository;
-        this.jwtTokenProvider = jwtTokenProvider;
-        // passwordEncoder는 Spring Security config에 같이 @bean해도 괜찮음
-        this.passwordEncoder = passwordEncoder;
-    }
+    public final MemberRepository memberRepository;
+    public final JwtTokenProvider jwtTokenProvider;
+    public final PasswordEncoder passwordEncoder;
 
     @Override
     public SignUpResultDTO signUp(String id, String password, String name, String role) {
@@ -61,7 +53,6 @@ public class SignServiceImpl implements SignService {
 
     @Override
     public SignInResultDTO signIn(String id, String password) throws RuntimeException {
-        // ID (User id)로 멤버를 가져오기
         Member member = memberRepository.getByUid(id);
 
         // 컨트롤러를 통해 제공된 password와 DB에 저장된 패스워드가 다르면 오류를 던짐
@@ -69,7 +60,6 @@ public class SignServiceImpl implements SignService {
             throw new RuntimeException();
         }
 
-        // Builder를 통해 인스턴스 생성
         SignInResultDTO signInResultDTO = SignInResultDTO.builder()
                 .token(jwtTokenProvider.createToken(String.valueOf(member.getUid()), member.getRoles()))
                 .build();

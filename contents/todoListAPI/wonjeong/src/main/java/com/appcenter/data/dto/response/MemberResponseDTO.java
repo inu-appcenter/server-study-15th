@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-@Builder
 public class MemberResponseDTO {
     private Long id;
     private String name;
@@ -22,7 +21,6 @@ public class MemberResponseDTO {
         this.email = email;
     }
 
-    // 업데이트 메서드
     public MemberResponseDTO updateMemberResponse(Member member) {
         return MemberResponseDTO.builder()
                 .id(member.getId())
