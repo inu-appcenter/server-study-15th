@@ -21,8 +21,8 @@ public class MemberController {
             @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "발급 받은 Token",
                     required = true, dataType = "String", paramType = "header")
     })
-    @GetMapping()
-    public ResponseEntity<MemberResponseDTO> getMember(Long id) throws Exception{
+    @GetMapping("/{id}")
+    public ResponseEntity<MemberResponseDTO> getMember(@PathVariable Long id) throws Exception{
         MemberResponseDTO memberResponseDTO = memberService.getMember(id);
 
         return ResponseEntity.status(HttpStatus.OK).body(memberResponseDTO);
