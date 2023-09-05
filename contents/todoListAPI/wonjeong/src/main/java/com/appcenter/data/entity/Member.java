@@ -1,7 +1,6 @@
 package com.appcenter.data.entity;
 
 import com.appcenter.data.dto.request.MemberRequestDTO;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
