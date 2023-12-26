@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 // UserDetailsService 인터페이스를 구현하는 서비스 객체
 public class UserDetailsServiceImpl implements UserDetailsService {
 

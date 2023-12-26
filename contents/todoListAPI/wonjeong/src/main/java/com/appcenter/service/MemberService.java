@@ -2,8 +2,6 @@ package com.appcenter.service;
 
 import com.appcenter.data.dto.request.MemberRequestDTO;
 import com.appcenter.data.dto.response.MemberResponseDTO;
-import com.appcenter.data.dto.result.SignInResultDTO;
-import com.appcenter.data.dto.result.SignUpResultDTO;
 
 public interface MemberService {
 

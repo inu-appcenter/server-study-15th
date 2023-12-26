@@ -1,7 +1,6 @@
 package com.appcenter.data.entity;
 
 import com.appcenter.data.dto.request.MemberRequestDTO;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,10 +14,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Entity
 @Getter
-@Entity // 이 클래스가 엔티티 클래스임을 명시
 @NoArgsConstructor
-@AllArgsConstructor
 @Builder
 public class Member implements UserDetails {
     // Id 어노테이션
@@ -44,12 +42,13 @@ public class Member implements UserDetails {
     private List<String> roles = new ArrayList<>();
 
     @Builder
-    public Member(Long id, String name, String password, String email, String uid) {
+    public Member(Long id, String name, String password, String email, String uid, List<String> roles) {
         this.id = id;
         this.name = name;
         this.password = password;
         this.email = email;
         this.uid = uid;
+        this.roles = roles;
     }
 
     public Member createMember(MemberRequestDTO memberRequestDTO) {

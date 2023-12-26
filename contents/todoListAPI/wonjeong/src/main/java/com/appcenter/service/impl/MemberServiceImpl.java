@@ -1,36 +1,26 @@
 package com.appcenter.service.impl;
 
-import com.appcenter.common.CommonResponse;
 import com.appcenter.data.dto.request.MemberRequestDTO;
 import com.appcenter.data.dto.response.MemberResponseDTO;
-import com.appcenter.data.dto.result.SignInResultDTO;
-import com.appcenter.data.dto.result.SignUpResultDTO;
 import com.appcenter.data.entity.Member;
 import com.appcenter.data.repository.MemberRepository;
 import com.appcenter.security.JwtTokenProvider;
 import com.appcenter.service.MemberService;
 import javassist.NotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-
 @Service
+@RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
-    // MemberRepository를 상수로 선언
     private final MemberRepository memberRepository;
-
-    public JwtTokenProvider jwtTokenProvider;
-    public PasswordEncoder passwordEncoder;
+    public final JwtTokenProvider jwtTokenProvider;
+    public final PasswordEncoder passwordEncoder;
 
     // 오류 메세지 상수 선언
     private final String NOT_FOUND_MEMBER = "유효하지 않은 멤버 id 입니다.";
-
-    public MemberServiceImpl(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-    }
-
 
     @Override
     public MemberResponseDTO getMember(Long id) throws Exception{

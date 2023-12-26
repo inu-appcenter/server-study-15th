@@ -2,10 +2,11 @@ package com.appcenter.data.dto.result;
 
 import lombok.*;
 
-@NoArgsConstructor
-@AllArgsConstructor
+
 @ToString
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class SignInResultDTO extends SignUpResultDTO {
 
     private String token;
